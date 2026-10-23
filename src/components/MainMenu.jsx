@@ -41,15 +41,15 @@ export default function MainMenu({
         <img
           src={getAssetUrl('/assets/art/main_menu_clean_bg.jpg')}
           alt="Word & World Adventure"
-          className="w-full h-full object-cover object-top pointer-events-none select-none"
+          className="w-full h-full object-cover object-top pointer-events-none select-none contrast-[1.05] saturate-[1.10]"
           loading="eager"
           decoding="async"
           fetchPriority="high"
         />
       </picture>
 
-      {/* Subtle atmospheric vignette at the bottom so buttons and cards pop cleanly */}
-      <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-[#040813]/95 via-[#060c1d]/60 to-transparent pointer-events-none z-0" />
+      {/* Subtle atmospheric vignette at the bottom so buttons and cards pop cleanly without dulling the center artwork */}
+      <div className="absolute inset-x-0 bottom-0 h-64 sm:h-72 bg-gradient-to-t from-[#040813]/90 via-[#040813]/25 to-transparent pointer-events-none z-0" />
 
       {/* 2. TOP BAR: Live Interactive Player Profile, Streak, Stars, Audio & Settings (Clean Vector Icons, No AI/Emojis) */}
       <div className="relative z-10 flex items-center justify-between gap-1.5 w-full px-3.5 pt-3 sm:pt-4 shrink-0">
