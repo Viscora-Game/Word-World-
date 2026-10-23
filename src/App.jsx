@@ -160,6 +160,11 @@ export default function App() {
     return Object.values(categoryProgress).reduce((acc, curr) => acc + curr.stars, 0);
   }, [categoryProgress]);
 
+  // Total completed levels
+  const totalCompleted = useMemo(() => {
+    return Object.values(categoryProgress).reduce((acc, curr) => acc + curr.completedLevels, 0);
+  }, [categoryProgress]);
+
   // Toast Notification Helper
   const showToast = (msg) => {
     setToastMessage(msg);
