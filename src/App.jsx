@@ -19,6 +19,7 @@ import FootballPitchModal from './components/FootballPitchModal';
 import LeaderboardModal from './components/LeaderboardModal';
 import BottomNavBar from './components/BottomNavBar';
 import GameIcon from './components/GameIcon';
+import { getAssetUrl } from './utils/assetUrl';
 import { Lightbulb, Sparkles } from 'lucide-react';
 
 export default function App() {
@@ -457,7 +458,7 @@ export default function App() {
           <div className="flex-1 min-h-0 flex flex-col justify-between overflow-hidden relative bg-[#070d1e]">
             {/* Ambient Celestial Backdrop */}
             <img
-              src="/assets/art/categories_bg.jpg"
+              src={getAssetUrl('/assets/art/categories_bg.jpg')}
               alt=""
               className="absolute inset-0 w-full h-full object-cover object-top opacity-15 pointer-events-none select-none z-0"
             />

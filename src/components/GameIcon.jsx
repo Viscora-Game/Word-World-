@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAssetUrl } from '../utils/assetUrl';
 
 const ICON_MAP = {
   trophy: '/assets/icons/trophy.png',
@@ -38,7 +39,8 @@ export default function GameIcon({
   className = '',
   alt = 'Icon'
 }) {
-  const src = ICON_MAP[name.toLowerCase()] || ICON_MAP.trophy;
+  const rawSrc = ICON_MAP[name.toLowerCase()] || ICON_MAP.trophy;
+  const src = getAssetUrl(rawSrc);
 
   return (
     <div

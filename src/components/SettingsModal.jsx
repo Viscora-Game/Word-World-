@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getAssetUrl } from '../utils/assetUrl';
 import {
   X,
   Volume2,
@@ -390,7 +391,7 @@ export default function SettingsModal({
               <div className="bg-slate-850 rounded-2xl p-3 border border-slate-800 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <img
-                    src="/assets/icons/app_icon.png"
+                    src={getAssetUrl('/assets/icons/app_icon.png')}
                     alt="Word & World App Icon"
                     className="w-12 h-12 rounded-2xl object-cover shadow-lg border border-slate-700/60"
                   />

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getAssetUrl } from '../utils/assetUrl';
 
 export default function CyberCoreIntro({ onFinish }) {
   const [isFading, setIsFading] = useState(false);
@@ -7,7 +8,7 @@ export default function CyberCoreIntro({ onFinish }) {
     // Attempt to play official CyberCore Hollywood Sound
     let audio = null;
     try {
-      audio = new Audio('/assets/audio/cybercore_sound_2_hollywood.wav');
+      audio = new Audio(getAssetUrl('/assets/audio/cybercore_sound_2_hollywood.wav'));
       audio.volume = 0.85;
       const playPromise = audio.play();
       if (playPromise !== undefined) {

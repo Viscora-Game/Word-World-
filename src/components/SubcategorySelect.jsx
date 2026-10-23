@@ -2,6 +2,7 @@ import React from 'react';
 import { Star, ChevronRight, Sparkles } from 'lucide-react';
 import { soundManager } from '../utils/audio';
 import GameIcon from './GameIcon';
+import { getAssetUrl } from '../utils/assetUrl';
 
 export default function SubcategorySelect({
   category,
@@ -16,7 +17,7 @@ export default function SubcategorySelect({
       
       {/* Background Artwork */}
       <img
-        src="/assets/art/categories_bg.jpg"
+        src={getAssetUrl('/assets/art/categories_bg.jpg')}
         alt="Background"
         className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none z-0"
       />
@@ -26,7 +27,7 @@ export default function SubcategorySelect({
       <div className="relative rounded-3xl bg-gradient-to-r from-slate-900/90 via-slate-850/90 to-slate-900/90 border border-slate-700/80 border-b-[4px] border-b-slate-950 px-3.5 py-2.5 mb-2.5 shadow-2xl overflow-hidden shrink-0 z-10 backdrop-blur-md">
         {/* Category Artwork Banner in Background */}
         <img
-          src={`/assets/art/cat_card_${category.id}.jpg`}
+          src={getAssetUrl(`/assets/art/cat_card_${category.id}.jpg`)}
           alt={category.name}
           className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"
         />

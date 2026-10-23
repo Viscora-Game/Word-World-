@@ -2,6 +2,7 @@ import React from 'react';
 import { Star, Lock, Play } from 'lucide-react';
 import { soundManager } from '../utils/audio';
 import GameIcon from './GameIcon';
+import { getAssetUrl } from '../utils/assetUrl';
 
 export default function LevelSelect({
   subcategory,
@@ -25,7 +26,7 @@ export default function LevelSelect({
       
       {/* Background Artwork */}
       <img
-        src="/assets/art/categories_bg.jpg"
+        src={getAssetUrl('/assets/art/categories_bg.jpg')}
         alt="Background"
         className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none z-0"
       />

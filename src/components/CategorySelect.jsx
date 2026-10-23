@@ -2,6 +2,7 @@ import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import { soundManager } from '../utils/audio';
 import GameIcon from './GameIcon';
+import { getAssetUrl } from '../utils/assetUrl';
 
 export default function CategorySelect({
   categories,
@@ -12,7 +13,7 @@ export default function CategorySelect({
   // Theme styling & high-res artwork mappings for all 8 Epic Worlds
   const THEME_CONFIGS = {
     spor: {
-      thumb: '/assets/art/cat_card_spor.jpg',
+      thumb: getAssetUrl('/assets/art/cat_card_spor.jpg'),
       gradient: 'from-[#062016]/95 via-[#081b27]/95 to-[#051624]/95',
       border: 'border-emerald-500/70',
       glow: 'shadow-[0_0_24px_rgba(16,185,129,0.25)]',
@@ -21,7 +22,7 @@ export default function CategorySelect({
       subcatsText: 'İlk 11 • Efsaneler • NBA • Formula 1'
     },
     'dizi-film': {
-      thumb: '/assets/art/cat_card_dizi-film.jpg',
+      thumb: getAssetUrl('/assets/art/cat_card_dizi-film.jpg'),
       gradient: 'from-[#220935]/95 via-[#150d2c]/95 to-[#0b0c24]/95',
       border: 'border-purple-500/70',
       glow: 'shadow-[0_0_24px_rgba(168,85,247,0.25)]',
@@ -30,7 +31,7 @@ export default function CategorySelect({
       subcatsText: 'Filmler • Diziler • Oyuncular & Yönetmenler • Ödüller'
     },
     'genel-kultur': {
-      thumb: '/assets/art/cat_card_genel-kultur.jpg',
+      thumb: getAssetUrl('/assets/art/cat_card_genel-kultur.jpg'),
       gradient: 'from-[#2a1906]/95 via-[#1c140e]/95 to-[#0c0f1c]/95',
       border: 'border-amber-500/70',
       glow: 'shadow-[0_0_24px_rgba(245,158,11,0.25)]',
@@ -39,7 +40,7 @@ export default function CategorySelect({
       subcatsText: 'Antik Medeniyetler • Tarihi Liderler • Savaşlar • Dünya Tarihi'
     },
     bilim: {
-      thumb: '/assets/art/cat_card_bilim.jpg',
+      thumb: getAssetUrl('/assets/art/cat_card_bilim.jpg'),
       gradient: 'from-[#052136]/95 via-[#08182b]/95 to-[#050f1e]/95',
       border: 'border-cyan-500/70',
       glow: 'shadow-[0_0_24px_rgba(6,182,212,0.25)]',
@@ -48,7 +49,7 @@ export default function CategorySelect({
       subcatsText: 'Bilim Dünyası • Genetik • Uzay & Gezegenler • Fizik & Kimya'
     },
     cografya: {
-      thumb: '/assets/art/cat_card_cografya.jpg',
+      thumb: getAssetUrl('/assets/art/cat_card_cografya.jpg'),
       gradient: 'from-[#07262c]/95 via-[#0a1e2e]/95 to-[#071324]/95',
       border: 'border-cyan-500/70',
       glow: 'shadow-[0_0_24px_rgba(6,182,212,0.25)]',
@@ -57,7 +58,7 @@ export default function CategorySelect({
       subcatsText: 'Ülkeler & Başkentler • Şehirler • Dağlar • Denizler'
     },
     doga: {
-      thumb: '/assets/art/cat_card_doga.jpg',
+      thumb: getAssetUrl('/assets/art/cat_card_doga.jpg'),
       gradient: 'from-[#062412]/95 via-[#0c1f18]/95 to-[#08151f]/95',
       border: 'border-emerald-500/70',
       glow: 'shadow-[0_0_24px_rgba(16,185,129,0.25)]',
@@ -66,7 +67,7 @@ export default function CategorySelect({
       subcatsText: 'Vahşi Hayvanlar • Deniz Canlıları • Kuşlar • Bitkiler'
     },
     muzik: {
-      thumb: '/assets/art/cat_card_muzik.jpg',
+      thumb: getAssetUrl('/assets/art/cat_card_muzik.jpg'),
       gradient: 'from-[#2d092c]/95 via-[#1b0a29]/95 to-[#0d0a24]/95',
       border: 'border-fuchsia-500/70',
       glow: 'shadow-[0_0_24px_rgba(217,70,239,0.25)]',
@@ -75,7 +76,7 @@ export default function CategorySelect({
       subcatsText: 'Efsane Sanatçılar • Müzik Grupları • Türler • Enstrümanlar'
     },
     mutfak: {
-      thumb: '/assets/art/cat_card_mutfak.jpg',
+      thumb: getAssetUrl('/assets/art/cat_card_mutfak.jpg'),
       gradient: 'from-[#311406]/95 via-[#230d07]/95 to-[#120907]/95',
       border: 'border-amber-500/70',
       glow: 'shadow-[0_0_24px_rgba(245,158,11,0.25)]',
@@ -90,7 +91,7 @@ export default function CategorySelect({
       
       {/* 1. CUSTOM 3D EXPEDITION WALLPAPER (User Uploaded Vertical Artwork) */}
       <img
-        src="/assets/art/categories_bg.jpg"
+        src={getAssetUrl('/assets/art/categories_bg.jpg')}
         alt="Categories Background"
         className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none z-0"
       />
@@ -101,7 +102,7 @@ export default function CategorySelect({
       {/* 2. TOP BANNER: The Exact "DÜNYALARI KEŞFET" 3D Graphic Banner */}
       <div className="relative z-10 w-full rounded-2xl overflow-hidden shadow-2xl border border-cyan-400/50 mb-2 shrink-0">
         <img
-          src="/assets/art/discover_worlds_banner.png"
+          src={getAssetUrl('/assets/art/discover_worlds_banner.png')}
           alt="Dünyaları Keşfet"
           className="w-full h-auto max-h-20 sm:max-h-24 object-cover pointer-events-none"
         />
