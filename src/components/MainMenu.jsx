@@ -36,11 +36,17 @@ export default function MainMenu({
     <div className="flex-1 w-full max-w-md mx-auto flex flex-col justify-between overflow-hidden select-none relative bg-[#070d1e]">
       
       {/* 1. CLEAN HIGH-RES ARTWORK BACKGROUND (High definition 3D Earth, Landmarks, Airplane & W-O-R-D Tiles) */}
-      <img
-        src={getAssetUrl('/assets/art/main_menu_clean_bg.jpg')}
-        alt="Word & World Adventure"
-        className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none z-0"
-      />
+      <picture className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
+        <source srcSet={getAssetUrl('/assets/art/main_menu_clean_bg.webp')} type="image/webp" />
+        <img
+          src={getAssetUrl('/assets/art/main_menu_clean_bg.jpg')}
+          alt="Word & World Adventure"
+          className="w-full h-full object-cover object-top pointer-events-none select-none"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+        />
+      </picture>
 
       {/* Subtle atmospheric vignette at the bottom so buttons and cards pop cleanly */}
       <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-[#040813]/95 via-[#060c1d]/60 to-transparent pointer-events-none z-0" />
@@ -139,11 +145,17 @@ export default function MainMenu({
           {/* Subtle Golden-Cyan Ambient Glow Behind Logo */}
           <div className="absolute inset-0 bg-gradient-to-r from-amber-500/15 via-cyan-500/20 to-blue-500/15 rounded-full blur-xl pointer-events-none" />
 
-          <img
-            src={getAssetUrl('/assets/icons/game_logo_transparent.png')}
-            alt="Word & World"
-            className="relative z-10 w-full h-auto max-h-[70px] sm:max-h-[82px] object-contain drop-shadow-[0_12px_28px_rgba(0,0,0,0.9)] hover:scale-105 active:scale-95 transition-transform duration-200 cursor-pointer"
-          />
+          <picture className="relative z-10 w-full h-auto max-h-[70px] sm:max-h-[82px] flex items-center justify-center">
+            <source srcSet={getAssetUrl('/assets/icons/game_logo_transparent.webp')} type="image/webp" />
+            <img
+              src={getAssetUrl('/assets/icons/game_logo_transparent.png')}
+              alt="Word & World"
+              className="w-full h-auto max-h-[70px] sm:max-h-[82px] object-contain drop-shadow-[0_12px_28px_rgba(0,0,0,0.9)] hover:scale-105 active:scale-95 transition-transform duration-200 cursor-pointer"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
+          </picture>
         </div>
 
         {/* Massive 3D Primary Play Button (OYUNA BAŞLA) */}

@@ -13,7 +13,7 @@ export default function CategorySelect({
   // Theme styling & high-res artwork mappings for all 8 Epic Worlds
   const THEME_CONFIGS = {
     spor: {
-      thumb: getAssetUrl('/assets/art/cat_card_spor.jpg'),
+      thumb: getAssetUrl('/assets/art/cat_card_spor.webp'),
       gradient: 'from-[#062016]/95 via-[#081b27]/95 to-[#051624]/95',
       border: 'border-emerald-500/70',
       glow: 'shadow-[0_0_24px_rgba(16,185,129,0.25)]',
@@ -22,7 +22,7 @@ export default function CategorySelect({
       subcatsText: 'İlk 11 • Efsaneler • NBA • Formula 1'
     },
     'dizi-film': {
-      thumb: getAssetUrl('/assets/art/cat_card_dizi-film.jpg'),
+      thumb: getAssetUrl('/assets/art/cat_card_dizi-film.webp'),
       gradient: 'from-[#220935]/95 via-[#150d2c]/95 to-[#0b0c24]/95',
       border: 'border-purple-500/70',
       glow: 'shadow-[0_0_24px_rgba(168,85,247,0.25)]',
@@ -31,7 +31,7 @@ export default function CategorySelect({
       subcatsText: 'Filmler • Diziler • Oyuncular & Yönetmenler • Ödüller'
     },
     'genel-kultur': {
-      thumb: getAssetUrl('/assets/art/cat_card_genel-kultur.jpg'),
+      thumb: getAssetUrl('/assets/art/cat_card_genel-kultur.webp'),
       gradient: 'from-[#2a1906]/95 via-[#1c140e]/95 to-[#0c0f1c]/95',
       border: 'border-amber-500/70',
       glow: 'shadow-[0_0_24px_rgba(245,158,11,0.25)]',
@@ -40,7 +40,7 @@ export default function CategorySelect({
       subcatsText: 'Antik Medeniyetler • Tarihi Liderler • Savaşlar • Dünya Tarihi'
     },
     bilim: {
-      thumb: getAssetUrl('/assets/art/cat_card_bilim.jpg'),
+      thumb: getAssetUrl('/assets/art/cat_card_bilim.webp'),
       gradient: 'from-[#052136]/95 via-[#08182b]/95 to-[#050f1e]/95',
       border: 'border-cyan-500/70',
       glow: 'shadow-[0_0_24px_rgba(6,182,212,0.25)]',
@@ -49,7 +49,7 @@ export default function CategorySelect({
       subcatsText: 'Bilim Dünyası • Genetik • Uzay & Gezegenler • Fizik & Kimya'
     },
     cografya: {
-      thumb: getAssetUrl('/assets/art/cat_card_cografya.jpg'),
+      thumb: getAssetUrl('/assets/art/cat_card_cografya.webp'),
       gradient: 'from-[#07262c]/95 via-[#0a1e2e]/95 to-[#071324]/95',
       border: 'border-cyan-500/70',
       glow: 'shadow-[0_0_24px_rgba(6,182,212,0.25)]',
@@ -58,7 +58,7 @@ export default function CategorySelect({
       subcatsText: 'Ülkeler & Başkentler • Şehirler • Dağlar • Denizler'
     },
     doga: {
-      thumb: getAssetUrl('/assets/art/cat_card_doga.jpg'),
+      thumb: getAssetUrl('/assets/art/cat_card_doga.webp'),
       gradient: 'from-[#062412]/95 via-[#0c1f18]/95 to-[#08151f]/95',
       border: 'border-emerald-500/70',
       glow: 'shadow-[0_0_24px_rgba(16,185,129,0.25)]',
@@ -67,7 +67,7 @@ export default function CategorySelect({
       subcatsText: 'Vahşi Hayvanlar • Deniz Canlıları • Kuşlar • Bitkiler'
     },
     muzik: {
-      thumb: getAssetUrl('/assets/art/cat_card_muzik.jpg'),
+      thumb: getAssetUrl('/assets/art/cat_card_muzik.webp'),
       gradient: 'from-[#2d092c]/95 via-[#1b0a29]/95 to-[#0d0a24]/95',
       border: 'border-fuchsia-500/70',
       glow: 'shadow-[0_0_24px_rgba(217,70,239,0.25)]',
@@ -76,7 +76,7 @@ export default function CategorySelect({
       subcatsText: 'Efsane Sanatçılar • Müzik Grupları • Türler • Enstrümanlar'
     },
     mutfak: {
-      thumb: getAssetUrl('/assets/art/cat_card_mutfak.jpg'),
+      thumb: getAssetUrl('/assets/art/cat_card_mutfak.webp'),
       gradient: 'from-[#311406]/95 via-[#230d07]/95 to-[#120907]/95',
       border: 'border-amber-500/70',
       glow: 'shadow-[0_0_24px_rgba(245,158,11,0.25)]',
@@ -90,22 +90,32 @@ export default function CategorySelect({
     <div className="flex-1 w-full max-w-md mx-auto px-3.5 py-2 flex flex-col justify-between overflow-hidden select-none relative bg-[#070d1e]">
       
       {/* 1. CUSTOM 3D EXPEDITION WALLPAPER (User Uploaded Vertical Artwork) */}
-      <img
-        src={getAssetUrl('/assets/art/categories_bg.jpg')}
-        alt="Categories Background"
-        className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none z-0"
-      />
+      <picture className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
+        <source srcSet={getAssetUrl('/assets/art/categories_bg.webp')} type="image/webp" />
+        <img
+          src={getAssetUrl('/assets/art/categories_bg.jpg')}
+          alt="Categories Background"
+          className="w-full h-full object-cover object-top"
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
 
       {/* Atmospheric vignette for maximum readability and vibrant glassmorphism */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#070d1e]/85 via-[#070d1e]/55 to-[#040814]/90 pointer-events-none z-0" />
 
       {/* 2. TOP BANNER: The Exact "DÜNYALARI KEŞFET" 3D Graphic Banner */}
       <div className="relative z-10 w-full rounded-2xl overflow-hidden shadow-2xl border border-cyan-400/50 mb-2 shrink-0">
-        <img
-          src={getAssetUrl('/assets/art/discover_worlds_banner.png')}
-          alt="Dünyaları Keşfet"
-          className="w-full h-auto max-h-20 sm:max-h-24 object-cover pointer-events-none"
-        />
+        <picture>
+          <source srcSet={getAssetUrl('/assets/art/discover_worlds_banner.webp')} type="image/webp" />
+          <img
+            src={getAssetUrl('/assets/art/discover_worlds_banner.png')}
+            alt="Dünyaları Keşfet"
+            className="w-full h-auto max-h-20 sm:max-h-24 object-cover pointer-events-none"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
       </div>
 
       {/* 3. SCROLLABLE CATEGORY CARDS (Featuring the 4 New Dedicated Visuals) */}

@@ -43,6 +43,20 @@ export default function App() {
   const [view, setView] = useState('main');
   const [selectedCategoryId, setSelectedCategoryId] = useState('spor');
   const [selectedSubcategoryId, setSelectedSubcategoryId] = useState('ilk-11-takim');
+
+  // Background warmup of all primary graphic assets during initial load & intro
+  useEffect(() => {
+    const criticalAssets = [
+      getAssetUrl('/assets/art/main_menu_clean_bg.webp'),
+      getAssetUrl('/assets/icons/game_logo_transparent.webp'),
+      getAssetUrl('/assets/art/categories_bg.webp'),
+      getAssetUrl('/assets/art/discover_worlds_banner.webp')
+    ];
+    criticalAssets.forEach((url) => {
+      const img = new Image();
+      img.src = url;
+    });
+  }, []);
   const [selectedLevelId, setSelectedLevelId] = useState(1);
 
   // In-Game state
