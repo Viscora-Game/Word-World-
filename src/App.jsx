@@ -50,7 +50,15 @@ export default function App() {
       getAssetUrl('/assets/art/main_menu_clean_bg.webp'),
       getAssetUrl('/assets/icons/game_logo_transparent.webp'),
       getAssetUrl('/assets/art/categories_bg.webp'),
-      getAssetUrl('/assets/art/discover_worlds_banner.webp')
+      getAssetUrl('/assets/art/discover_worlds_banner.webp'),
+      getAssetUrl('/assets/art/cat_card_spor.webp'),
+      getAssetUrl('/assets/art/cat_card_dizi-film.webp'),
+      getAssetUrl('/assets/art/cat_card_genel-kultur.webp'),
+      getAssetUrl('/assets/art/cat_card_bilim.webp'),
+      getAssetUrl('/assets/art/cat_card_cografya.webp'),
+      getAssetUrl('/assets/art/cat_card_doga.webp'),
+      getAssetUrl('/assets/art/cat_card_muzik.webp'),
+      getAssetUrl('/assets/art/cat_card_mutfak.webp')
     ];
     criticalAssets.forEach((url) => {
       const img = new Image();
@@ -608,6 +616,7 @@ export default function App() {
           isOpen={isLeaderboardModalOpen}
           onClose={() => setIsLeaderboardModalOpen(false)}
           totalStars={totalStars}
+          totalCompleted={totalCompleted}
           playerRankTitle={t?.masterHunter || 'Usta Avcı'}
           t={t}
         />

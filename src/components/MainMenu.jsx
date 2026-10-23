@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, Star, Volume2, VolumeX, Settings, ChevronRight, ClipboardList, MapPin, Trophy } from 'lucide-react';
+import { Play, Star, Volume2, VolumeX, Settings, ChevronRight, ClipboardList, MapPin, Trophy, Crown, Flame } from 'lucide-react';
 import { soundManager } from '../utils/audio';
 import GameIcon from './GameIcon';
 import { getAssetUrl } from '../utils/assetUrl';
@@ -51,14 +51,14 @@ export default function MainMenu({
       {/* Subtle atmospheric vignette at the bottom so buttons and cards pop cleanly */}
       <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-[#040813]/95 via-[#060c1d]/60 to-transparent pointer-events-none z-0" />
 
-      {/* 2. TOP BAR: Live Interactive Player Profile, Streak, Stars, Audio & Settings */}
-      <div className="relative z-10 flex items-center justify-between gap-2 w-full px-3.5 pt-2 shrink-0">
+      {/* 2. TOP BAR: Live Interactive Player Profile, Streak, Stars, Audio & Settings (Clean Vector Icons, No AI/Emojis) */}
+      <div className="relative z-10 flex items-center justify-between gap-1.5 w-full px-3.5 pt-3 sm:pt-4 shrink-0">
         
         {/* Player Profile Badge */}
-        <div className="flex items-center gap-2 bg-[#0a1324]/90 border border-slate-700/80 px-2.5 py-1.5 rounded-2xl shadow-xl backdrop-blur-md">
+        <div className="flex items-center gap-2 bg-[#0a1324]/95 border border-slate-700/80 px-2.5 py-1.5 rounded-2xl shadow-xl backdrop-blur-md">
           <div className="relative w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-400 via-yellow-300 to-amber-500 p-0.5 shadow-md shrink-0">
-            <div className="w-full h-full bg-slate-950/80 rounded-[10px] flex items-center justify-center">
-              <GameIcon name="crown" size="w-5 h-5" />
+            <div className="w-full h-full bg-[#070e1c] rounded-[10px] flex items-center justify-center">
+              <Crown className="w-4 h-4 text-amber-300 fill-amber-400/30 drop-shadow" />
             </div>
           </div>
           <div className="flex flex-col text-left">
@@ -87,20 +87,20 @@ export default function MainMenu({
         {/* Action Controls & Counters */}
         <div className="flex items-center gap-1.5">
           {/* Daily Streak */}
-          <div className="flex items-center gap-1 bg-[#0a1324]/90 border border-slate-700/80 px-2.5 py-1.5 rounded-2xl shadow-md backdrop-blur-md">
-            <GameIcon name="fire" size="w-3.5 h-3.5" />
+          <div className="flex items-center gap-1.5 bg-[#0a1324]/95 border border-slate-700/80 px-2.5 py-1.5 rounded-2xl shadow-md backdrop-blur-md">
+            <Flame className="w-4 h-4 text-orange-400 fill-orange-400 drop-shadow-sm" />
             <div className="flex flex-col leading-none text-left">
               <span className="text-[11px] font-black text-orange-400">3G</span>
-              <span className="text-[7.5px] font-bold text-slate-400">Seri</span>
+              <span className="text-[7.5px] font-bold text-slate-400 uppercase tracking-tighter">Seri</span>
             </div>
           </div>
 
           {/* Stars Pill */}
-          <div className="flex items-center gap-1 bg-gradient-to-r from-amber-500/25 to-yellow-500/15 border border-amber-500/50 px-2.5 py-1.5 rounded-2xl shadow-md backdrop-blur-md">
-            <GameIcon name="star" size="w-3.5 h-3.5" />
+          <div className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500/20 via-yellow-500/15 to-amber-500/10 border border-amber-500/50 px-2.5 py-1.5 rounded-2xl shadow-md backdrop-blur-md">
+            <Star className="w-4 h-4 text-amber-300 fill-amber-300 drop-shadow-sm" />
             <div className="flex flex-col leading-none text-left">
               <span className="text-[11px] font-black text-amber-300">{totalStars}</span>
-              <span className="text-[7.5px] font-bold text-amber-400/90">Yıldız</span>
+              <span className="text-[7.5px] font-bold text-amber-400/90 uppercase tracking-tighter">Yıldız</span>
             </div>
           </div>
 
@@ -110,7 +110,7 @@ export default function MainMenu({
               soundManager.playKey();
               onToggleSound();
             }}
-            className="w-8 h-8 rounded-xl bg-[#0a1324]/90 border border-slate-700/80 border-b-2 border-b-slate-950 flex items-center justify-center text-slate-300 hover:text-white active:translate-y-0.5 transition shadow-md cursor-pointer"
+            className="w-8 h-8 rounded-xl bg-[#0a1324]/95 border border-slate-700/80 border-b-2 border-b-slate-950 flex items-center justify-center text-slate-300 hover:text-white active:translate-y-0.5 transition shadow-md cursor-pointer"
             title="Ses Aç/Kapat"
           >
             {soundEnabled ? (
@@ -120,13 +120,13 @@ export default function MainMenu({
             )}
           </button>
 
-          {/* Settings Button (Clean, no duplicate help icon) */}
+          {/* Settings Button */}
           <button
             onClick={() => {
               soundManager.playKey();
               onOpenSettings();
             }}
-            className="w-8 h-8 rounded-xl bg-[#0a1324]/90 border border-slate-700/80 border-b-2 border-b-slate-950 flex items-center justify-center text-slate-300 hover:text-white active:translate-y-0.5 transition shadow-md cursor-pointer"
+            className="w-8 h-8 rounded-xl bg-[#0a1324]/95 border border-slate-700/80 border-b-2 border-b-slate-950 flex items-center justify-center text-slate-300 hover:text-white active:translate-y-0.5 transition shadow-md cursor-pointer"
             title="Ayarlar"
           >
             <Settings className="w-4 h-4 text-slate-300" />

@@ -1,7 +1,6 @@
 import React from 'react';
-import { Volume2, VolumeX, Settings, ChevronLeft } from 'lucide-react';
+import { Volume2, VolumeX, Settings, ChevronLeft, Star } from 'lucide-react';
 import { soundManager } from '../utils/audio';
-import GameIcon from './GameIcon';
 
 export default function Header({
   view,
@@ -44,8 +43,8 @@ export default function Header({
 
       <div className="flex items-center gap-1.5">
         {/* Total Stars Pill */}
-        <div className="flex items-center gap-1 bg-gradient-to-r from-amber-500/25 to-yellow-500/15 border border-amber-500/50 px-2.5 py-1.5 rounded-2xl shadow-md backdrop-blur-md">
-          <GameIcon name="star" size="w-3.5 h-3.5" />
+        <div className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500/20 via-yellow-500/15 to-amber-500/10 border border-amber-500/50 px-2.5 py-1.5 rounded-2xl shadow-md backdrop-blur-md">
+          <Star className="w-3.5 h-3.5 text-amber-300 fill-amber-300 drop-shadow-sm" />
           <span className="text-amber-300 font-black text-xs tracking-wide">
             {totalStars}
           </span>
