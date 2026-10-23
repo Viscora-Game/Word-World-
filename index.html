@@ -9,6 +9,16 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>Word & World</title>
+    <!-- Isolate from other games on viscora-game.github.io domain & unregister rogue service workers -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (var reg of registrations) {
+            reg.unregister();
+          }
+        });
+      }
+    </script>
     <!-- Instant Game Art Preloading (Loads during initial HTML download, zero-lag render) -->
     <link rel="preload" as="image" href="./assets/art/main_menu_clean_bg.webp" type="image/webp" fetchpriority="high" />
     <link rel="preload" as="image" href="./assets/icons/game_logo_transparent.webp" type="image/webp" />
