@@ -73,7 +73,7 @@ export default function MainMenu({
       </picture>
 
       {/* Subtle atmospheric vignette at the bottom */}
-      <div className="absolute inset-x-0 bottom-0 h-64 sm:h-72 bg-gradient-to-t from-[#040813]/90 via-[#040813]/25 to-transparent pointer-events-none z-0" />
+      <div className="absolute inset-x-0 bottom-0 h-80 sm:h-96 bg-gradient-to-t from-[#040814]/95 via-[#050b1a]/55 to-transparent pointer-events-none z-0" />
 
       {/* 2. TOP BAR: Explorer Progress, Streak, Stars, Audio & Settings */}
       <div className="relative z-10 flex items-center justify-between gap-1 w-full px-2.5 sm:px-3.5 pt-3 sm:pt-4 shrink-0">
@@ -179,22 +179,22 @@ export default function MainMenu({
         </div>
       </div>
 
-      {/* 3. HERO SHOWCASE SPACER */}
-      <div className="flex-1 w-full min-h-[140px] pointer-events-none" />
+      {/* 3. HERO EARTH SHOWCASE SPACER (Proportional so logo sits closer to Earth without overlapping it) */}
+      <div className="flex-[0.76] w-full min-h-[110px] pointer-events-none" />
 
-      {/* 4. LOWER ACTION SECTION: Logo + Primary Play Button + 2 Balanced Mode Cards */}
-      <div className="relative z-10 flex flex-col gap-2.5 w-full px-3.5 pb-6 shrink-0">
+      {/* 4. ELEVATED & REFINED LOWER SECTION */}
+      <div className="relative z-10 flex flex-col gap-3 w-full px-4 shrink-0">
         
         {/* 3D "WORD & WORLD" Logo */}
-        <div className="relative flex items-center justify-center select-none pt-0 pb-1 w-full max-w-[280px] sm:max-w-[320px] mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/15 via-cyan-500/20 to-blue-500/15 rounded-full blur-xl pointer-events-none" />
+        <div className="relative flex items-center justify-center select-none pb-0.5 w-full max-w-[305px] sm:max-w-[345px] mx-auto">
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-cyan-500/25 to-blue-500/20 rounded-full blur-2xl pointer-events-none" />
 
-          <picture className="relative z-10 w-full h-auto max-h-[70px] sm:max-h-[82px] flex items-center justify-center">
+          <picture className="relative z-10 w-full h-auto max-h-[84px] sm:max-h-[96px] flex items-center justify-center">
             <source srcSet={getAssetUrl('/assets/icons/game_logo_transparent.webp')} type="image/webp" />
             <img
               src={getAssetUrl('/assets/icons/game_logo_transparent.png')}
               alt="Word & World"
-              className="w-full h-auto max-h-[70px] sm:max-h-[82px] object-contain drop-shadow-[0_12px_28px_rgba(0,0,0,0.9)] hover:scale-105 active:scale-95 transition-transform duration-200 cursor-pointer"
+              className="w-full h-auto max-h-[84px] sm:max-h-[96px] object-contain drop-shadow-[0_12px_28px_rgba(0,0,0,0.92)] hover:scale-105 active:scale-95 transition-transform duration-200 cursor-pointer"
               loading="eager"
               decoding="async"
               fetchPriority="high"
@@ -202,100 +202,119 @@ export default function MainMenu({
           </picture>
         </div>
 
-        {/* Massive 3D Primary Play Button (OYUNA BAŞLA) */}
+        {/* Primary 3D Play Button (OYUNA BAŞLA) */}
         <button
           onClick={() => {
             soundManager.playKey();
             onPlay();
           }}
-          className="group relative w-full py-3.5 px-5 rounded-2xl bg-gradient-to-b from-emerald-400 via-emerald-500 to-teal-600 hover:from-emerald-300 hover:via-emerald-400 hover:to-teal-500 text-slate-950 font-black tracking-wider uppercase flex items-center justify-between border-t-2 border-emerald-200/90 border-b-[6px] border-b-emerald-950 active:border-b-[2px] active:translate-y-1 shadow-2xl shadow-emerald-950/90 transition-all cursor-pointer overflow-hidden"
+          className="group relative w-full py-3.5 px-4 rounded-2xl bg-gradient-to-b from-emerald-400 via-emerald-500 to-teal-600 hover:from-emerald-300 hover:via-emerald-400 hover:to-teal-500 text-slate-950 font-black tracking-wide uppercase flex items-center justify-between border-t-2 border-emerald-200/95 border-b-[6px] border-b-emerald-950 active:border-b-[2px] active:translate-y-1 shadow-[0_14px_30px_rgba(2,44,34,0.85)] transition-all cursor-pointer overflow-hidden"
         >
           <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/35 to-transparent -skew-x-20 pointer-events-none animate-shimmer-sweep" />
 
-          <div className="relative z-10 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-slate-950/35 border border-emerald-200/50 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
-              <PiPlayFill className="w-5 h-5 text-white ml-0.5" />
+          <div className="relative z-10 flex items-center gap-3 min-w-0">
+            <div className="w-11 h-11 rounded-2xl bg-slate-950/30 border border-white/35 flex items-center justify-center shadow-inner shrink-0 group-hover:scale-105 transition-transform">
+              <PiPlayFill className="w-5 h-5 text-white ml-0.5 drop-shadow" />
             </div>
-            <div className="flex flex-col text-left leading-none">
-              <span className="text-lg sm:text-xl font-black text-slate-950 drop-shadow-[0_1px_0_rgba(255,255,255,0.4)]">
+            <div className="flex flex-col text-left leading-none min-w-0">
+              <span className="text-lg sm:text-xl font-black text-slate-950 tracking-wider drop-shadow-[0_1px_0_rgba(255,255,255,0.45)]">
                 {t?.playNow || 'OYUNA BAŞLA'}
               </span>
               <span className="text-[10.5px] font-extrabold text-emerald-950/90 mt-1">
-                {totalCompleted} / {totalLevelsCount} {t?.levelsOpen || 'SEVİYE AÇIK'}
+                {totalCompleted} / {totalLevelsCount} {isTR ? 'BÖLÜM TAMAMLANDI' : 'LEVELS CLEARED'}
               </span>
             </div>
           </div>
 
-          <div className="relative z-10 w-8 h-8 rounded-full bg-emerald-700/40 flex items-center justify-center">
+          <div className="relative z-10 flex items-center gap-1.5 bg-slate-950/20 border border-emerald-950/20 px-2.5 py-1.5 rounded-xl shrink-0">
+            <span className="text-[11px] font-black text-slate-950">%{overallPct}</span>
             <PiCaretRightBold className="w-4 h-4 text-slate-950 group-hover:translate-x-0.5 transition-transform" />
           </div>
         </button>
 
-        {/* 2 Balanced Mode Cards Row (Günlük Görev & Dünya Serüveni - Clean & Uncluttered!) */}
+        {/* Refined 2-Card Bottom Row (Jewel-Tone 3D Game Cards) */}
         <div className="grid grid-cols-2 gap-2.5">
           
-          {/* Card 1: Günlük Görev (Purple Theme) */}
+          {/* Card 1: Günlük Görev */}
           <button
             onClick={() => {
               soundManager.playKey();
               onOpenDaily();
             }}
-            className="relative rounded-2xl p-3 text-left bg-gradient-to-b from-[#1e0e33]/95 via-[#140b24]/95 to-[#0b0818]/95 border border-purple-500/60 border-b-[4px] border-b-purple-950 active:border-b-[1px] active:translate-y-[2px] shadow-xl shadow-purple-950/60 flex items-center gap-2.5 group transition-all cursor-pointer overflow-hidden backdrop-blur-sm"
+            className="group relative rounded-2xl p-3 text-left bg-gradient-to-b from-[#281347]/95 via-[#190d30]/95 to-[#0e081d]/95 hover:from-[#321857]/95 border-t border-x border-purple-400/55 border-b-[5px] border-b-purple-950 active:border-b-[2px] active:translate-y-0.5 shadow-xl shadow-purple-950/70 flex flex-col justify-between gap-2.5 transition-all cursor-pointer overflow-hidden backdrop-blur-md"
           >
-            {!dailyCompleted && (
-              <span className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-purple-400 animate-ping" />
-            )}
-            <div className="w-10 h-10 rounded-xl bg-purple-500/25 border border-purple-400/45 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-sm">
-              <PiCalendarStarDuotone className="w-5 h-5 text-purple-300" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <span className="text-[9px] font-black uppercase text-purple-300 tracking-wider block truncate">
-                {t?.dailyMission || 'GÜNLÜK GÖREV'}
-              </span>
-              <span className="text-xs font-black text-white truncate block">
-                {isTR ? 'Günün Kelimesi' : 'Daily Word'}
-              </span>
+            <div className="absolute -top-6 -right-6 w-20 h-20 bg-purple-500/25 rounded-full blur-xl pointer-events-none" />
+
+            <div className="flex items-center justify-between w-full relative z-10">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 border border-purple-200/50 flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform">
+                <PiCalendarStarDuotone className="w-5 h-5 text-white drop-shadow-sm" />
+              </div>
+
               {dailyCompleted ? (
-                <span className="inline-flex items-center gap-1 text-[9.5px] font-black text-emerald-300 bg-emerald-500/20 border border-emerald-500/40 px-2 py-0.2 rounded-full mt-1">
+                <span className="inline-flex items-center gap-1 text-[9.5px] font-black text-emerald-300 bg-emerald-500/20 border border-emerald-400/40 px-2 py-0.5 rounded-full">
                   <PiCheckCircleFill className="w-3 h-3 text-emerald-400" />
-                  <span>{isTR ? 'Tamamlandı' : 'Completed'}</span>
+                  <span>{isTR ? 'Bitti' : 'Done'}</span>
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1 text-[9.5px] font-black text-amber-300 bg-amber-500/20 border border-amber-500/35 px-2 py-0.2 rounded-full mt-1">
-                  <PiStarFill className="w-2.5 h-2.5 text-amber-300" />
-                  <span>+{DAILY_BONUS_STARS} {isTR ? 'Yıldız' : 'Stars'}</span>
+                <span className="inline-flex items-center gap-1 text-[10px] font-black text-amber-300 bg-amber-500/20 border border-amber-400/45 px-2 py-0.5 rounded-full shadow-xs">
+                  <PiStarFill className="w-3 h-3 text-amber-300" />
+                  <span>+{DAILY_BONUS_STARS}</span>
                 </span>
               )}
             </div>
+
+            <div className="w-full flex items-end justify-between gap-1 relative z-10">
+              <div className="min-w-0">
+                <span className="text-[9px] font-black uppercase text-purple-300 tracking-wider block truncate">
+                  {t?.dailyMission || 'GÜNLÜK GÖREV'}
+                </span>
+                <span className="text-xs sm:text-[13px] font-black text-white truncate block leading-snug">
+                  {isTR ? 'Günün Kelimesi' : 'Daily Word'}
+                </span>
+              </div>
+              <PiCaretRightBold className="w-3.5 h-3.5 text-purple-300/80 shrink-0 mb-0.5 group-hover:translate-x-0.5 transition-transform" />
+            </div>
           </button>
 
-          {/* Card 2: Dünya Serüveni (Cyan/Blue Theme) */}
+          {/* Card 2: Dünya Serüveni */}
           <button
             onClick={() => {
               soundManager.playKey();
               onOpenCategories();
             }}
-            className="relative rounded-2xl p-3 text-left bg-gradient-to-b from-[#0b2138]/95 via-[#081729]/95 to-[#050e1b]/95 border border-cyan-500/60 border-b-[4px] border-b-cyan-950 active:border-b-[1px] active:translate-y-[2px] shadow-xl shadow-cyan-950/60 flex items-center gap-2.5 group transition-all cursor-pointer overflow-hidden backdrop-blur-sm"
+            className="group relative rounded-2xl p-3 text-left bg-gradient-to-b from-[#0f2c4c]/95 via-[#0a1e36]/95 to-[#061121]/95 hover:from-[#14375e]/95 border-t border-x border-cyan-400/55 border-b-[5px] border-b-cyan-950 active:border-b-[2px] active:translate-y-0.5 shadow-xl shadow-cyan-950/70 flex flex-col justify-between gap-2.5 transition-all cursor-pointer overflow-hidden backdrop-blur-md"
           >
-            <div className="w-10 h-10 rounded-xl bg-cyan-500/25 border border-cyan-400/45 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-sm">
-              <PiCompassDuotone className="w-5 h-5 text-cyan-300" />
+            <div className="absolute -top-6 -right-6 w-20 h-20 bg-cyan-500/25 rounded-full blur-xl pointer-events-none" />
+
+            <div className="flex items-center justify-between w-full relative z-10">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 border border-cyan-100/50 flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform">
+                <PiCompassDuotone className="w-5 h-5 text-white drop-shadow-sm" />
+              </div>
+
+              <span className="inline-flex items-center gap-1 text-[10px] font-black text-cyan-200 bg-cyan-500/20 border border-cyan-400/40 px-2 py-0.5 rounded-full shadow-xs">
+                {totalLevelsCount} {isTR ? 'Bölüm' : 'Lvls'}
+              </span>
             </div>
-            <div className="min-w-0 flex-1">
-              <span className="text-[9px] font-black uppercase text-cyan-300 tracking-wider block truncate">
-                {t?.worldAdventure || 'DÜNYA SERÜVENİ'}
-              </span>
-              <span className="text-xs font-black text-white truncate block">
-                {isTR ? '8 Büyük Tema' : '8 Epic Worlds'}
-              </span>
-              <span className="inline-flex items-center gap-1 text-[9.5px] font-black text-cyan-300 bg-cyan-500/20 border border-cyan-500/35 px-2 py-0.2 rounded-full mt-1">
-                {totalLevelsCount}+ {isTR ? 'Seviye' : 'Levels'}
-              </span>
+
+            <div className="w-full flex items-end justify-between gap-1 relative z-10">
+              <div className="min-w-0">
+                <span className="text-[9px] font-black uppercase text-cyan-300 tracking-wider block truncate">
+                  {t?.worldAdventure || 'DÜNYA SERÜVENİ'}
+                </span>
+                <span className="text-xs sm:text-[13px] font-black text-white truncate block leading-snug">
+                  {isTR ? '8 Büyük Tema' : '8 Epic Worlds'}
+                </span>
+              </div>
+              <PiCaretRightBold className="w-3.5 h-3.5 text-cyan-300/80 shrink-0 mb-0.5 group-hover:translate-x-0.5 transition-transform" />
             </div>
           </button>
 
         </div>
 
       </div>
+
+      {/* 5. BOTTOM BREATHING CUSHION (Lifts lower section away from bottom bezel) */}
+      <div className="flex-[0.24] w-full min-h-[20px] max-h-[68px] pointer-events-none shrink-0" />
 
     </div>
   );
