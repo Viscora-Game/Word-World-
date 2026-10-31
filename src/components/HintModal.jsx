@@ -1,10 +1,10 @@
 import React from 'react';
 import {
   PiLightbulbFilamentDuotone,
-  PiKeyDuotone,
-  PiCrosshairDuotone,
+  PiPushPinDuotone,
+  PiEraserDuotone,
   PiXBold,
-  PiSparkleFill
+  PiChatCenteredTextDuotone
 } from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 
@@ -63,7 +63,7 @@ export default function HintModal({
         {/* Clue Box */}
         <div className="bg-slate-900/90 rounded-2xl p-3.5 border border-slate-800 mb-3 text-left relative z-10 shadow-inner">
           <div className="flex items-center gap-1.5 text-[11px] font-black text-amber-300 mb-1">
-            <PiSparkleFill className="w-3.5 h-3.5 text-amber-400" />
+            <PiChatCenteredTextDuotone className="w-3.5 h-3.5 text-amber-400" />
             <span>{t?.categoryClueInfo || (isTR ? 'Görev İpucu' : 'Mission Clue')}</span>
           </div>
           <p className="text-xs sm:text-sm font-semibold text-slate-100 leading-relaxed">
@@ -91,7 +91,7 @@ export default function HintModal({
         <div className="bg-slate-950/80 rounded-2xl p-3 border border-slate-800/90 flex items-center justify-between mb-2 relative z-10">
           <div className="flex items-center gap-2.5 text-left">
             <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 flex items-center justify-center shrink-0">
-              <PiKeyDuotone className="w-5 h-5" />
+              <PiPushPinDuotone className="w-5 h-5" />
             </div>
             <div>
               <h4 className="text-xs font-black text-white">
@@ -119,12 +119,12 @@ export default function HintModal({
           </button>
         </div>
 
-        {/* JOKER 2: Radar Eliminate 3 Wrong Keys */}
+        {/* JOKER 2: Eliminate 3 Wrong Keys */}
         {onEliminateLetters && (
           <div className="bg-slate-950/80 rounded-2xl p-3 border border-slate-800/90 flex items-center justify-between relative z-10">
             <div className="flex items-center gap-2.5 text-left">
               <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400/40 text-purple-300 flex items-center justify-center shrink-0">
-                <PiCrosshairDuotone className="w-5 h-5" />
+                <PiEraserDuotone className="w-5 h-5" />
               </div>
               <div>
                 <h4 className="text-xs font-black text-white">

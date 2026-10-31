@@ -113,11 +113,11 @@ export default function FootballPitchModal({
           </div>
 
           {/* FORWARDS (HÜCUM HATTI) */}
-          <div className="relative z-10 w-full flex items-center justify-around pt-1">
+          <div className="relative z-10 w-full flex items-center justify-around gap-1 px-1 pt-1">
             {(lineup.fwd || []).map((name, idx) => (
-              <div key={idx} className="flex flex-col items-center">
-                <TacticalKit role="FW" number={idx === 0 ? '9' : idx === 1 ? '11' : '7'} />
-                <span className="text-[9px] sm:text-[10px] font-black text-white bg-slate-950/85 px-2 py-0.5 rounded-md mt-0.5 border border-rose-400/40 truncate max-w-[82px] text-center shadow-md">
+              <div key={idx} className="flex flex-col items-center flex-1 min-w-0 max-w-[84px]">
+                <TacticalKit role="FW" number={idx === 0 ? '9' : idx === 1 ? '11' : idx === 2 ? '7' : '17'} />
+                <span className="text-[8.5px] sm:text-[9.5px] font-black text-white bg-slate-950/90 px-1.5 py-0.5 rounded-md mt-0.5 border border-rose-400/40 truncate max-w-full text-center shadow-md">
                   {name}
                 </span>
               </div>
@@ -125,11 +125,11 @@ export default function FootballPitchModal({
           </div>
 
           {/* MIDFIELDERS (ORTA SAHA HATTI) */}
-          <div className="relative z-10 w-full flex flex-wrap items-center justify-around my-auto gap-y-1.5 px-0.5">
+          <div className="relative z-10 w-full flex items-center justify-around gap-1 px-1 my-auto">
             {(lineup.mid || []).map((name, idx) => (
-              <div key={idx} className="flex flex-col items-center min-w-[54px]">
-                <TacticalKit role="MF" number={idx === 0 ? '8' : idx === 1 ? '6' : idx === 2 ? '10' : '14'} />
-                <span className="text-[8.5px] sm:text-[9.5px] font-black text-white bg-slate-950/85 px-1.5 py-0.5 rounded-md mt-0.5 border border-indigo-400/40 truncate max-w-[72px] text-center shadow-md">
+              <div key={idx} className="flex flex-col items-center flex-1 min-w-0 max-w-[76px]">
+                <TacticalKit role="MF" number={idx === 0 ? '8' : idx === 1 ? '6' : idx === 2 ? '10' : idx === 3 ? '14' : '20'} />
+                <span className="text-[8px] sm:text-[9px] font-black text-white bg-slate-950/90 px-1 py-0.5 rounded-md mt-0.5 border border-indigo-400/40 truncate max-w-full text-center shadow-md">
                   {name}
                 </span>
               </div>
@@ -137,11 +137,11 @@ export default function FootballPitchModal({
           </div>
 
           {/* DEFENDERS (DEFANS HATTI) */}
-          <div className="relative z-10 w-full flex items-center justify-around pb-0.5">
+          <div className="relative z-10 w-full flex items-center justify-around gap-1 px-1 pb-0.5">
             {(lineup.def || []).map((name, idx) => (
-              <div key={idx} className="flex flex-col items-center">
+              <div key={idx} className="flex flex-col items-center flex-1 min-w-0 max-w-[74px]">
                 <TacticalKit role="DF" number={idx === 0 ? '2' : idx === 1 ? '4' : idx === 2 ? '5' : '3'} />
-                <span className="text-[8.5px] sm:text-[9.5px] font-black text-white bg-slate-950/85 px-1.5 py-0.5 rounded-md mt-0.5 border border-sky-400/40 truncate max-w-[68px] text-center shadow-md">
+                <span className="text-[8px] sm:text-[9px] font-black text-white bg-slate-950/90 px-1 py-0.5 rounded-md mt-0.5 border border-sky-400/40 truncate max-w-full text-center shadow-md">
                   {name}
                 </span>
               </div>

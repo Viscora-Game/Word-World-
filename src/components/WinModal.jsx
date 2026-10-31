@@ -189,38 +189,56 @@ export default function WinModal({
 
         {/* 2. DOĞRU CEVAP vs GİZLİ KELİME KİLİTLİ */}
         {isWon ? (
-          <div className="w-full bg-slate-950/80 rounded-2xl p-2.5 border border-slate-800 shadow-inner flex flex-col items-center mb-2.5 relative z-10">
+          <div className="w-full bg-slate-950/80 rounded-2xl p-2.5 border border-slate-800 shadow-inner flex flex-col items-center mb-2.5 relative z-10 overflow-hidden">
             <span className="text-[9.5px] font-black text-emerald-400 uppercase tracking-widest mb-1.5 flex items-center gap-1">
               <PiCheckCircleFill className="w-3.5 h-3.5 text-emerald-400" />
               {t?.wordWas || (isTR ? 'DOĞRU KELİME' : 'CORRECT WORD')}
             </span>
-            <div className="flex items-center justify-center gap-1 flex-wrap">
-              {(targetWord || '').split('').map((ch, idx) => (
-                <span
-                  key={idx}
-                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-b from-emerald-400 via-emerald-500 to-teal-600 border-t-2 border-emerald-200/90 border-b-[3px] border-b-emerald-950 text-white font-black text-xs sm:text-sm flex items-center justify-center shadow-md drop-shadow-sm"
-                >
-                  {ch}
-                </span>
-              ))}
+            <div className="flex items-center justify-center gap-0.5 sm:gap-1 w-full max-w-full">
+              {(targetWord || '').split('').map((ch, idx) => {
+                const wLen = (targetWord || '').length;
+                const boxCls =
+                  wLen >= 11
+                    ? 'w-[21px] h-6 sm:w-6 sm:h-7 text-[10px] sm:text-xs rounded-md border-b-2'
+                    : wLen >= 9
+                    ? 'w-6 h-7 sm:w-7 sm:h-8 text-[11px] sm:text-xs rounded-lg border-b-2'
+                    : 'w-7 h-8 sm:w-8 sm:h-9 text-xs sm:text-sm rounded-xl border-b-[3px]';
+                return (
+                  <span
+                    key={idx}
+                    className={`${boxCls} shrink-0 bg-gradient-to-b from-emerald-400 via-emerald-500 to-teal-600 border-t border-emerald-200/90 border-b-emerald-950 text-white font-black flex items-center justify-center shadow-md drop-shadow-sm`}
+                  >
+                    {ch}
+                  </span>
+                );
+              })}
             </div>
           </div>
         ) : (
           /* LOSS STATE: Word stays strictly secret so retrying remains a true challenge! */
-          <div className="w-full bg-slate-950/80 rounded-2xl p-2.5 border border-slate-800 shadow-inner flex flex-col items-center mb-2.5 relative z-10">
+          <div className="w-full bg-slate-950/80 rounded-2xl p-2.5 border border-slate-800 shadow-inner flex flex-col items-center mb-2.5 relative z-10 overflow-hidden">
             <span className="text-[9.5px] font-black text-rose-400 uppercase tracking-widest mb-1.5 flex items-center gap-1">
               <PiLockKeyDuotone className="w-3.5 h-3.5 text-rose-400" />
               {targetWord.length} {isTR ? 'HARFLİ KELİME GİZLİ KALDI' : 'LETTER WORD REMAINS LOCKED'}
             </span>
-            <div className="flex items-center justify-center gap-1 flex-wrap">
-              {Array.from({ length: targetWord.length }).map((_, idx) => (
-                <span
-                  key={idx}
-                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-slate-900 border border-slate-700/80 border-b-2 border-b-slate-950 text-slate-500 font-black text-xs sm:text-sm flex items-center justify-center shadow-inner"
-                >
-                  ?
-                </span>
-              ))}
+            <div className="flex items-center justify-center gap-0.5 sm:gap-1 w-full max-w-full">
+              {Array.from({ length: targetWord.length }).map((_, idx) => {
+                const wLen = targetWord.length;
+                const boxCls =
+                  wLen >= 11
+                    ? 'w-[21px] h-6 sm:w-6 sm:h-7 text-[10px] sm:text-xs rounded-md'
+                    : wLen >= 9
+                    ? 'w-6 h-7 sm:w-7 sm:h-8 text-[11px] sm:text-xs rounded-lg'
+                    : 'w-7 h-8 sm:w-8 sm:h-9 text-xs sm:text-sm rounded-xl';
+                return (
+                  <span
+                    key={idx}
+                    className={`${boxCls} shrink-0 bg-slate-900 border border-slate-700/80 border-b-2 border-b-slate-950 text-slate-500 font-black flex items-center justify-center shadow-inner`}
+                  >
+                    ?
+                  </span>
+                );
+              })}
             </div>
           </div>
         )}

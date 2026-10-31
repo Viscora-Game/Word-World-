@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
-import { PiBackspaceDuotone, PiKeyReturnDuotone } from 'react-icons/pi';
+import { PiBackspaceDuotone } from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 import { normalizeLetter } from '../utils/turkishUpper';
 import { evaluateGuess } from '../utils/evaluator';
@@ -126,10 +126,10 @@ export default function Keyboard({
             let specialClass = '';
             if (isEnter) {
               specialClass =
-                'flex-[1.5] text-[11px] sm:text-xs tracking-wider bg-gradient-to-b from-emerald-500 via-emerald-600 to-teal-700 hover:from-emerald-400 hover:to-teal-600 text-white border-t-2 border-emerald-300/80 border-b-[4px] border-b-emerald-950 shadow-lg shadow-emerald-950/50 active:border-b-[2px] active:translate-y-0.5';
+                'flex-[1.55] min-w-0 px-1 text-[10px] sm:text-xs tracking-tight sm:tracking-wide bg-gradient-to-b from-emerald-500 via-emerald-600 to-teal-700 hover:from-emerald-400 hover:to-teal-600 text-white border-t-2 border-emerald-300/80 border-b-[4px] border-b-emerald-950 shadow-lg shadow-emerald-950/50 active:border-b-[2px] active:translate-y-0.5';
             } else if (isBackspace) {
               specialClass =
-                'flex-[1.3] text-xs bg-gradient-to-b from-slate-700 via-slate-750 to-slate-800 text-rose-300 border-t border-slate-600 border-b-[4px] border-b-slate-950 active:border-b-[2px] active:translate-y-0.5';
+                'flex-[1.3] min-w-0 px-1 text-xs bg-gradient-to-b from-slate-700 via-slate-750 to-slate-800 text-rose-300 border-t border-slate-600 border-b-[4px] border-b-slate-950 active:border-b-[2px] active:translate-y-0.5';
             }
 
             return (
@@ -141,19 +141,20 @@ export default function Keyboard({
                   soundManager.playKey();
                   handleKeyPress(key);
                 }}
-                className={`h-[42px] sm:h-[48px] rounded-xl sm:rounded-2xl flex items-center justify-center font-black transition-all cursor-pointer ${
-                  isSpecial ? specialClass : `flex-1 text-xs sm:text-base ${getKeyAppearance(key)}`
+                className={`h-[42px] sm:h-[48px] rounded-lg sm:rounded-xl flex items-center justify-center font-black transition-all cursor-pointer overflow-hidden ${
+                  isSpecial
+                    ? specialClass
+                    : `flex-1 min-w-0 px-0.5 text-xs sm:text-base ${getKeyAppearance(key)}`
                 }`}
                 style={{
                   touchAction: 'manipulation'
                 }}
               >
                 {isBackspace ? (
-                  <PiBackspaceDuotone className="w-5 h-5 sm:w-6 sm:h-6 text-slate-200 drop-shadow" />
+                  <PiBackspaceDuotone className="w-5 h-5 sm:w-6 sm:h-6 text-slate-200 drop-shadow shrink-0" />
                 ) : isEnter ? (
-                  <span className="flex items-center gap-1 font-black">
+                  <span className="font-black leading-none">
                     {lang === 'tr' ? 'ONAY' : 'ENTER'}
-                    <PiKeyReturnDuotone className="w-3.5 h-3.5 opacity-95" />
                   </span>
                 ) : (
                   key

@@ -89,41 +89,39 @@ export default function SubcategorySelect({
               />
 
               <div className="flex items-center justify-between gap-2 relative z-10 w-full mb-1.5">
-                <div className="flex items-center gap-2.5 min-w-0">
+                <div className="flex items-center gap-2.5 flex-1 min-w-0">
                   <div
                     className={`w-11 h-11 rounded-2xl bg-gradient-to-br ${category.color} p-0.5 shadow-md flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}
                   >
                     <div className="w-full h-full bg-slate-950/70 rounded-[14px] flex items-center justify-center">
-                      <GameIcon name={sub.iconKey} size="w-7 h-7" />
+                      <GameIcon name={sub.iconKey} size="w-6 h-6" />
                     </div>
                   </div>
 
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <h3 className="text-xs sm:text-sm font-black text-white group-hover:text-amber-300 transition-colors truncate">
-                        {sub.name}
-                      </h3>
-                      {sub.badge && (
-                        <span className="text-[8px] font-black uppercase px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                          {sub.badge}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-[10px] text-slate-300/80 truncate max-w-[210px] mt-0.5">
+                  <div className="flex-1 min-w-0">
+                    {sub.badge && (
+                      <span className="inline-block text-[7.5px] font-black uppercase px-1.5 py-0.2 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/35 mb-0.5">
+                        {sub.badge}
+                      </span>
+                    )}
+                    <h3 className="text-xs sm:text-sm font-black text-white group-hover:text-amber-300 transition-colors truncate leading-snug">
+                      {sub.name}
+                    </h3>
+                    <p className="text-[10px] text-slate-300/80 truncate mt-0.5">
                       {sub.description}
                     </p>
                   </div>
                 </div>
 
-                {/* Stars Badge with 3D Star */}
-                <div className="flex items-center gap-2 shrink-0">
-                  <div className="flex items-center gap-1 bg-amber-500/15 border border-amber-500/30 px-2.5 py-1 rounded-full shadow-sm">
-                    <GameIcon name="star" size="w-4 h-4" />
-                    <span className="text-xs font-black text-amber-300">
+                {/* Stars Badge */}
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <div className="flex items-center gap-1 bg-amber-500/15 border border-amber-500/30 px-2 py-1 rounded-full shadow-sm">
+                    <GameIcon name="star" size="w-3.5 h-3.5" />
+                    <span className="text-[11px] font-black text-amber-300">
                       {earnedStars}/{maxStars}
                     </span>
                   </div>
-                  <div className="w-7 h-7 rounded-xl bg-slate-950/40 border border-slate-700/60 flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-xl bg-slate-950/40 border border-slate-700/60 flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
                     <PiCaretRightBold className="w-3.5 h-3.5 text-slate-300" />
                   </div>
                 </div>

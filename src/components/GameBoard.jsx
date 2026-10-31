@@ -61,76 +61,87 @@ export default function GameBoard({
     }
   }
 
-  // Adaptive Tile Dimensioning:
-  // Strictly capped to 27vh total board height so even 9-10 letter words
-  // leave comfortable 40px+ clearance above the virtual keyboard!
-  const getTileSizeStyle = () => {
-    const maxDimensionVh = 27 / maxAttempts; // ~4.5vh per row = 27vh max total
-    const maxDimensionVw = 82 / wordLength;
+  // Container-Query Adaptive Tile Sizing:
+  // Uses exact GameBoard container width (100cqw) and height (100cqh) rather than viewport vw,
+  // guaranteeing zero horizontal or vertical overflow for 3-to-14+ letter words on both mobile and desktop frames.
+  const isLongWord = wordLength >= 9;
+  const colGapPx = wordLength >= 10 ? 3 : wordLength >= 8 ? 4 : 6;
+  const rowGapPx = 5;
+  const horizOverhead = (isLongWord ? 36 : 52) + (wordLength - 1) * colGapPx;
+  const vertOverhead = 84;
 
-    return {
-      width: `min(${maxDimensionVh}vh, ${maxDimensionVw}vw, 44px)`,
-      height: `min(${maxDimensionVh}vh, ${maxDimensionVw}vw, 46px)`,
-      maxWidth: '44px',
-      maxHeight: '46px'
-    };
+  const availW = `calc((100cqw - ${horizOverhead}px) / ${wordLength})`;
+  const availH = `calc((100cqh - ${vertOverhead}px) / ${maxAttempts})`;
+
+  const tileStyle = {
+    width: `min(${availW}, ${availH}, 46px)`,
+    height: `min(${availH}, calc(${availW} * 1.16), 48px)`
   };
 
-  const getFontSize = () => {
-    if (wordLength <= 4) return 'text-xl sm:text-2xl';
-    if (wordLength <= 6) return 'text-lg sm:text-xl';
-    if (wordLength <= 8) return 'text-base sm:text-lg';
-    return 'text-sm sm:text-base';
+  const getFontClass = () => {
+    if (wordLength <= 5) return 'text-xl sm:text-2xl';
+    if (wordLength <= 7) return 'text-lg sm:text-xl';
+    if (wordLength <= 9) return 'text-sm sm:text-base';
+    return 'text-xs sm:text-sm';
   };
 
-  const tileStyle = getTileSizeStyle();
-  const fontClass = getFontSize();
+  const getRadiusClass = () => {
+    if (wordLength <= 6) return 'rounded-2xl';
+    if (wordLength <= 9) return 'rounded-xl';
+    return 'rounded-lg';
+  };
 
-  // Dynamic gap based on word length
-  const rowGapClass = wordLength >= 8 ? 'gap-1' : 'gap-1 sm:gap-1.5';
+  const fontClass = getFontClass();
+  const radiusClass = getRadiusClass();
+  const lipClass = isLongWord ? 'border-b-[3px]' : 'border-b-[4px]';
 
   return (
-    <div className="w-full flex-1 min-h-0 flex items-center justify-center px-2 py-1 select-none overflow-hidden my-auto relative">
-      
-      {/* Cheerful Arena Backing: Turns boring grid into a cozy, vibrant game board */}
-      <div className="p-2 sm:p-3 rounded-[28px] bg-gradient-to-b from-slate-900/60 via-slate-950/80 to-slate-900/60 border border-slate-700/50 shadow-2xl shadow-indigo-950/30 backdrop-blur-xs flex flex-col justify-center items-center relative">
-        
-        {/* Soft atmospheric ambient glow */}
-        <div className="absolute inset-0 rounded-[28px] bg-gradient-to-tr from-indigo-500/5 via-cyan-500/5 to-amber-500/5 pointer-events-none" />
+    <div
+      className={`w-full flex-1 min-h-0 flex items-center justify-center ${
+        isLongWord ? 'px-1.5' : 'px-2.5'
+      } py-1 select-none overflow-hidden relative`}
+      style={{ containerType: 'size' }}
+    >
+      {/* Arena Backing */}
+      <div
+        className={`${
+          isLongWord ? 'px-1.5 py-2 rounded-2xl' : 'p-2.5 rounded-[26px]'
+        } max-w-full bg-gradient-to-b from-slate-900/65 via-slate-950/85 to-slate-900/65 border border-slate-700/50 shadow-2xl shadow-indigo-950/30 backdrop-blur-xs flex flex-col justify-center items-center relative`}
+      >
+        <div className="absolute inset-0 rounded-inherit bg-gradient-to-tr from-indigo-500/5 via-cyan-500/5 to-amber-500/5 pointer-events-none" />
 
-        <div className={`flex flex-col ${rowGapClass} justify-center items-center max-h-full relative z-10`}>
+        <div
+          className="flex flex-col justify-center items-center max-w-full relative z-10"
+          style={{ gap: `${rowGapPx}px` }}
+        >
           {rows.map((row, rowIndex) => {
             const isCurrentRow = row.type === 'current';
 
             return (
               <div
                 key={rowIndex}
-                className={`flex ${rowGapClass} justify-center items-center perspective-1000 p-0.5 rounded-2xl transition-all ${
+                style={{ gap: `${colGapPx}px` }}
+                className={`flex justify-center items-center max-w-full perspective-1000 p-0.5 rounded-xl transition-all ${
                   isCurrentRow
                     ? 'ring-1 ring-cyan-400/30 bg-cyan-500/5 shadow-sm'
                     : ''
                 } ${row.isShaking ? 'animate-row-shake' : ''}`}
               >
                 {Array.from({ length: wordLength }).map((_, colIndex) => {
-                  const letter = row.text[colIndex] ? normalizeLetter(row.text[colIndex], lang) : '';
+                  const letter = row.text[colIndex]
+                    ? normalizeLetter(row.text[colIndex], lang)
+                    : '';
 
                   // 1. SUBMITTED ROWS (REVEALED TACTILE 3D TILES)
                   if (row.type === 'submitted') {
                     const status = row.evaluations[colIndex];
-                    
-                    // Absent (Soft frosted glass)
-                    let tileTheme =
-                      'bg-gradient-to-b from-slate-800 to-slate-850 border-t border-slate-700/60 border-b-[4px] border-b-slate-950 text-slate-400 shadow-sm';
 
-                    // Correct (Juicy 3D Emerald Candy)
+                    let tileTheme = `bg-gradient-to-b from-slate-800 to-slate-850 border-t border-slate-700/60 ${lipClass} border-b-slate-950 text-slate-400 shadow-sm`;
+
                     if (status === 'correct') {
-                      tileTheme =
-                        'bg-gradient-to-b from-emerald-400 via-emerald-500 to-teal-600 border-t-2 border-emerald-200/90 border-b-[4px] border-b-emerald-950 text-white shadow-lg shadow-emerald-950/60';
-                    } 
-                    // Present (Radiant 3D Sunshine Honey)
-                    else if (status === 'present') {
-                      tileTheme =
-                        'bg-gradient-to-b from-amber-300 via-amber-400 to-amber-600 border-t-2 border-amber-100/90 border-b-[4px] border-b-amber-950 text-slate-950 shadow-lg shadow-amber-950/60';
+                      tileTheme = `bg-gradient-to-b from-emerald-400 via-emerald-500 to-teal-600 border-t-2 border-emerald-200/90 ${lipClass} border-b-emerald-950 text-white shadow-lg shadow-emerald-950/60`;
+                    } else if (status === 'present') {
+                      tileTheme = `bg-gradient-to-b from-amber-300 via-amber-400 to-amber-600 border-t-2 border-amber-100/90 ${lipClass} border-b-amber-950 text-slate-950 shadow-lg shadow-amber-950/60`;
                     }
 
                     return (
@@ -139,16 +150,16 @@ export default function GameBoard({
                         style={{
                           ...tileStyle,
                           animationDelay: row.isAnimating
-                            ? `${colIndex * 120}ms`
+                            ? `${colIndex * 110}ms`
                             : row.isWinningRow
-                            ? `${colIndex * 80}ms`
+                            ? `${colIndex * 75}ms`
                             : '0ms'
                         }}
-                        className={`rounded-2xl flex items-center justify-center font-black uppercase transition-all ${fontClass} ${
+                        className={`${radiusClass} shrink-0 flex items-center justify-center font-black uppercase leading-none transition-all ${fontClass} ${
                           row.isAnimating ? 'animate-tile-flip' : ''
                         } ${row.isWinningRow ? 'animate-win-wave' : ''} ${tileTheme}`}
                       >
-                        <span className="drop-shadow-[0_2px_3px_rgba(0,0,0,0.4)]">
+                        <span className="drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]">
                           {letter}
                         </span>
                       </div>
@@ -163,9 +174,9 @@ export default function GameBoard({
                       <div
                         key={`curr-${colIndex}`}
                         style={tileStyle}
-                        className={`rounded-2xl flex items-center justify-center font-black uppercase transition-all duration-100 ${fontClass} ${
+                        className={`${radiusClass} shrink-0 flex items-center justify-center font-black uppercase leading-none transition-all duration-100 ${fontClass} ${
                           hasChar
-                            ? 'bg-gradient-to-b from-indigo-500 via-indigo-600 to-purple-600 border-t-2 border-indigo-200/80 border-b-[4px] border-b-indigo-950 text-white shadow-lg shadow-indigo-500/30 animate-tile-pop'
+                            ? `bg-gradient-to-b from-indigo-500 via-indigo-600 to-purple-600 border-t-2 border-indigo-200/80 ${lipClass} border-b-indigo-950 text-white shadow-lg shadow-indigo-500/30 animate-tile-pop`
                             : ghostHintChar
                             ? 'bg-cyan-950/55 border border-cyan-400/55 border-b-2 border-b-cyan-950 text-cyan-300/65 shadow-inner ring-1 ring-cyan-400/20'
                             : 'bg-slate-900/70 border border-slate-700/60 border-b-2 border-b-slate-950 text-slate-500 shadow-inner'
@@ -178,8 +189,7 @@ export default function GameBoard({
                             {ghostHintChar}
                           </span>
                         ) : (
-                          /* Cheerful subtle placeholder dot */
-                          <span className="w-1.5 h-1.5 rounded-full bg-slate-700/70" />
+                          <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-slate-700/70" />
                         )}
                       </div>
                     );
@@ -190,7 +200,7 @@ export default function GameBoard({
                     <div
                       key={`empty-${colIndex}`}
                       style={tileStyle}
-                      className="rounded-2xl border border-slate-800/80 bg-slate-950/40 text-slate-700 flex items-center justify-center shadow-inner"
+                      className={`${radiusClass} shrink-0 border border-slate-800/80 bg-slate-950/40 text-slate-700 flex items-center justify-center shadow-inner`}
                     >
                       <span className="w-1 h-1 rounded-full bg-slate-800/60" />
                     </div>

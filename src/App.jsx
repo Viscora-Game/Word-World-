@@ -28,7 +28,7 @@ import FootballPitchModal from './components/FootballPitchModal';
 import BottomNavBar from './components/BottomNavBar';
 import GameIcon from './components/GameIcon';
 import { getAssetUrl } from './utils/assetUrl';
-import { PiLightbulbFilamentDuotone, PiSparkleFill } from 'react-icons/pi';
+import { PiLightbulbFilamentDuotone, PiInfoDuotone } from 'react-icons/pi';
 import { GiSoccerField } from 'react-icons/gi';
 
 const ALPHABET_POOL = {
@@ -508,9 +508,9 @@ export default function App() {
         
         {/* Floating Toast Notification (Clean Vector Icon, Zero Emojis) */}
         {toastMessage && (
-          <div className="absolute top-14 left-1/2 -translate-x-1/2 z-50 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 border border-indigo-300/50 text-white font-black text-xs py-2 px-4 rounded-full shadow-2xl backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-150 flex items-center gap-1.5 whitespace-nowrap">
-            <PiSparkleFill className="w-3.5 h-3.5 text-amber-300 shrink-0" />
-            <span>{toastMessage}</span>
+          <div className="absolute top-14 left-1/2 -translate-x-1/2 z-50 max-w-[92%] bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 border border-indigo-300/50 text-white font-black text-xs py-2 px-3.5 rounded-full shadow-2xl backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-150 flex items-center gap-1.5">
+            <PiInfoDuotone className="w-4 h-4 text-cyan-200 shrink-0" />
+            <span className="truncate">{toastMessage}</span>
           </div>
         )}
 

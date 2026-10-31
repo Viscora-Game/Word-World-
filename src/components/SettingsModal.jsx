@@ -5,7 +5,7 @@ import {
   PiXBold,
   PiSpeakerHighDuotone,
   PiSpeakerSlashDuotone,
-  PiDeviceMobileCameraDuotone,
+  PiVibrateDuotone,
   PiGlobeHemisphereWestDuotone,
   PiArrowCounterClockwiseBold,
   PiCheckBold,
@@ -16,7 +16,9 @@ import {
   PiThumbsUpDuotone,
   PiEnvelopeSimpleDuotone,
   PiArrowSquareOutBold,
-  PiSparkleFill
+  PiGearSixDuotone,
+  PiBookOpenTextDuotone,
+  PiInfoDuotone
 } from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 
@@ -111,7 +113,15 @@ export default function SettingsModal({
         <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-800 shrink-0">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
-              <PiSparkleFill className="w-4 h-4" />
+              {activeTab === 'rules' ? (
+                <PiBookOpenTextDuotone className="w-4 h-4" />
+              ) : activeTab === 'privacy' ? (
+                <PiShieldCheckDuotone className="w-4 h-4" />
+              ) : activeTab === 'about' ? (
+                <PiInfoDuotone className="w-4 h-4" />
+              ) : (
+                <PiGearSixDuotone className="w-4 h-4" />
+              )}
             </div>
             <h3 className="text-sm font-black text-white tracking-wide uppercase">
               {tabs.find((tab) => tab.id === activeTab)?.label || (isTR ? 'Ayarlar' : 'Settings')}
@@ -235,7 +245,7 @@ export default function SettingsModal({
               <div className="bg-slate-850/90 rounded-2xl p-3 border border-slate-800 flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <div className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300">
-                    <PiDeviceMobileCameraDuotone className="w-4 h-4 text-amber-400" />
+                    <PiVibrateDuotone className="w-4 h-4 text-amber-400" />
                   </div>
                   <div>
                     <h4 className="text-xs font-black text-white">{t?.vibration || (isTR ? 'Titreşim' : 'Vibration')}</h4>

@@ -58,7 +58,7 @@ export default function DailyPuzzleModal({
 
         {/* Emblem */}
         <div className="w-15 h-15 rounded-2xl bg-gradient-to-tr from-purple-600/30 via-fuchsia-500/20 to-indigo-600/30 border border-purple-400/50 flex items-center justify-center mb-2.5 shadow-xl relative z-10">
-          <GameIcon name={dailyChallenge?.iconKey || 'rocket'} size="w-9 h-9" />
+          <GameIcon name={dailyChallenge?.iconKey || 'compass'} size="w-9 h-9" />
         </div>
 
         {/* Edition Pill */}
