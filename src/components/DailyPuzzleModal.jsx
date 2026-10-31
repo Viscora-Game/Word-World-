@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {
-  X,
-  Star,
-  Calendar,
-  ArrowRight,
-  CheckCircle2,
-  Clock,
-  Flame,
-  Compass
-} from 'lucide-react';
+  PiXBold,
+  PiStarFill,
+  PiCalendarStarDuotone,
+  PiArrowRightBold,
+  PiCheckCircleFill,
+  PiClockCountdownDuotone,
+  PiFireFill,
+  PiCompassDuotone
+} from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 import { getCountdownToMidnight, DAILY_BONUS_STARS } from '../utils/dailyQuest';
 import GameIcon from './GameIcon';
@@ -53,7 +53,7 @@ export default function DailyPuzzleModal({
           }}
           className="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-800/90 border border-slate-700 text-slate-400 hover:text-white flex items-center justify-center active:scale-90 transition cursor-pointer z-10"
         >
-          <X className="w-4 h-4" />
+          <PiXBold className="w-4 h-4" />
         </button>
 
         {/* Emblem */}
@@ -63,7 +63,7 @@ export default function DailyPuzzleModal({
 
         {/* Edition Pill */}
         <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-500/20 border border-purple-400/40 mb-1.5 relative z-10">
-          <Calendar className="w-3 h-3 text-purple-300" />
+          <PiCalendarStarDuotone className="w-3.5 h-3.5 text-purple-300" />
           <span className="text-[10px] font-black uppercase tracking-wider text-purple-200">
             {isTR
               ? `GÜNÜN KELİMESİ #${dailyChallenge?.edition || 1}`
@@ -86,7 +86,7 @@ export default function DailyPuzzleModal({
           <div className="w-full bg-slate-900/90 rounded-2xl p-2.5 border border-slate-800 flex items-center justify-between mb-3 relative z-10 text-left">
             <div className="flex items-center gap-2 min-w-0">
               <div className="w-8 h-8 rounded-xl bg-purple-500/15 border border-purple-500/35 flex items-center justify-center shrink-0">
-                <Compass className="w-4 h-4 text-purple-300" />
+                <PiCompassDuotone className="w-4 h-4 text-purple-300" />
               </div>
               <div className="min-w-0">
                 <span className="text-[9px] font-black uppercase tracking-wider text-purple-300 block truncate">
@@ -111,7 +111,7 @@ export default function DailyPuzzleModal({
               {isTR ? 'Özel Ödül' : 'Bonus'}
             </span>
             <div className="flex items-center gap-1 mt-1">
-              <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
+              <PiStarFill className="w-4 h-4 text-amber-400" />
               <span className="text-sm font-black text-amber-300">
                 +{DAILY_BONUS_STARS}
               </span>
@@ -125,7 +125,7 @@ export default function DailyPuzzleModal({
               {isTR ? 'Günlük Seri' : 'Streak'}
             </span>
             <div className="flex items-center gap-1 mt-1">
-              <Flame className="w-4 h-4 text-orange-400 fill-orange-400" />
+              <PiFireFill className="w-4 h-4 text-orange-400" />
               <span className="text-sm font-black text-orange-300">
                 {streak} {isTR ? 'Gün' : 'Days'}
               </span>
@@ -139,7 +139,7 @@ export default function DailyPuzzleModal({
               {isTR ? 'Yeni Kelime' : 'Next Word'}
             </span>
             <div className="flex items-center gap-1 mt-1">
-              <Clock className="w-3.5 h-3.5 text-cyan-400" />
+              <PiClockCountdownDuotone className="w-4 h-4 text-cyan-400" />
               <span className="text-xs font-black text-cyan-300 tabular-nums">
                 {countdown}
               </span>
@@ -151,7 +151,7 @@ export default function DailyPuzzleModal({
         {dailyCompleted ? (
           <div className="w-full flex flex-col gap-2 relative z-10">
             <div className="w-full py-3 px-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-black text-xs flex items-center justify-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <PiCheckCircleFill className="w-4 h-4 text-emerald-400" />
               <span>
                 {isTR
                   ? `Bugünün Kelimesi Çözüldü! (${dailyRecord?.attemptsCount || 1}/${dailyRecord?.maxAttempts || 6})`
@@ -178,7 +178,7 @@ export default function DailyPuzzleModal({
             className="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-b from-purple-400 via-purple-500 to-indigo-600 hover:from-purple-300 hover:via-purple-400 hover:to-indigo-500 text-white font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 border-t-2 border-purple-200/80 border-b-[5px] border-b-indigo-950 active:border-b-[2px] active:translate-y-1 shadow-xl shadow-purple-950/80 transition-all cursor-pointer relative z-10"
           >
             <span>{isTR ? 'GÜNÜN KELİMESİNE BAŞLA' : 'START DAILY WORD'}</span>
-            <ArrowRight className="w-4 h-4" />
+            <PiArrowRightBold className="w-4 h-4" />
           </button>
         )}
       </div>

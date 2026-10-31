@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
-import { Delete, CornerDownLeft } from 'lucide-react';
+import { PiBackspaceDuotone, PiKeyReturnDuotone } from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 import { normalizeLetter } from '../utils/turkishUpper';
 import { evaluateGuess } from '../utils/evaluator';
@@ -149,11 +149,11 @@ export default function Keyboard({
                 }}
               >
                 {isBackspace ? (
-                  <Delete className="w-4 h-4 sm:w-5 sm:h-5 text-slate-200 drop-shadow" />
+                  <PiBackspaceDuotone className="w-5 h-5 sm:w-6 sm:h-6 text-slate-200 drop-shadow" />
                 ) : isEnter ? (
                   <span className="flex items-center gap-1 font-black">
                     {lang === 'tr' ? 'ONAY' : 'ENTER'}
-                    <CornerDownLeft className="w-3 h-3 opacity-90" />
+                    <PiKeyReturnDuotone className="w-3.5 h-3.5 opacity-95" />
                   </span>
                 ) : (
                   key

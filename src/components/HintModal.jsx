@@ -1,5 +1,11 @@
 import React from 'react';
-import { Lightbulb, KeyRound, Radar, X, Sparkles } from 'lucide-react';
+import {
+  PiLightbulbFilamentDuotone,
+  PiKeyDuotone,
+  PiCrosshairDuotone,
+  PiXBold,
+  PiSparkleFill
+} from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 
 export default function HintModal({
@@ -36,13 +42,13 @@ export default function HintModal({
           }}
           className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800/90 border border-slate-700 text-slate-400 hover:text-white flex items-center justify-center active:scale-90 transition cursor-pointer z-10"
         >
-          <X className="w-4 h-4" />
+          <PiXBold className="w-4 h-4" />
         </button>
 
         {/* Icon & Title */}
         <div className="flex items-center gap-3 mb-3.5 relative z-10">
           <div className="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-400/50 text-amber-300 flex items-center justify-center shadow-lg">
-            <Lightbulb className="w-6 h-6" />
+            <PiLightbulbFilamentDuotone className="w-7 h-7" />
           </div>
           <div className="text-left">
             <span className="text-[10px] font-black uppercase tracking-wider text-amber-400 block">
@@ -57,7 +63,7 @@ export default function HintModal({
         {/* Clue Box */}
         <div className="bg-slate-900/90 rounded-2xl p-3.5 border border-slate-800 mb-3 text-left relative z-10 shadow-inner">
           <div className="flex items-center gap-1.5 text-[11px] font-black text-amber-300 mb-1">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <PiSparkleFill className="w-3.5 h-3.5 text-amber-400" />
             <span>{t?.categoryClueInfo || (isTR ? 'Görev İpucu' : 'Mission Clue')}</span>
           </div>
           <p className="text-xs sm:text-sm font-semibold text-slate-100 leading-relaxed">
@@ -85,7 +91,7 @@ export default function HintModal({
         <div className="bg-slate-950/80 rounded-2xl p-3 border border-slate-800/90 flex items-center justify-between mb-2 relative z-10">
           <div className="flex items-center gap-2.5 text-left">
             <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 flex items-center justify-center shrink-0">
-              <KeyRound className="w-5 h-5" />
+              <PiKeyDuotone className="w-5 h-5" />
             </div>
             <div>
               <h4 className="text-xs font-black text-white">
@@ -118,7 +124,7 @@ export default function HintModal({
           <div className="bg-slate-950/80 rounded-2xl p-3 border border-slate-800/90 flex items-center justify-between relative z-10">
             <div className="flex items-center gap-2.5 text-left">
               <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400/40 text-purple-300 flex items-center justify-center shrink-0">
-                <Radar className="w-5 h-5" />
+                <PiCrosshairDuotone className="w-5 h-5" />
               </div>
               <div>
                 <h4 className="text-xs font-black text-white">

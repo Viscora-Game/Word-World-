@@ -2,24 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { getAssetUrl } from '../utils/assetUrl';
 import { PUBLIC_GAME_URL } from '../utils/dailyQuest';
 import {
-  X,
-  Volume2,
-  VolumeX,
-  Smartphone,
-  Globe,
-  RotateCcw,
-  Check,
-  Star,
-  Shield,
-  FileText,
-  Info,
-  Share2,
-  ThumbsUp,
-  Mail,
-  ExternalLink,
-  Sparkles,
-  HelpCircle
-} from 'lucide-react';
+  PiXBold,
+  PiSpeakerHighDuotone,
+  PiSpeakerSlashDuotone,
+  PiDeviceMobileCameraDuotone,
+  PiGlobeHemisphereWestDuotone,
+  PiArrowCounterClockwiseBold,
+  PiCheckBold,
+  PiStarFill,
+  PiShieldCheckDuotone,
+  PiFileTextDuotone,
+  PiShareNetworkDuotone,
+  PiThumbsUpDuotone,
+  PiEnvelopeSimpleDuotone,
+  PiArrowSquareOutBold,
+  PiSparkleFill
+} from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 
 const DEV_PAGE_URL = 'https://play.google.com/store/apps/dev?id=5656382228588702142';
@@ -113,7 +111,7 @@ export default function SettingsModal({
         <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-800 shrink-0">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
-              <Sparkles className="w-4 h-4" />
+              <PiSparkleFill className="w-4 h-4" />
             </div>
             <h3 className="text-sm font-black text-white tracking-wide uppercase">
               {tabs.find((tab) => tab.id === activeTab)?.label || (isTR ? 'Ayarlar' : 'Settings')}
@@ -127,7 +125,7 @@ export default function SettingsModal({
             }}
             className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 text-slate-400 hover:text-white flex items-center justify-center active:scale-90 transition cursor-pointer"
           >
-            <X className="w-4 h-4" />
+            <PiXBold className="w-4 h-4" />
           </button>
         </div>
 
@@ -164,7 +162,7 @@ export default function SettingsModal({
               {/* Language Switcher */}
               <div className="bg-slate-850/90 rounded-2xl p-3 border border-slate-800">
                 <div className="flex items-center gap-2 text-xs font-black text-slate-300 mb-2">
-                  <Globe className="w-4 h-4 text-indigo-400" />
+                  <PiGlobeHemisphereWestDuotone className="w-4 h-4 text-indigo-400" />
                   <span>{t?.language || (isTR ? 'Dil Seçimi' : 'Language')}</span>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
@@ -181,7 +179,7 @@ export default function SettingsModal({
                   >
                     <span className="px-1.5 py-0.5 rounded bg-indigo-950 text-indigo-200 text-[10px] font-black border border-indigo-500/40">TR</span>
                     <span>Türkçe</span>
-                    {lang === 'tr' && <Check className="w-3.5 h-3.5 ml-auto text-emerald-400" />}
+                    {lang === 'tr' && <PiCheckBold className="w-3.5 h-3.5 ml-auto text-emerald-400" />}
                   </button>
                   <button
                     onClick={() => {
@@ -196,7 +194,7 @@ export default function SettingsModal({
                   >
                     <span className="px-1.5 py-0.5 rounded bg-purple-950 text-purple-200 text-[10px] font-black border border-purple-500/40">EN</span>
                     <span>English</span>
-                    {lang === 'en' && <Check className="w-3.5 h-3.5 ml-auto text-emerald-400" />}
+                    {lang === 'en' && <PiCheckBold className="w-3.5 h-3.5 ml-auto text-emerald-400" />}
                   </button>
                 </div>
               </div>
@@ -206,9 +204,9 @@ export default function SettingsModal({
                 <div className="flex items-center gap-2.5">
                   <div className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300">
                     {soundEnabled ? (
-                      <Volume2 className="w-4 h-4 text-emerald-400" />
+                      <PiSpeakerHighDuotone className="w-4 h-4 text-emerald-400" />
                     ) : (
-                      <VolumeX className="w-4 h-4 text-slate-500" />
+                      <PiSpeakerSlashDuotone className="w-4 h-4 text-slate-500" />
                     )}
                   </div>
                   <div>
@@ -237,7 +235,7 @@ export default function SettingsModal({
               <div className="bg-slate-850/90 rounded-2xl p-3 border border-slate-800 flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <div className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300">
-                    <Smartphone className="w-4 h-4 text-amber-400" />
+                    <PiDeviceMobileCameraDuotone className="w-4 h-4 text-amber-400" />
                   </div>
                   <div>
                     <h4 className="text-xs font-black text-white">{t?.vibration || (isTR ? 'Titreşim' : 'Vibration')}</h4>
@@ -274,7 +272,7 @@ export default function SettingsModal({
                 }}
                 className="mt-1 py-2.5 px-4 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 font-black text-xs flex items-center justify-center gap-2 transition cursor-pointer active:scale-95"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
+                <PiArrowCounterClockwiseBold className="w-3.5 h-3.5" />
                 <span>{t?.resetAllProgress || (isTR ? 'Tüm Oyun Verilerini Sıfırla' : 'Reset All Game Data')}</span>
               </button>
             </div>
@@ -340,7 +338,7 @@ export default function SettingsModal({
             <div className="flex flex-col gap-2.5">
               <div className="bg-slate-850/90 rounded-2xl p-3 border border-slate-800 flex flex-col gap-2">
                 <div className="flex items-center gap-2 text-xs font-black text-emerald-400">
-                  <Shield className="w-4 h-4" />
+                  <PiShieldCheckDuotone className="w-4 h-4" />
                   <span>{t?.privacyPolicy || (isTR ? 'Gizlilik Politikası' : 'Privacy Policy')}</span>
                 </div>
                 <p className="text-[11px] text-slate-300 leading-relaxed">
@@ -352,7 +350,7 @@ export default function SettingsModal({
 
               <div className="bg-slate-850/90 rounded-2xl p-3 border border-slate-800 flex flex-col gap-2">
                 <div className="flex items-center gap-2 text-xs font-black text-indigo-400">
-                  <FileText className="w-4 h-4" />
+                  <PiFileTextDuotone className="w-4 h-4" />
                   <span>{t?.termsOfService || (isTR ? 'Kullanım Koşulları' : 'Terms of Service')}</span>
                 </div>
                 <p className="text-[11px] text-slate-300 leading-relaxed">
@@ -419,10 +417,10 @@ export default function SettingsModal({
                   className="w-full py-2 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs flex items-center justify-between transition cursor-pointer shadow-md active:translate-y-0.5"
                 >
                   <span className="flex items-center gap-1.5">
-                    <Globe className="w-3.5 h-3.5" />
+                    <PiGlobeHemisphereWestDuotone className="w-4 h-4" />
                     <span>{isTR ? 'Viscora Games Google Play Sayfası' : 'Viscora Games Google Play Page'}</span>
                   </span>
-                  <ExternalLink className="w-3.5 h-3.5" />
+                  <PiArrowSquareOutBold className="w-3.5 h-3.5" />
                 </a>
               </div>
 
@@ -432,15 +430,15 @@ export default function SettingsModal({
                 className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500/20 to-yellow-500/10 border border-amber-500/40 hover:border-amber-400 text-amber-300 font-black text-xs flex items-center justify-between transition cursor-pointer active:scale-98"
               >
                 <div className="flex items-center gap-2">
-                  <ThumbsUp className="w-4 h-4 text-amber-400" />
+                  <PiThumbsUpDuotone className="w-4 h-4 text-amber-400" />
                   <span>{t?.rateGame || (isTR ? 'Oyunu Değerlendir' : 'Rate Game')}</span>
                 </div>
                 <div className="flex text-amber-400">
-                  <Star className="w-3.5 h-3.5 fill-amber-400" />
-                  <Star className="w-3.5 h-3.5 fill-amber-400" />
-                  <Star className="w-3.5 h-3.5 fill-amber-400" />
-                  <Star className="w-3.5 h-3.5 fill-amber-400" />
-                  <Star className="w-3.5 h-3.5 fill-amber-400" />
+                  <PiStarFill className="w-3.5 h-3.5" />
+                  <PiStarFill className="w-3.5 h-3.5" />
+                  <PiStarFill className="w-3.5 h-3.5" />
+                  <PiStarFill className="w-3.5 h-3.5" />
+                  <PiStarFill className="w-3.5 h-3.5" />
                 </div>
               </button>
 
@@ -450,17 +448,17 @@ export default function SettingsModal({
                 className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-indigo-500/20 to-purple-500/10 border border-indigo-500/40 hover:border-indigo-400 text-indigo-300 font-black text-xs flex items-center justify-between transition cursor-pointer active:scale-98"
               >
                 <div className="flex items-center gap-2">
-                  <Share2 className="w-4 h-4 text-indigo-400" />
+                  <PiShareNetworkDuotone className="w-4 h-4 text-indigo-400" />
                   <span>{t?.shareGame || (isTR ? 'Oyunu Paylaş' : 'Share Game')}</span>
                 </div>
-                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                <PiArrowSquareOutBold className="w-3.5 h-3.5 opacity-80" />
               </button>
 
               {/* Support & Developer Contact (Viscora Games Email) */}
               <div className="bg-slate-850/90 rounded-2xl p-3 border border-slate-800 flex flex-col gap-1.5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs font-black text-slate-300">
-                    <Mail className="w-4 h-4 text-cyan-400" />
+                    <PiEnvelopeSimpleDuotone className="w-4 h-4 text-cyan-400" />
                     <span>{t?.contactSupport || (isTR ? 'Destek & İletişim' : 'Support & Contact')}</span>
                   </div>
                   <button
@@ -479,7 +477,7 @@ export default function SettingsModal({
                   href={`mailto:${DEV_EMAIL}?subject=Word%20%26%20World%20Destek%20%2F%20Geri%20Bildirim`}
                   className="inline-flex items-center gap-1.5 text-xs font-black text-cyan-300 hover:text-cyan-200 transition bg-slate-900/80 p-2 rounded-xl border border-slate-800"
                 >
-                  <Mail className="w-3.5 h-3.5 text-cyan-400" />
+                  <PiEnvelopeSimpleDuotone className="w-3.5 h-3.5 text-cyan-400" />
                   <span>{DEV_EMAIL}</span>
                 </a>
               </div>

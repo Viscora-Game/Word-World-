@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronRight } from 'lucide-react';
+import { PiCaretRightBold } from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 import GameIcon from './GameIcon';
 import { getAssetUrl } from '../utils/assetUrl';
@@ -183,7 +183,7 @@ export default function CategorySelect({
                   </div>
 
                   <div className="w-7 h-7 rounded-xl bg-slate-950/70 border border-slate-700/80 flex items-center justify-center group-hover:translate-x-0.5 transition-transform text-slate-300 shadow-inner">
-                    <ChevronRight className="w-4 h-4" />
+                    <PiCaretRightBold className="w-3.5 h-3.5" />
                   </div>
                 </div>
               </div>

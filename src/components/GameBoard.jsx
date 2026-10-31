@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { evaluateGuess } from '../utils/evaluator';
 import { normalizeLetter } from '../utils/turkishUpper';
 import { soundManager } from '../utils/audio';
-import { Sparkles } from 'lucide-react';
 
 export default function GameBoard({
   guesses,

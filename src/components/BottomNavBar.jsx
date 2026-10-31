@@ -1,9 +1,15 @@
 import React from 'react';
-import { Home, Compass, ClipboardList, Trophy } from 'lucide-react';
+import {
+  PiHouseDuotone,
+  PiCompassDuotone,
+  PiCalendarStarDuotone,
+  PiBookOpenTextDuotone
+} from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 
 export default function BottomNavBar({
-  activeTab = 'home', // 'home' | 'categories' | 'quests' | 'leaderboard'
+  activeTab = 'categories',
+  dailyCompleted = false,
   onSelectTab,
   t
 }) {
@@ -11,23 +17,23 @@ export default function BottomNavBar({
     {
       id: 'home',
       label: t?.home || 'Ana Sayfa',
-      icon: Home
+      icon: PiHouseDuotone
     },
     {
       id: 'categories',
-      label: t?.map || 'Harita',
-      icon: Compass
+      label: t?.map || 'Dünyalar',
+      icon: PiCompassDuotone
     },
     {
       id: 'quests',
-      label: t?.quests || 'Görevler',
-      icon: ClipboardList,
-      hasBadge: true
+      label: t?.quests || 'Günlük',
+      icon: PiCalendarStarDuotone,
+      hasBadge: !dailyCompleted
     },
     {
-      id: 'leaderboard',
-      label: t?.leaderboard || 'Liderlik',
-      icon: Trophy
+      id: 'rules',
+      label: t?.howToPlay || 'Rehber',
+      icon: PiBookOpenTextDuotone
     }
   ];
 
@@ -51,19 +57,19 @@ export default function BottomNavBar({
                   : 'text-slate-400 hover:text-slate-200 font-bold'
               }`}
             >
-              {/* Active Tab Glow */}
               {isActive && (
                 <div className="absolute inset-0 bg-amber-400/15 rounded-xl blur-sm pointer-events-none" />
               )}
 
-              {/* Notification Badge */}
               {tab.hasBadge && (
-                <span className="absolute top-1 right-2.5 w-2 h-2 rounded-full bg-rose-500 ring-2 ring-[#0c1427] animate-pulse" />
+                <span className="absolute top-1 right-2.5 w-2 h-2 rounded-full bg-purple-400 ring-2 ring-[#0c1427] animate-pulse" />
               )}
 
               <Icon
                 className={`w-5 h-5 transition-transform ${
-                  isActive ? 'text-amber-300 stroke-[2.5] drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]' : 'text-slate-400'
+                  isActive
+                    ? 'text-amber-300 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]'
+                    : 'text-slate-400'
                 }`}
               />
 

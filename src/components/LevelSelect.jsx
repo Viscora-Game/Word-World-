@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, Lock, Play } from 'lucide-react';
+import { PiStarFill, PiLockKeyDuotone, PiPlayFill } from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 import GameIcon from './GameIcon';
 import { getAssetUrl } from '../utils/assetUrl';
@@ -102,7 +102,7 @@ export default function LevelSelect({
                   {wordLength} {t?.lettersShort || 'Harf'}
                 </span>
                 {!isUnlocked ? (
-                  <Lock className="w-3.5 h-3.5 text-slate-500" />
+                  <PiLockKeyDuotone className="w-3.5 h-3.5 text-slate-500" />
                 ) : isCurrent ? (
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                 ) : null}
@@ -127,18 +127,18 @@ export default function LevelSelect({
               <div className="w-full flex items-center justify-center">
                 {isCurrent ? (
                   <div className="flex items-center gap-1 bg-white/20 border border-white/40 px-2 py-0.5 rounded-full text-[9px] font-black text-white">
-                    <Play className="w-2.5 h-2.5 fill-white" />
-                    <span>{t?.playNow || 'OYNA'}</span>
+                    <PiPlayFill className="w-2.5 h-2.5" />
+                    <span>{t?.play || 'OYNA'}</span>
                   </div>
                 ) : (
                   <div className="flex items-center gap-0.5">
                     {[1, 2, 3].map((s) => (
-                      <Star
+                      <PiStarFill
                         key={s}
                         className={`w-3.5 h-3.5 ${
                           s <= lvlInfo.stars
-                            ? 'fill-amber-400 text-amber-400 drop-shadow-[0_0_4px_rgba(251,191,36,0.6)]'
-                            : 'text-slate-700 fill-slate-800'
+                            ? 'text-amber-400 drop-shadow-[0_0_4px_rgba(251,191,36,0.6)]'
+                            : 'text-slate-700'
                         }`}
                       />
                     ))}

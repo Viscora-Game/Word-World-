@@ -1,75 +1,43 @@
 import React from 'react';
-import { X, Shield, Sparkles } from 'lucide-react';
+import { GiSoccerField, GiTShirt, GiGoalKeeper } from 'react-icons/gi';
+import { PiXBold, PiSoccerBallDuotone } from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 
-function TacticalKit({ role = 'FW', label = '9' }) {
-  const palettes = {
+function TacticalKit({ role = 'FW', number = '9' }) {
+  const styles = {
     FW: {
-      primary: '#f43f5e',
-      secondary: '#be123c',
-      trim: '#fde047',
-      text: '#ffffff'
+      badge: 'from-rose-500 to-rose-700 border-amber-300/80 text-white',
+      numBg: 'bg-rose-950 text-amber-300 border-amber-400/50'
     },
     MF: {
-      primary: '#6366f1',
-      secondary: '#3730a3',
-      trim: '#38bdf8',
-      text: '#ffffff'
+      badge: 'from-indigo-500 to-indigo-700 border-cyan-300/80 text-white',
+      numBg: 'bg-indigo-950 text-cyan-300 border-cyan-400/50'
     },
     DF: {
-      primary: '#0ea5e9',
-      secondary: '#0369a1',
-      trim: '#e0f2fe',
-      text: '#ffffff'
+      badge: 'from-sky-500 to-blue-700 border-sky-200/80 text-white',
+      numBg: 'bg-slate-950 text-sky-300 border-sky-400/50'
     },
     GK: {
-      primary: '#f59e0b',
-      secondary: '#b45309',
-      trim: '#fef08a',
-      text: '#0f172a'
+      badge: 'from-amber-400 to-amber-600 border-yellow-100 text-slate-950',
+      numBg: 'bg-slate-950 text-amber-300 border-amber-400/60'
     }
   };
 
-  const p = palettes[role] || palettes.FW;
+  const s = styles[role] || styles.FW;
+  const Icon = role === 'GK' ? GiGoalKeeper : GiTShirt;
 
   return (
-    <div className="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center drop-shadow-[0_4px_6px_rgba(0,0,0,0.65)]">
-      <svg viewBox="0 0 40 40" className="w-full h-full">
-        <defs>
-          <linearGradient id={`kitGrad_${role}`} x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor={p.primary} />
-            <stop offset="100%" stopColor={p.secondary} />
-          </linearGradient>
-        </defs>
-        {/* Jersey silhouette */}
-        <path
-          d="M12 6 L16 9 Q20 11 24 9 L28 6 L36 12 L33 19 L29 17 L29 34 Q20 36 11 34 L11 17 L7 19 L4 12 Z"
-          fill={`url(#kitGrad_${role})`}
-          stroke={p.trim}
-          strokeWidth="1.6"
-          strokeLinejoin="round"
-        />
-        {/* Collar highlight */}
-        <path
-          d="M15.5 7.5 Q20 11.5 24.5 7.5"
-          fill="none"
-          stroke="#ffffff"
-          strokeWidth="1.4"
-          strokeLinecap="round"
-        />
-        {/* Role / Squad Number */}
-        <text
-          x="20"
-          y="25.5"
-          textAnchor="middle"
-          fill={p.text}
-          fontSize="9.5"
-          fontWeight="900"
-          fontFamily="system-ui, sans-serif"
-        >
-          {label}
-        </text>
-      </svg>
+    <div className="relative flex items-center justify-center">
+      <div
+        className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-b ${s.badge} border-[1.5px] shadow-lg flex items-center justify-center`}
+      >
+        <Icon className="w-5 h-5 drop-shadow-sm" />
+      </div>
+      <span
+        className={`absolute -top-1 -right-1.5 px-1 rounded-md border text-[8px] font-black leading-tight shadow ${s.numBg}`}
+      >
+        {number}
+      </span>
     </div>
   );
 }
@@ -94,7 +62,7 @@ export default function FootballPitchModal({
         <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-800/90 relative z-10">
           <div className="flex items-center gap-2.5 min-w-0">
             <div className="w-9 h-9 rounded-2xl bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center text-emerald-300 shrink-0 shadow-md">
-              <Shield className="w-4 h-4 fill-emerald-400/20" />
+              <GiSoccerField className="w-5 h-5" />
             </div>
             <div className="min-w-0 text-left">
               <span className="text-[9.5px] font-black uppercase tracking-wider text-emerald-400 block truncate">
@@ -113,7 +81,7 @@ export default function FootballPitchModal({
             }}
             className="w-8 h-8 rounded-full bg-slate-800/90 border border-slate-700 text-slate-300 hover:text-white flex items-center justify-center active:scale-90 transition shrink-0 cursor-pointer"
           >
-            <X className="w-4 h-4" />
+            <PiXBold className="w-4 h-4" />
           </button>
         </div>
 
@@ -135,16 +103,11 @@ export default function FootballPitchModal({
 
           {/* Crisp Chalk Pitch Markings */}
           <div className="absolute inset-2.5 border-2 border-white/40 rounded-lg pointer-events-none">
-            {/* Halfway line */}
             <div className="absolute top-1/2 left-0 right-0 h-[1.5px] bg-white/40 -translate-y-1/2" />
-            {/* Center circle */}
             <div className="absolute top-1/2 left-1/2 w-20 h-20 border-2 border-white/40 rounded-full -translate-x-1/2 -translate-y-1/2" />
-            {/* Center spot */}
             <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-white/60 rounded-full -translate-x-1/2 -translate-y-1/2" />
-            {/* Top Penalty Box & 6-Yard Box */}
             <div className="absolute top-0 left-1/2 w-32 h-12 border-2 border-t-0 border-white/40 -translate-x-1/2" />
             <div className="absolute top-0 left-1/2 w-16 h-5 border-2 border-t-0 border-white/35 -translate-x-1/2" />
-            {/* Bottom Penalty Box & 6-Yard Box */}
             <div className="absolute bottom-0 left-1/2 w-32 h-12 border-2 border-b-0 border-white/40 -translate-x-1/2" />
             <div className="absolute bottom-0 left-1/2 w-16 h-5 border-2 border-b-0 border-white/35 -translate-x-1/2" />
           </div>
@@ -153,7 +116,7 @@ export default function FootballPitchModal({
           <div className="relative z-10 w-full flex items-center justify-around pt-1">
             {(lineup.fwd || []).map((name, idx) => (
               <div key={idx} className="flex flex-col items-center">
-                <TacticalKit role="FW" label={idx === 0 ? '9' : idx === 1 ? '11' : '7'} />
+                <TacticalKit role="FW" number={idx === 0 ? '9' : idx === 1 ? '11' : '7'} />
                 <span className="text-[9px] sm:text-[10px] font-black text-white bg-slate-950/85 px-2 py-0.5 rounded-md mt-0.5 border border-rose-400/40 truncate max-w-[82px] text-center shadow-md">
                   {name}
                 </span>
@@ -165,7 +128,7 @@ export default function FootballPitchModal({
           <div className="relative z-10 w-full flex flex-wrap items-center justify-around my-auto gap-y-1.5 px-0.5">
             {(lineup.mid || []).map((name, idx) => (
               <div key={idx} className="flex flex-col items-center min-w-[54px]">
-                <TacticalKit role="MF" label={idx === 0 ? '8' : idx === 1 ? '6' : idx === 2 ? '10' : '14'} />
+                <TacticalKit role="MF" number={idx === 0 ? '8' : idx === 1 ? '6' : idx === 2 ? '10' : '14'} />
                 <span className="text-[8.5px] sm:text-[9.5px] font-black text-white bg-slate-950/85 px-1.5 py-0.5 rounded-md mt-0.5 border border-indigo-400/40 truncate max-w-[72px] text-center shadow-md">
                   {name}
                 </span>
@@ -177,7 +140,7 @@ export default function FootballPitchModal({
           <div className="relative z-10 w-full flex items-center justify-around pb-0.5">
             {(lineup.def || []).map((name, idx) => (
               <div key={idx} className="flex flex-col items-center">
-                <TacticalKit role="DF" label={idx === 0 ? '2' : idx === 1 ? '4' : idx === 2 ? '5' : '3'} />
+                <TacticalKit role="DF" number={idx === 0 ? '2' : idx === 1 ? '4' : idx === 2 ? '5' : '3'} />
                 <span className="text-[8.5px] sm:text-[9.5px] font-black text-white bg-slate-950/85 px-1.5 py-0.5 rounded-md mt-0.5 border border-sky-400/40 truncate max-w-[68px] text-center shadow-md">
                   {name}
                 </span>
@@ -188,7 +151,7 @@ export default function FootballPitchModal({
           {/* GOALKEEPER (KALECİ) */}
           <div className="relative z-10 w-full flex items-center justify-center pb-0.5">
             <div className="flex flex-col items-center">
-              <TacticalKit role="GK" label="1" />
+              <TacticalKit role="GK" number="1" />
               <span className="text-[9px] sm:text-[10px] font-black text-amber-300 bg-slate-950/90 px-2.5 py-0.5 rounded-md mt-0.5 border border-amber-400/55 shadow-md">
                 {lineup.gk}
               </span>
@@ -199,7 +162,7 @@ export default function FootballPitchModal({
         {/* Footer Info & Action Button */}
         <div className="mt-3 flex items-center justify-between gap-2 relative z-10">
           <div className="flex items-center gap-1.5 text-[11px] font-black text-slate-300">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <PiSoccerBallDuotone className="w-4 h-4 text-emerald-400 shrink-0" />
             <span className="px-2.5 py-1 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-black">
               {teamWordLength} {t?.letterTeam || 'Harfli Takım'}
             </span>

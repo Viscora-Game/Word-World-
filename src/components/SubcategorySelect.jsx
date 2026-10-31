@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, ChevronRight, Sparkles } from 'lucide-react';
+import { PiCaretRightBold } from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 import GameIcon from './GameIcon';
 import { getAssetUrl } from '../utils/assetUrl';
@@ -124,7 +124,7 @@ export default function SubcategorySelect({
                     </span>
                   </div>
                   <div className="w-7 h-7 rounded-xl bg-slate-950/40 border border-slate-700/60 flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-                    <ChevronRight className="w-4 h-4 text-slate-300" />
+                    <PiCaretRightBold className="w-3.5 h-3.5 text-slate-300" />
                   </div>
                 </div>
               </div>

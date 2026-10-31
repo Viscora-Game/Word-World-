@@ -3,7 +3,6 @@ import { CATEGORIES_DATA, UI_STRINGS } from './data/categories';
 import { soundManager } from './utils/audio';
 import { normalizeLetter, toUpperTR, toAsciiUpper } from './utils/turkishUpper';
 import { evaluateGuess } from './utils/evaluator';
-import { leaderboardService } from './services/leaderboardService';
 import {
   getDailyChallenge,
   getDailyState,
@@ -26,11 +25,11 @@ import WinModal from './components/WinModal';
 import HintModal from './components/HintModal';
 import SettingsModal from './components/SettingsModal';
 import FootballPitchModal from './components/FootballPitchModal';
-import LeaderboardModal from './components/LeaderboardModal';
 import BottomNavBar from './components/BottomNavBar';
 import GameIcon from './components/GameIcon';
 import { getAssetUrl } from './utils/assetUrl';
-import { Lightbulb, Sparkles, Shield } from 'lucide-react';
+import { PiLightbulbFilamentDuotone, PiSparkleFill } from 'react-icons/pi';
+import { GiSoccerField } from 'react-icons/gi';
 
 const ALPHABET_POOL = {
   tr: 'ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ'.split(''),
@@ -53,8 +52,7 @@ export default function App() {
     return saved ? JSON.parse(saved) : {};
   });
 
-  // Player Profile, Daily Quest & Streak states
-  const [playerName, setPlayerName] = useState(() => leaderboardService.getPlayerName());
+  // Daily Quest & Streak states
   const [dailyBonusStars, setDailyBonusStars] = useState(
     () => getDailyState().totalBonusStars || 0
   );
@@ -107,7 +105,6 @@ export default function App() {
 
   // Modals
   const [isDailyModalOpen, setIsDailyModalOpen] = useState(false);
-  const [isLeaderboardModalOpen, setIsLeaderboardModalOpen] = useState(false);
   const [isWinModalOpen, setIsWinModalOpen] = useState(false);
   const [isHintModalOpen, setIsHintModalOpen] = useState(false);
   const [isPitchModalOpen, setIsPitchModalOpen] = useState(false);
@@ -193,16 +190,6 @@ export default function App() {
   }, [categoryProgress]);
 
   const totalStars = levelStars + dailyBonusStars;
-
-  // Total completed levels
-  const totalCompleted = useMemo(() => {
-    return Object.values(categoryProgress).reduce((acc, curr) => acc + curr.completedLevels, 0);
-  }, [categoryProgress]);
-
-  // Live Player Rank for MainMenu Card
-  const playerRank = useMemo(() => {
-    return leaderboardService.getQuickRank(totalStars, totalCompleted, lang);
-  }, [totalStars, totalCompleted, lang, playerName]);
 
   // Toast Notification Helper
   const showToast = useCallback((msg) => {
@@ -347,21 +334,13 @@ export default function App() {
       setLevelProgress((prev) => {
         const subMap = { ...(prev[selectedSubcategoryId] || {}) };
         const oldStars = subMap[selectedLevelId]?.stars || 0;
-        const wasCompleted = Boolean(subMap[selectedLevelId]?.completed);
         const newBestStars = Math.max(oldStars, stars);
-        const starDiff = Math.max(0, newBestStars - oldStars);
 
         subMap[selectedLevelId] = {
           completed: true,
           stars: newBestStars,
           attempts: attemptsCount
         };
-
-        // Sync updated score to Leaderboard service
-        leaderboardService.submitScore(
-          totalStars + starDiff + extraDailyStars,
-          totalCompleted + (wasCompleted ? 0 : 1)
-        );
 
         return {
           ...prev,
@@ -395,8 +374,6 @@ export default function App() {
     isDailyMode,
     selectedSubcategoryId,
     selectedLevelId,
-    totalStars,
-    totalCompleted,
     showToast
   ]);
 
@@ -532,7 +509,7 @@ export default function App() {
         {/* Floating Toast Notification (Clean Vector Icon, Zero Emojis) */}
         {toastMessage && (
           <div className="absolute top-14 left-1/2 -translate-x-1/2 z-50 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 border border-indigo-300/50 text-white font-black text-xs py-2 px-4 rounded-full shadow-2xl backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-150 flex items-center gap-1.5 whitespace-nowrap">
-            <Sparkles className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+            <PiSparkleFill className="w-3.5 h-3.5 text-amber-300 shrink-0" />
             <span>{toastMessage}</span>
           </div>
         )}
@@ -570,20 +547,13 @@ export default function App() {
               }
             }}
             onOpenDaily={() => setIsDailyModalOpen(true)}
-            onOpenLeaderboard={() => setIsLeaderboardModalOpen(true)}
             onOpenSettings={() => {
               setSettingsTab('settings');
-              setIsSettingsModalOpen(true);
-            }}
-            onOpenHelp={() => {
-              setSettingsTab('rules');
               setIsSettingsModalOpen(true);
             }}
             soundEnabled={soundEnabled}
             onToggleSound={() => setSoundEnabled((prev) => !prev)}
             totalStars={totalStars}
-            playerName={playerName}
-            playerRank={playerRank}
             streak={streak}
             dailyCompleted={dailyCompleted}
             levelProgress={levelProgress}
@@ -660,7 +630,7 @@ export default function App() {
                       }}
                       className="flex items-center gap-1 bg-gradient-to-r from-amber-500/25 to-yellow-500/15 border border-amber-500/40 text-amber-300 px-2.5 py-1 rounded-full text-[10px] font-black active:scale-95 transition shadow-sm cursor-pointer"
                     >
-                      <Lightbulb className="w-3 h-3 text-amber-400" />
+                      <PiLightbulbFilamentDuotone className="w-3.5 h-3.5 text-amber-300" />
                       <span>{t.hint}</span>
                     </button>
 
@@ -684,7 +654,7 @@ export default function App() {
                     }}
                     className="mt-1 w-full py-2 px-3 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-[11px] sm:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 border border-emerald-400/50 border-b-[3px] border-b-emerald-950 shadow-md active:translate-y-0.5 transition cursor-pointer"
                   >
-                    <Shield className="w-3.5 h-3.5 text-emerald-200 fill-emerald-300/20 shrink-0" />
+                    <GiSoccerField className="w-4 h-4 text-emerald-200 shrink-0" />
                     <span>
                       {t?.viewPitch || 'SAHADAKİ İLK 11 DİZİLİŞİNİ GÖR'} ({currentLevel.lineup.formation})
                     </span>
@@ -723,11 +693,15 @@ export default function App() {
         {view === 'categories' && (
           <BottomNavBar
             activeTab="categories"
+            dailyCompleted={dailyCompleted}
             onSelectTab={(tabId) => {
               if (tabId === 'home') setView('main');
               else if (tabId === 'categories') setView('categories');
               else if (tabId === 'quests') setIsDailyModalOpen(true);
-              else if (tabId === 'leaderboard') setIsLeaderboardModalOpen(true);
+              else if (tabId === 'rules') {
+                setSettingsTab('rules');
+                setIsSettingsModalOpen(true);
+              }
             }}
             t={t}
           />
@@ -783,17 +757,6 @@ export default function App() {
           dailyRecord={dailyRecord}
           streak={streak}
           lang={lang}
-          t={t}
-        />
-
-        {/* Global & Seasonal Leaderboard Modal */}
-        <LeaderboardModal
-          isOpen={isLeaderboardModalOpen}
-          onClose={() => setIsLeaderboardModalOpen(false)}
-          totalStars={totalStars}
-          totalCompleted={totalCompleted}
-          lang={lang}
-          onPlayerNameChange={(newName) => setPlayerName(newName)}
           t={t}
         />
 

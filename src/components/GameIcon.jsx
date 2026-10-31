@@ -1,220 +1,192 @@
 import React from 'react';
 import {
-  Trophy,
-  Star,
-  Flame,
-  Crown,
-  Medal,
-  Sparkles,
-  Rocket,
-  Globe,
-  Compass,
-  Landmark,
-  Atom,
-  Orbit,
-  Brain,
-  Dna,
-  Microscope,
-  Clapperboard,
-  Tv,
-  Gem,
-  Shield,
-  Coins,
-  Flag,
-  Target,
-  Zap,
-  Award,
-  Film,
-  Music,
-  Utensils
-} from 'lucide-react';
+  GiTrophyCup,
+  GiSoccerBall,
+  GiBasketballBall,
+  GiF1Car,
+  GiSoccerField,
+  GiClapperboard,
+  GiTv,
+  GiCrystalGrowth,
+  GiSpikedDragonHead,
+  GiPopcorn,
+  GiEarthAfricaEurope,
+  GiEarthAmerica,
+  GiCompass,
+  GiCrown,
+  GiTwoCoins,
+  GiCutDiamond,
+  GiGreekTemple,
+  GiAtom,
+  GiRingedPlanet,
+  GiBrain,
+  GiDna2,
+  GiMicroscope,
+  GiRocket,
+  GiSparkles,
+  GiStarMedal,
+  GiRoundStar,
+  GiSmallFire,
+  GiMusicalNotes,
+  GiChefToque
+} from 'react-icons/gi';
 
-const VECTOR_THEMES = {
+// Powered by open-source Game-Icons repository (https://github.com/game-icons/icons)
+const GAME_ICON_THEMES = {
   star: {
-    Icon: Star,
+    Icon: GiRoundStar,
     color: 'text-amber-300',
-    fill: 'fill-amber-400',
-    glow: 'drop-shadow-[0_2px_6px_rgba(251,191,36,0.65)]'
+    glow: 'drop-shadow-[0_2px_6px_rgba(251,191,36,0.7)]'
   },
   trophy: {
-    Icon: Trophy,
+    Icon: GiTrophyCup,
     color: 'text-amber-300',
-    fill: 'fill-amber-400/35',
-    glow: 'drop-shadow-[0_2px_8px_rgba(245,158,11,0.6)]'
+    glow: 'drop-shadow-[0_2px_8px_rgba(245,158,11,0.65)]'
   },
   crown: {
-    Icon: Crown,
+    Icon: GiCrown,
     color: 'text-amber-300',
-    fill: 'fill-amber-400/40',
     glow: 'drop-shadow-[0_2px_8px_rgba(251,191,36,0.65)]'
   },
   medal: {
-    Icon: Medal,
+    Icon: GiStarMedal,
     color: 'text-amber-300',
-    fill: 'fill-amber-400/30',
-    glow: 'drop-shadow-[0_2px_6px_rgba(245,158,11,0.55)]'
+    glow: 'drop-shadow-[0_2px_6px_rgba(245,158,11,0.6)]'
   },
   coin: {
-    Icon: Coins,
+    Icon: GiTwoCoins,
     color: 'text-yellow-300',
-    fill: 'fill-yellow-400/30',
-    glow: 'drop-shadow-[0_2px_6px_rgba(250,204,21,0.55)]'
+    glow: 'drop-shadow-[0_2px_6px_rgba(250,204,21,0.6)]'
   },
   fire: {
-    Icon: Flame,
+    Icon: GiSmallFire,
     color: 'text-orange-400',
-    fill: 'fill-orange-500/45',
-    glow: 'drop-shadow-[0_2px_8px_rgba(249,115,22,0.65)]'
+    glow: 'drop-shadow-[0_2px_8px_rgba(249,115,22,0.7)]'
   },
   sparkles: {
-    Icon: Sparkles,
+    Icon: GiSparkles,
     color: 'text-amber-300',
-    fill: 'fill-amber-300/35',
-    glow: 'drop-shadow-[0_2px_6px_rgba(251,191,36,0.6)]'
+    glow: 'drop-shadow-[0_2px_6px_rgba(251,191,36,0.65)]'
   },
   stadium: {
-    Icon: Shield,
+    Icon: GiSoccerField,
     color: 'text-emerald-300',
-    fill: 'fill-emerald-400/30',
-    glow: 'drop-shadow-[0_2px_7px_rgba(16,185,129,0.55)]'
+    glow: 'drop-shadow-[0_2px_7px_rgba(16,185,129,0.6)]'
   },
   soccer: {
-    Icon: Target,
-    color: 'text-emerald-300',
-    fill: 'fill-emerald-400/25',
-    glow: 'drop-shadow-[0_2px_7px_rgba(16,185,129,0.55)]'
+    Icon: GiSoccerBall,
+    color: 'text-emerald-200',
+    glow: 'drop-shadow-[0_2px_7px_rgba(16,185,129,0.6)]'
   },
   basketball: {
-    Icon: Award,
-    color: 'text-orange-300',
-    fill: 'fill-orange-400/30',
-    glow: 'drop-shadow-[0_2px_7px_rgba(249,115,22,0.55)]'
+    Icon: GiBasketballBall,
+    color: 'text-orange-400',
+    glow: 'drop-shadow-[0_2px_7px_rgba(249,115,22,0.65)]'
   },
   f1: {
-    Icon: Flag,
-    color: 'text-rose-300',
-    fill: 'fill-rose-500/35',
-    glow: 'drop-shadow-[0_2px_7px_rgba(244,63,94,0.55)]'
+    Icon: GiF1Car,
+    color: 'text-rose-400',
+    glow: 'drop-shadow-[0_2px_7px_rgba(244,63,94,0.65)]'
   },
   clapper: {
-    Icon: Clapperboard,
+    Icon: GiClapperboard,
     color: 'text-purple-300',
-    fill: 'fill-purple-400/30',
-    glow: 'drop-shadow-[0_2px_7px_rgba(168,85,247,0.55)]'
+    glow: 'drop-shadow-[0_2px_7px_rgba(168,85,247,0.6)]'
   },
   tv: {
-    Icon: Tv,
+    Icon: GiTv,
     color: 'text-indigo-300',
-    fill: 'fill-indigo-400/25',
-    glow: 'drop-shadow-[0_2px_7px_rgba(99,102,241,0.55)]'
+    glow: 'drop-shadow-[0_2px_7px_rgba(99,102,241,0.6)]'
   },
   popcorn: {
-    Icon: Film,
+    Icon: GiPopcorn,
     color: 'text-rose-300',
-    fill: 'fill-rose-400/25',
-    glow: 'drop-shadow-[0_2px_7px_rgba(244,63,94,0.55)]'
+    glow: 'drop-shadow-[0_2px_7px_rgba(244,63,94,0.6)]'
   },
   crystal: {
-    Icon: Gem,
+    Icon: GiCrystalGrowth,
     color: 'text-cyan-300',
-    fill: 'fill-cyan-400/35',
-    glow: 'drop-shadow-[0_2px_8px_rgba(34,211,238,0.6)]'
-  },
-  gem: {
-    Icon: Gem,
-    color: 'text-fuchsia-300',
-    fill: 'fill-fuchsia-400/35',
-    glow: 'drop-shadow-[0_2px_8px_rgba(217,70,239,0.6)]'
-  },
-  dragon: {
-    Icon: Zap,
-    color: 'text-amber-300',
-    fill: 'fill-amber-400/35',
-    glow: 'drop-shadow-[0_2px_7px_rgba(245,158,11,0.55)]'
-  },
-  globe: {
-    Icon: Globe,
-    color: 'text-cyan-300',
-    fill: 'fill-cyan-400/20',
-    glow: 'drop-shadow-[0_2px_7px_rgba(6,182,212,0.55)]'
-  },
-  earth_europe: {
-    Icon: Globe,
-    color: 'text-sky-300',
-    fill: 'fill-sky-400/20',
-    glow: 'drop-shadow-[0_2px_7px_rgba(56,189,248,0.55)]'
-  },
-  earth_americas: {
-    Icon: Globe,
-    color: 'text-teal-300',
-    fill: 'fill-teal-400/20',
-    glow: 'drop-shadow-[0_2px_7px_rgba(20,184,166,0.55)]'
-  },
-  compass: {
-    Icon: Compass,
-    color: 'text-amber-300',
-    fill: 'fill-amber-400/25',
-    glow: 'drop-shadow-[0_2px_7px_rgba(245,158,11,0.55)]'
-  },
-  map: {
-    Icon: Compass,
-    color: 'text-cyan-300',
-    fill: 'fill-cyan-400/25',
-    glow: 'drop-shadow-[0_2px_7px_rgba(6,182,212,0.55)]'
-  },
-  temple: {
-    Icon: Landmark,
-    color: 'text-amber-200',
-    fill: 'fill-amber-400/30',
-    glow: 'drop-shadow-[0_2px_7px_rgba(245,158,11,0.55)]'
-  },
-  atom: {
-    Icon: Atom,
-    color: 'text-cyan-300',
-    fill: '',
     glow: 'drop-shadow-[0_2px_8px_rgba(34,211,238,0.65)]'
   },
+  gem: {
+    Icon: GiCutDiamond,
+    color: 'text-fuchsia-300',
+    glow: 'drop-shadow-[0_2px_8px_rgba(217,70,239,0.65)]'
+  },
+  dragon: {
+    Icon: GiSpikedDragonHead,
+    color: 'text-amber-300',
+    glow: 'drop-shadow-[0_2px_8px_rgba(245,158,11,0.65)]'
+  },
+  globe: {
+    Icon: GiEarthAfricaEurope,
+    color: 'text-cyan-300',
+    glow: 'drop-shadow-[0_2px_7px_rgba(6,182,212,0.6)]'
+  },
+  earth_europe: {
+    Icon: GiEarthAfricaEurope,
+    color: 'text-sky-300',
+    glow: 'drop-shadow-[0_2px_7px_rgba(56,189,248,0.6)]'
+  },
+  earth_americas: {
+    Icon: GiEarthAmerica,
+    color: 'text-teal-300',
+    glow: 'drop-shadow-[0_2px_7px_rgba(20,184,166,0.6)]'
+  },
+  compass: {
+    Icon: GiCompass,
+    color: 'text-amber-300',
+    glow: 'drop-shadow-[0_2px_7px_rgba(245,158,11,0.6)]'
+  },
+  map: {
+    Icon: GiCompass,
+    color: 'text-cyan-300',
+    glow: 'drop-shadow-[0_2px_7px_rgba(6,182,212,0.6)]'
+  },
+  temple: {
+    Icon: GiGreekTemple,
+    color: 'text-amber-200',
+    glow: 'drop-shadow-[0_2px_7px_rgba(245,158,11,0.6)]'
+  },
+  atom: {
+    Icon: GiAtom,
+    color: 'text-cyan-300',
+    glow: 'drop-shadow-[0_2px_8px_rgba(34,211,238,0.7)]'
+  },
   planet: {
-    Icon: Orbit,
+    Icon: GiRingedPlanet,
     color: 'text-indigo-300',
-    fill: '',
-    glow: 'drop-shadow-[0_2px_8px_rgba(129,140,248,0.65)]'
+    glow: 'drop-shadow-[0_2px_8px_rgba(129,140,248,0.7)]'
   },
   brain: {
-    Icon: Brain,
+    Icon: GiBrain,
     color: 'text-pink-300',
-    fill: 'fill-pink-400/25',
-    glow: 'drop-shadow-[0_2px_7px_rgba(244,114,182,0.55)]'
+    glow: 'drop-shadow-[0_2px_7px_rgba(244,114,182,0.6)]'
   },
   dna: {
-    Icon: Dna,
+    Icon: GiDna2,
     color: 'text-teal-300',
-    fill: '',
-    glow: 'drop-shadow-[0_2px_7px_rgba(45,212,191,0.6)]'
+    glow: 'drop-shadow-[0_2px_7px_rgba(45,212,191,0.65)]'
   },
   microscope: {
-    Icon: Microscope,
+    Icon: GiMicroscope,
     color: 'text-sky-300',
-    fill: 'fill-sky-400/20',
-    glow: 'drop-shadow-[0_2px_7px_rgba(56,189,248,0.55)]'
+    glow: 'drop-shadow-[0_2px_7px_rgba(56,189,248,0.6)]'
   },
   rocket: {
-    Icon: Rocket,
+    Icon: GiRocket,
     color: 'text-purple-300',
-    fill: 'fill-purple-400/35',
-    glow: 'drop-shadow-[0_2px_8px_rgba(192,132,252,0.65)]'
+    glow: 'drop-shadow-[0_2px_8px_rgba(192,132,252,0.7)]'
   },
   music: {
-    Icon: Music,
+    Icon: GiMusicalNotes,
     color: 'text-fuchsia-300',
-    fill: '',
-    glow: 'drop-shadow-[0_2px_7px_rgba(232,121,249,0.6)]'
+    glow: 'drop-shadow-[0_2px_7px_rgba(232,121,249,0.65)]'
   },
   chef: {
-    Icon: Utensils,
+    Icon: GiChefToque,
     color: 'text-orange-300',
-    fill: '',
-    glow: 'drop-shadow-[0_2px_7px_rgba(251,146,60,0.6)]'
+    glow: 'drop-shadow-[0_2px_7px_rgba(251,146,60,0.65)]'
   }
 };
 
@@ -224,7 +196,7 @@ export default function GameIcon({
   className = ''
 }) {
   const key = (name || 'trophy').toLowerCase();
-  const cfg = VECTOR_THEMES[key] || VECTOR_THEMES.trophy;
+  const cfg = GAME_ICON_THEMES[key] || GAME_ICON_THEMES.trophy;
   const IconComponent = cfg.Icon;
 
   return (
@@ -232,8 +204,7 @@ export default function GameIcon({
       className={`relative inline-flex items-center justify-center shrink-0 ${size} ${className}`}
     >
       <IconComponent
-        strokeWidth={2.35}
-        className={`w-full h-full ${cfg.color} ${cfg.fill} ${cfg.glow} pointer-events-none transition-transform duration-200 group-hover:scale-110`}
+        className={`w-full h-full ${cfg.color} ${cfg.glow} pointer-events-none transition-transform duration-200 group-hover:scale-110`}
       />
     </div>
   );
