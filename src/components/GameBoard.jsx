@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { evaluateGuess } from '../utils/evaluator';
 import { normalizeLetter } from '../utils/turkishUpper';
 import { soundManager } from '../utils/audio';
+import { GAME_THEMES } from '../utils/themes';
 
 export default function GameBoard({
   guesses,
@@ -11,8 +12,10 @@ export default function GameBoard({
   isShaking,
   isWon,
   revealedPositions = {},
+  theme,
   lang = 'tr'
 }) {
+  const activeTheme = theme || GAME_THEMES[0];
   const wordLength = targetWord.length;
   const [animatingRow, setAnimatingRow] = useState(-1);
 
@@ -106,9 +109,11 @@ export default function GameBoard({
       <div
         className={`${
           isLongWord ? 'px-1.5 py-2 rounded-2xl' : 'p-2.5 rounded-[26px]'
-        } max-w-full bg-gradient-to-b from-slate-900/65 via-slate-950/85 to-slate-900/65 border border-slate-700/50 shadow-2xl shadow-indigo-950/30 backdrop-blur-xs flex flex-col justify-center items-center relative`}
+        } max-w-full bg-gradient-to-b ${activeTheme.arenaFrame} border shadow-2xl backdrop-blur-xs flex flex-col justify-center items-center relative transition-colors duration-300`}
       >
-        <div className="absolute inset-0 rounded-inherit bg-gradient-to-tr from-indigo-500/5 via-cyan-500/5 to-amber-500/5 pointer-events-none" />
+        <div
+          className={`absolute inset-0 rounded-inherit bg-gradient-to-tr ${activeTheme.arenaGlow} pointer-events-none`}
+        />
 
         <div
           className="flex flex-col justify-center items-center max-w-full relative z-10"
@@ -123,7 +128,7 @@ export default function GameBoard({
                 style={{ gap: `${colGapPx}px` }}
                 className={`flex justify-center items-center max-w-full perspective-1000 p-0.5 rounded-xl transition-all ${
                   isCurrentRow
-                    ? 'ring-1 ring-cyan-400/30 bg-cyan-500/5 shadow-sm'
+                    ? `ring-1 ${activeTheme.activeRowRing} shadow-sm`
                     : ''
                 } ${row.isShaking ? 'animate-row-shake' : ''}`}
               >
@@ -136,7 +141,7 @@ export default function GameBoard({
                   if (row.type === 'submitted') {
                     const status = row.evaluations[colIndex];
 
-                    let tileTheme = `bg-gradient-to-b from-slate-800 to-slate-850 border-t border-slate-700/60 ${lipClass} border-b-slate-950 text-slate-400 shadow-sm`;
+                    let tileTheme = `${activeTheme.absentTile} ${lipClass}`;
 
                     if (status === 'correct') {
                       tileTheme = `bg-gradient-to-b from-emerald-400 via-emerald-500 to-teal-600 border-t-2 border-emerald-200/90 ${lipClass} border-b-emerald-950 text-white shadow-lg shadow-emerald-950/60`;
@@ -176,10 +181,10 @@ export default function GameBoard({
                         style={tileStyle}
                         className={`${radiusClass} shrink-0 flex items-center justify-center font-black uppercase leading-none transition-all duration-100 ${fontClass} ${
                           hasChar
-                            ? `bg-gradient-to-b from-indigo-500 via-indigo-600 to-purple-600 border-t-2 border-indigo-200/80 ${lipClass} border-b-indigo-950 text-white shadow-lg shadow-indigo-500/30 animate-tile-pop`
+                            ? `${activeTheme.typingTile} ${lipClass} animate-tile-pop`
                             : ghostHintChar
                             ? 'bg-cyan-950/55 border border-cyan-400/55 border-b-2 border-b-cyan-950 text-cyan-300/65 shadow-inner ring-1 ring-cyan-400/20'
-                            : 'bg-slate-900/70 border border-slate-700/60 border-b-2 border-b-slate-950 text-slate-500 shadow-inner'
+                            : `${activeTheme.currentEmptyTile} shadow-inner`
                         }`}
                       >
                         {hasChar ? (
@@ -189,7 +194,7 @@ export default function GameBoard({
                             {ghostHintChar}
                           </span>
                         ) : (
-                          <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-slate-700/70" />
+                          <span className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${activeTheme.emptyDot}`} />
                         )}
                       </div>
                     );
@@ -200,9 +205,9 @@ export default function GameBoard({
                     <div
                       key={`empty-${colIndex}`}
                       style={tileStyle}
-                      className={`${radiusClass} shrink-0 border border-slate-800/80 bg-slate-950/40 text-slate-700 flex items-center justify-center shadow-inner`}
+                      className={`${radiusClass} shrink-0 ${activeTheme.futureEmptyTile} flex items-center justify-center shadow-inner`}
                     >
-                      <span className="w-1 h-1 rounded-full bg-slate-800/60" />
+                      <span className={`w-1 h-1 rounded-full ${activeTheme.emptyDot} opacity-60`} />
                     </div>
                   );
                 })}

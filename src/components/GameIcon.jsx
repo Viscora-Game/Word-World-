@@ -41,6 +41,13 @@ import {
   GiCroissant,
   GiForkKnifeSpoon,
   GiCupcake,
+  GiLipstick,
+  GiPerfumeBottle,
+  GiLotusFlower,
+  GiCutDiamond,
+  GiDress,
+  GiNinjaStar,
+  GiFairyWand,
   GiRoundStar,
   GiSmallFire
 } from 'react-icons/gi';
@@ -117,6 +124,16 @@ const GAME_ICON_THEMES = {
     Icon: GiDirectorChair,
     color: 'text-fuchsia-300',
     glow: 'drop-shadow-[0_2px_7px_rgba(217,70,239,0.6)]'
+  },
+  anime: {
+    Icon: GiNinjaStar,
+    color: 'text-violet-300',
+    glow: 'drop-shadow-[0_2px_8px_rgba(167,139,250,0.7)]'
+  },
+  wand: {
+    Icon: GiFairyWand,
+    color: 'text-amber-200',
+    glow: 'drop-shadow-[0_2px_8px_rgba(251,191,36,0.7)]'
   },
 
   // 3. History & General Knowledge (Genel Kültür & Tarih)
@@ -279,6 +296,33 @@ const GAME_ICON_THEMES = {
     Icon: GiCupcake,
     color: 'text-pink-300',
     glow: 'drop-shadow-[0_2px_7px_rgba(244,114,182,0.65)]'
+  },
+
+  // 9. Fashion, Beauty & Cosmetics (Moda, Kozmetik & Güzellik)
+  perfume: {
+    Icon: GiPerfumeBottle,
+    color: 'text-pink-300',
+    glow: 'drop-shadow-[0_2px_8px_rgba(244,114,182,0.7)]'
+  },
+  lipstick: {
+    Icon: GiLipstick,
+    color: 'text-rose-400',
+    glow: 'drop-shadow-[0_2px_8px_rgba(251,113,133,0.7)]'
+  },
+  lotus: {
+    Icon: GiLotusFlower,
+    color: 'text-pink-200',
+    glow: 'drop-shadow-[0_2px_8px_rgba(249,168,212,0.7)]'
+  },
+  diamond: {
+    Icon: GiCutDiamond,
+    color: 'text-fuchsia-200',
+    glow: 'drop-shadow-[0_2px_8px_rgba(232,121,249,0.75)]'
+  },
+  dress: {
+    Icon: GiDress,
+    color: 'text-rose-300',
+    glow: 'drop-shadow-[0_2px_7px_rgba(251,113,133,0.65)]'
   }
 };
 

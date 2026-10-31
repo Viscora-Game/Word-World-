@@ -3,6 +3,7 @@ import {
   PiHouseDuotone,
   PiCompassDuotone,
   PiCalendarStarDuotone,
+  PiPaletteDuotone,
   PiBookOpenTextDuotone
 } from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
@@ -31,8 +32,13 @@ export default function BottomNavBar({
       hasBadge: !dailyCompleted
     },
     {
+      id: 'themes',
+      label: t?.themes || 'Temalar',
+      icon: PiPaletteDuotone
+    },
+    {
       id: 'rules',
-      label: t?.howToPlay || 'Rehber',
+      label: t?.home === 'Home' ? 'Guide' : 'Rehber',
       icon: PiBookOpenTextDuotone
     }
   ];
@@ -51,7 +57,7 @@ export default function BottomNavBar({
                 soundManager.playKey();
                 onSelectTab(tab.id);
               }}
-              className={`relative flex flex-col items-center justify-center gap-0.5 py-1 px-3 rounded-xl transition-all duration-200 cursor-pointer ${
+              className={`relative flex flex-col items-center justify-center gap-0.5 py-1 px-1.5 sm:px-2.5 rounded-xl transition-all duration-200 cursor-pointer ${
                 isActive
                   ? 'text-amber-400 font-black scale-105'
                   : 'text-slate-400 hover:text-slate-200 font-bold'
@@ -74,7 +80,7 @@ export default function BottomNavBar({
               />
 
               <span
-                className={`text-[9px] sm:text-[9.5px] font-black uppercase tracking-wider leading-none mt-0.5 ${
+                className={`text-[8.5px] sm:text-[9.5px] font-black uppercase tracking-wide leading-none mt-0.5 whitespace-nowrap ${
                   isActive ? 'text-amber-300 drop-shadow-sm' : 'text-slate-400'
                 }`}
               >

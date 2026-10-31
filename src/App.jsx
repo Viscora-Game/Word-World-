@@ -24,10 +24,17 @@ import Keyboard from './components/Keyboard';
 import WinModal from './components/WinModal';
 import HintModal from './components/HintModal';
 import SettingsModal from './components/SettingsModal';
+import ThemeModal from './components/ThemeModal';
 import FootballPitchModal from './components/FootballPitchModal';
 import BottomNavBar from './components/BottomNavBar';
 import GameIcon from './components/GameIcon';
 import { getAssetUrl } from './utils/assetUrl';
+import {
+  getThemeById,
+  loadThemeState,
+  saveThemeState,
+  clearThemeState
+} from './utils/themes';
 import { PiLightbulbFilamentDuotone, PiInfoDuotone } from 'react-icons/pi';
 import { GiSoccerField } from 'react-icons/gi';
 
@@ -51,6 +58,7 @@ export default function App() {
     const saved = localStorage.getItem('wordhunt_progress');
     return saved ? JSON.parse(saved) : {};
   });
+  const [themeState, setThemeState] = useState(() => loadThemeState());
 
   // Daily Quest & Streak states
   const [dailyBonusStars, setDailyBonusStars] = useState(
@@ -78,6 +86,7 @@ export default function App() {
       getAssetUrl('/assets/art/discover_worlds_banner.webp'),
       getAssetUrl('/assets/art/cat_card_spor.webp'),
       getAssetUrl('/assets/art/cat_card_dizi-film.webp'),
+      getAssetUrl('/assets/art/cat_card_kozmetik.webp'),
       getAssetUrl('/assets/art/cat_card_genel-kultur.webp'),
       getAssetUrl('/assets/art/cat_card_bilim.webp'),
       getAssetUrl('/assets/art/cat_card_cografya.webp'),
@@ -105,6 +114,7 @@ export default function App() {
 
   // Modals
   const [isDailyModalOpen, setIsDailyModalOpen] = useState(false);
+  const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
   const [isWinModalOpen, setIsWinModalOpen] = useState(false);
   const [isHintModalOpen, setIsHintModalOpen] = useState(false);
   const [isPitchModalOpen, setIsPitchModalOpen] = useState(false);
@@ -159,6 +169,10 @@ export default function App() {
     localStorage.setItem('wordhunt_progress', JSON.stringify(levelProgress));
   }, [levelProgress]);
 
+  useEffect(() => {
+    saveThemeState(themeState);
+  }, [themeState]);
+
   // Compute category progress across all subcategories
   const categoryProgress = useMemo(() => {
     const res = {};
@@ -190,6 +204,11 @@ export default function App() {
   }, [categoryProgress]);
 
   const totalStars = levelStars + dailyBonusStars;
+  const availableStars = Math.max(0, totalStars - (themeState.spentStars || 0));
+  const activeTheme = useMemo(
+    () => getThemeById(themeState.activeId),
+    [themeState.activeId]
+  );
 
   // Toast Notification Helper
   const showToast = useCallback((msg) => {
@@ -198,6 +217,49 @@ export default function App() {
       setToastMessage(null);
     }, 2600);
   }, []);
+
+  // Theme selection & star unlock handlers
+  const handleSelectTheme = useCallback(
+    (themeId) => {
+      setThemeState((prev) => ({
+        ...prev,
+        activeId: themeId
+      }));
+      const picked = getThemeById(themeId);
+      const label = lang === 'en' ? picked.name.en : picked.name.tr;
+      showToast(lang === 'en' ? `${label} theme equipped!` : `${label} teması etkinleştirildi!`);
+    },
+    [lang, showToast]
+  );
+
+  const handleUnlockTheme = useCallback(
+    (theme) => {
+      if (availableStars < theme.cost) {
+        const diff = theme.cost - availableStars;
+        showToast(
+          lang === 'en'
+            ? `Need ${diff} more stars to unlock!`
+            : `Bu tema için ${diff} yıldız daha gerekli!`
+        );
+        return;
+      }
+      setThemeState((prev) => {
+        if (prev.unlockedIds.includes(theme.id)) return prev;
+        return {
+          activeId: theme.id,
+          unlockedIds: [...prev.unlockedIds, theme.id],
+          spentStars: (prev.spentStars || 0) + theme.cost
+        };
+      });
+      const label = lang === 'en' ? theme.name.en : theme.name.tr;
+      showToast(
+        lang === 'en'
+          ? `${label} unlocked & equipped!`
+          : `${label} teması açıldı ve kuşanıldı!`
+      );
+    },
+    [availableStars, lang, showToast]
+  );
 
   // Start / Reset Level
   const initLevel = useCallback((lvlId, daily = false) => {
@@ -466,8 +528,10 @@ export default function App() {
     setDailyBonusStars(0);
     setDailyCompleted(false);
     setDailyRecord(null);
+    setThemeState({ activeId: 'emerald', unlockedIds: ['emerald'], spentStars: 0 });
     localStorage.removeItem('wordhunt_progress');
     localStorage.removeItem('wordhunt_daily_v2');
+    clearThemeState();
     setIsSettingsModalOpen(false);
     showToast(t?.resetSuccess || 'Tüm ilerleme sıfırlandı!');
   };
@@ -520,6 +584,8 @@ export default function App() {
             view={view}
             onBack={handleBack}
             totalStars={totalStars}
+            availableStars={availableStars}
+            onOpenThemes={() => setIsThemeModalOpen(true)}
             soundEnabled={soundEnabled}
             onToggleSound={() => setSoundEnabled((prev) => !prev)}
             onOpenSettings={() => {
@@ -547,6 +613,7 @@ export default function App() {
               }
             }}
             onOpenDaily={() => setIsDailyModalOpen(true)}
+            onOpenThemes={() => setIsThemeModalOpen(true)}
             onOpenSettings={() => {
               setSettingsTab('settings');
               setIsSettingsModalOpen(true);
@@ -554,6 +621,7 @@ export default function App() {
             soundEnabled={soundEnabled}
             onToggleSound={() => setSoundEnabled((prev) => !prev)}
             totalStars={totalStars}
+            availableStars={availableStars}
             streak={streak}
             dailyCompleted={dailyCompleted}
             levelProgress={levelProgress}
@@ -569,6 +637,7 @@ export default function App() {
             categories={categories}
             categoryProgress={categoryProgress}
             onSelectCategory={handleSelectCategory}
+            lang={lang}
             t={t}
           />
         )}
@@ -607,7 +676,9 @@ export default function App() {
             
             {/* DEDICATED QUESTION / MISSION CARD */}
             <div className="w-full px-3 pt-1.5 pb-0.5 shrink-0 relative z-10">
-              <div className="w-full rounded-3xl bg-gradient-to-r from-slate-900/95 via-slate-850/95 to-slate-900/95 border border-slate-700/80 border-b-[4px] border-b-slate-950 px-3.5 py-2.5 shadow-xl backdrop-blur-md flex flex-col gap-1">
+              <div
+                className={`w-full rounded-3xl bg-gradient-to-r ${activeTheme.questionCard} border border-b-[4px] px-3.5 py-2.5 shadow-xl backdrop-blur-md flex flex-col gap-1 transition-colors duration-300`}
+              >
                 
                 {/* Mode header + utility buttons */}
                 <div className="flex items-center justify-between gap-2">
@@ -672,6 +743,7 @@ export default function App() {
               isShaking={isShaking}
               isWon={isWon}
               revealedPositions={revealedPositions}
+              theme={activeTheme}
               lang={lang}
             />
 
@@ -683,6 +755,7 @@ export default function App() {
               onEnter={handleEnter}
               onDelete={handleDelete}
               eliminatedKeys={eliminatedKeys}
+              theme={activeTheme}
               lang={lang}
               disabled={isWon || isGameOver}
             />
@@ -698,6 +771,7 @@ export default function App() {
               if (tabId === 'home') setView('main');
               else if (tabId === 'categories') setView('categories');
               else if (tabId === 'quests') setIsDailyModalOpen(true);
+              else if (tabId === 'themes') setIsThemeModalOpen(true);
               else if (tabId === 'rules') {
                 setSettingsTab('rules');
                 setIsSettingsModalOpen(true);
@@ -780,6 +854,19 @@ export default function App() {
         {showIntro && (
           <CyberCoreIntro onFinish={() => setShowIntro(false)} />
         )}
+
+        {/* Theme & Cosmetics Studio Modal */}
+        <ThemeModal
+          isOpen={isThemeModalOpen}
+          onClose={() => setIsThemeModalOpen(false)}
+          activeThemeId={themeState.activeId}
+          unlockedThemeIds={themeState.unlockedIds}
+          availableStars={availableStars}
+          totalStars={totalStars}
+          onSelectTheme={handleSelectTheme}
+          onUnlockTheme={handleUnlockTheme}
+          lang={lang}
+        />
 
         {/* Settings / Rules Modal */}
         <SettingsModal

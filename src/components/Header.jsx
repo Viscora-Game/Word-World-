@@ -4,7 +4,8 @@ import {
   PiSpeakerSlashDuotone,
   PiGearSixDuotone,
   PiCaretLeftBold,
-  PiStarFill
+  PiStarFill,
+  PiPaletteDuotone
 } from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 
@@ -12,12 +13,15 @@ export default function Header({
   view,
   onBack,
   totalStars,
+  availableStars,
+  onOpenThemes,
   soundEnabled,
   onToggleSound,
   onOpenSettings,
   title,
   subtitle
 }) {
+  const displayStars = typeof availableStars === 'number' ? availableStars : totalStars;
   return (
     <header className="w-full bg-[#0d121f]/95 backdrop-blur-md border-b border-slate-800/80 px-3 py-2 flex items-center justify-between shrink-0 z-30 select-none shadow-sm">
       <div className="flex items-center gap-1.5 min-w-0">
@@ -39,21 +43,42 @@ export default function Header({
             {title}
           </h1>
           {subtitle && (
-            <span className="text-[10px] font-bold text-slate-400 truncate max-w-[165px] sm:max-w-[225px]">
+            <span className="text-[10px] font-bold text-slate-400 truncate max-w-[138px] sm:max-w-[205px]">
               {subtitle}
             </span>
           )}
         </div>
       </div>
 
-      <div className="flex items-center gap-1.5">
-        {/* Total Stars Pill */}
-        <div className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500/20 via-yellow-500/15 to-amber-500/10 border border-amber-500/50 px-2.5 py-1.5 rounded-2xl shadow-md backdrop-blur-md">
+      <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+        {/* Spendable Stars Pill (Opens Theme Studio) */}
+        <button
+          type="button"
+          onClick={() => {
+            soundManager.playKey();
+            onOpenThemes?.();
+          }}
+          className="flex items-center gap-1 bg-gradient-to-r from-amber-500/20 via-yellow-500/15 to-amber-500/10 hover:from-amber-500/30 border border-amber-500/50 px-2.5 py-1.5 rounded-2xl shadow-md backdrop-blur-md active:scale-95 transition cursor-pointer"
+          title="Tema & Kozmetik Atölyesi"
+        >
           <PiStarFill className="w-3.5 h-3.5 text-amber-300 drop-shadow-sm" />
           <span className="text-amber-300 font-black text-xs tracking-wide">
-            {totalStars}
+            {displayStars}
           </span>
-        </div>
+        </button>
+
+        {/* Theme & Cosmetics Studio Button */}
+        <button
+          type="button"
+          onClick={() => {
+            soundManager.playKey();
+            onOpenThemes?.();
+          }}
+          className="w-8 h-8 rounded-xl bg-gradient-to-br from-pink-500/25 via-rose-500/20 to-purple-600/25 border border-pink-400/55 border-b-2 border-b-slate-950 flex items-center justify-center text-pink-200 hover:text-white active:translate-y-0.5 transition shadow-md cursor-pointer"
+          title="Tema & Kozmetik Atölyesi"
+        >
+          <PiPaletteDuotone className="w-4 h-4 text-pink-300" />
+        </button>
 
         {/* Sound Toggle */}
         <button

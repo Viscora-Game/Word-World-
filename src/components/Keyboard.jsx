@@ -3,6 +3,7 @@ import { PiBackspaceDuotone } from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 import { normalizeLetter } from '../utils/turkishUpper';
 import { evaluateGuess } from '../utils/evaluator';
+import { GAME_THEMES } from '../utils/themes';
 
 const KEYBOARD_LAYOUTS = {
   tr: [
@@ -24,9 +25,11 @@ export default function Keyboard({
   onEnter,
   onDelete,
   eliminatedKeys = [],
+  theme,
   lang = 'tr',
   disabled = false
 }) {
+  const activeTheme = theme || GAME_THEMES[0];
   // Determine key statuses from previous guesses & radar eliminations
   const keyStatus = {};
 
@@ -110,12 +113,14 @@ export default function Keyboard({
     if (status === 'absent') {
       return 'bg-slate-850/80 text-slate-500 border-t border-slate-700/40 border-b-[3px] border-b-slate-950 opacity-40 active:border-b-[1px] active:translate-y-0.5';
     }
-    // Default unused key - modern 3D rounded candy key
-    return 'bg-gradient-to-b from-slate-700 via-slate-750 to-slate-800 text-white border-t border-slate-500/60 border-b-[4px] border-b-slate-950 shadow-md active:border-b-[2px] active:translate-y-0.5 active:bg-slate-700';
+    // Default unused key - themed 3D rounded candy key
+    return activeTheme.unusedKey;
   };
 
   return (
-    <div className="w-full max-w-md mx-auto px-1 sm:px-2 pt-1 pb-2 sm:pb-3 flex flex-col gap-1 sm:gap-1.5 select-none bg-slate-950/90 backdrop-blur-md border-t border-slate-800/90 shrink-0">
+    <div
+      className={`w-full max-w-md mx-auto px-1 sm:px-2 pt-1 pb-2 sm:pb-3 flex flex-col gap-1 sm:gap-1.5 select-none ${activeTheme.keyboardDock} backdrop-blur-md border-t shrink-0 transition-colors duration-300`}
+    >
       {layout.map((row, rowIndex) => (
         <div key={rowIndex} className="flex gap-0.5 sm:gap-1 justify-center w-full">
           {row.map((key) => {
@@ -125,11 +130,9 @@ export default function Keyboard({
 
             let specialClass = '';
             if (isEnter) {
-              specialClass =
-                'flex-[1.55] min-w-0 px-1 text-[10px] sm:text-xs tracking-tight sm:tracking-wide bg-gradient-to-b from-emerald-500 via-emerald-600 to-teal-700 hover:from-emerald-400 hover:to-teal-600 text-white border-t-2 border-emerald-300/80 border-b-[4px] border-b-emerald-950 shadow-lg shadow-emerald-950/50 active:border-b-[2px] active:translate-y-0.5';
+              specialClass = `flex-[1.55] min-w-0 px-1 text-[10px] sm:text-xs tracking-tight sm:tracking-wide ${activeTheme.enterKey}`;
             } else if (isBackspace) {
-              specialClass =
-                'flex-[1.3] min-w-0 px-1 text-xs bg-gradient-to-b from-slate-700 via-slate-750 to-slate-800 text-rose-300 border-t border-slate-600 border-b-[4px] border-b-slate-950 active:border-b-[2px] active:translate-y-0.5';
+              specialClass = `flex-[1.3] min-w-0 px-1 text-xs ${activeTheme.backspaceKey}`;
             }
 
             return (

@@ -10,7 +10,8 @@ import {
   PiCalendarStarDuotone,
   PiCompassDuotone,
   PiFireFill,
-  PiCheckCircleFill
+  PiCheckCircleFill,
+  PiPaletteDuotone
 } from 'react-icons/pi';
 import { soundManager } from '../utils/audio';
 import { getAssetUrl } from '../utils/assetUrl';
@@ -20,10 +21,12 @@ export default function MainMenu({
   onPlay,
   onOpenCategories,
   onOpenDaily,
+  onOpenThemes,
   onOpenSettings,
   soundEnabled,
   onToggleSound,
   totalStars,
+  availableStars,
   streak = 1,
   dailyCompleted = false,
   levelProgress,
@@ -32,6 +35,7 @@ export default function MainMenu({
   t
 }) {
   const isTR = lang !== 'en';
+  const displayStars = typeof availableStars === 'number' ? availableStars : totalStars;
 
   // Calculate overall level stats
   let totalCompleted = 0;
@@ -95,7 +99,7 @@ export default function MainMenu({
           </div>
           <div className="flex flex-col text-left min-w-0">
             <div className="flex items-center gap-1 leading-none">
-              <span className="text-[10.5px] sm:text-[11px] font-black text-white tracking-wide truncate max-w-[76px] sm:max-w-[92px]">
+              <span className="text-[10px] sm:text-[11px] font-black text-white tracking-wide truncate max-w-[62px] sm:max-w-[90px]">
                 {getExplorerTitle()}
               </span>
               <span className="text-[8px] font-black text-amber-400 bg-amber-500/20 border border-amber-500/40 px-1 py-0.2 rounded-md shrink-0">
@@ -103,7 +107,7 @@ export default function MainMenu({
               </span>
             </div>
             <div className="flex items-center gap-1 mt-1">
-              <div className="w-11 sm:w-14 h-1.5 bg-slate-800 rounded-full overflow-hidden border border-slate-700 shrink-0">
+              <div className="w-9 sm:w-13 h-1.5 bg-slate-800 rounded-full overflow-hidden border border-slate-700 shrink-0">
                 <div
                   className="h-full bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full transition-all duration-300"
                   style={{ width: `${Math.max(overallPct, 8)}%` }}
@@ -138,16 +142,37 @@ export default function MainMenu({
             </div>
           </button>
 
-          {/* Total Stars Pill */}
-          <div className="flex items-center gap-1 bg-gradient-to-r from-amber-500/20 via-yellow-500/15 to-amber-500/10 border border-amber-500/50 px-2 py-1.5 rounded-2xl shadow-md backdrop-blur-md shrink-0">
+          {/* Total / Spendable Stars Pill (Opens Theme Studio) */}
+          <button
+            type="button"
+            onClick={() => {
+              soundManager.playKey();
+              onOpenThemes?.();
+            }}
+            className="flex items-center gap-1 bg-gradient-to-r from-amber-500/20 via-yellow-500/15 to-amber-500/10 hover:from-amber-500/30 border border-amber-500/50 px-2 py-1.5 rounded-2xl shadow-md backdrop-blur-md active:scale-95 transition cursor-pointer shrink-0"
+            title={isTR ? 'Tema & Kozmetik Atölyesi' : 'Theme & Style Studio'}
+          >
             <PiStarFill className="w-4 h-4 text-amber-300 drop-shadow-sm shrink-0" />
             <div className="flex flex-col leading-none text-left">
-              <span className="text-[10.5px] sm:text-[11px] font-black text-amber-300">{totalStars}</span>
+              <span className="text-[10.5px] sm:text-[11px] font-black text-amber-300">{displayStars}</span>
               <span className="text-[7px] font-bold text-amber-400/90 uppercase tracking-tighter">
                 {isTR ? 'Yıldız' : 'Stars'}
               </span>
             </div>
-          </div>
+          </button>
+
+          {/* Theme & Cosmetics Studio Button */}
+          <button
+            type="button"
+            onClick={() => {
+              soundManager.playKey();
+              onOpenThemes?.();
+            }}
+            className="w-[30px] h-[30px] sm:w-8 sm:h-8 rounded-xl bg-gradient-to-br from-pink-500/25 via-rose-500/20 to-purple-600/25 border border-pink-400/55 border-b-2 border-b-slate-950 flex items-center justify-center text-pink-200 hover:text-white active:translate-y-0.5 transition shadow-md cursor-pointer shrink-0"
+            title={isTR ? 'Tema & Kozmetik Atölyesi' : 'Theme & Style Studio'}
+          >
+            <PiPaletteDuotone className="w-4 h-4 text-pink-300" />
+          </button>
 
           {/* Sound Toggle */}
           <button
@@ -302,7 +327,7 @@ export default function MainMenu({
                   {t?.worldAdventure || 'DÜNYA SERÜVENİ'}
                 </span>
                 <span className="text-xs sm:text-[13px] font-black text-white truncate block leading-snug">
-                  {isTR ? '8 Büyük Tema' : '8 Epic Worlds'}
+                  {categories.length} {isTR ? 'Büyük Tema' : 'Epic Worlds'}
                 </span>
               </div>
               <PiCaretRightBold className="w-3.5 h-3.5 text-cyan-300/80 shrink-0 mb-0.5 group-hover:translate-x-0.5 transition-transform" />

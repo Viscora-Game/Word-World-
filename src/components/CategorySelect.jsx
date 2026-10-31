@@ -8,9 +8,12 @@ export default function CategorySelect({
   categories,
   categoryProgress,
   onSelectCategory,
+  lang = 'tr',
   t
 }) {
-  // Theme styling & high-res artwork mappings for all 8 Epic Worlds
+  const isTR = lang !== 'en';
+
+  // Theme styling & high-res artwork mappings for all 9 Epic Worlds
   const THEME_CONFIGS = {
     spor: {
       thumb: getAssetUrl('/assets/art/cat_card_spor.webp'),
@@ -19,7 +22,9 @@ export default function CategorySelect({
       glow: 'shadow-[0_0_24px_rgba(16,185,129,0.25)]',
       pillBg: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
       barGradient: 'from-emerald-400 to-teal-400',
-      subcatsText: 'İlk 11 • Efsaneler • NBA • Formula 1'
+      subcatsText: isTR
+        ? 'İlk 11 • Efsaneler • NBA • Formula 1'
+        : 'Starting XI • Legends • NBA • Formula 1'
     },
     'dizi-film': {
       thumb: getAssetUrl('/assets/art/cat_card_dizi-film.webp'),
@@ -28,7 +33,20 @@ export default function CategorySelect({
       glow: 'shadow-[0_0_24px_rgba(168,85,247,0.25)]',
       pillBg: 'bg-purple-500/20 text-purple-300 border-purple-500/40',
       barGradient: 'from-purple-400 to-indigo-400',
-      subcatsText: 'Filmler • Diziler • Oyuncular & Yönetmenler • Ödüller'
+      subcatsText: isTR
+        ? 'Filmler • Diziler • Anime & Manga • Animasyon'
+        : 'Movies • Series • Anime & Manga • Animation'
+    },
+    kozmetik: {
+      thumb: getAssetUrl('/assets/art/cat_card_kozmetik.webp'),
+      gradient: 'from-[#330b26]/95 via-[#220a21]/95 to-[#12071a]/95',
+      border: 'border-pink-400/75',
+      glow: 'shadow-[0_0_24px_rgba(244,114,182,0.3)]',
+      pillBg: 'bg-pink-500/25 text-pink-200 border-pink-400/50',
+      barGradient: 'from-pink-400 via-rose-400 to-fuchsia-400',
+      subcatsText: isTR
+        ? 'Makyaj • Cilt Bakımı • Moda & Parfüm • Mücevher'
+        : 'Makeup • Skincare • Fashion & Perfume • Gems'
     },
     'genel-kultur': {
       thumb: getAssetUrl('/assets/art/cat_card_genel-kultur.webp'),

@@ -1,4 +1,4 @@
-// Auto-generated Multi-Subcategory Word & World Database
+// Word & World — Comprehensive Multi-Category & Multi-Language Dataset
 export const CATEGORIES_DATA = {
   "tr": [
     {
@@ -931,7 +931,7 @@ export const CATEGORIES_DATA = {
       "name": "Dizi & Sinema",
       "iconKey": "clapper",
       "color": "from-purple-500 to-indigo-600",
-      "description": "Kült filmler, unutulmaz diziler, efsane oyuncular ve yönetmenler",
+      "description": "Kült filmler, unutulmaz diziler, anime & manga evreni, animasyonlar ve sinema yıldızları",
       "subcategories": [
         {
           "id": "film-efsaneler",
@@ -986,6 +986,30 @@ export const CATEGORIES_DATA = {
               "id": 8,
               "word": "INTERSTELLAR",
               "hint": "Solucan deliğinden geçerek insanlığa yeni bir yuva arayan Cooper ve kızı Murphy'nin destanı",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 9,
+              "word": "BARBİE",
+              "hint": "Greta Gerwig yönetmenliğinde Margot Robbie'nin başrolüyle gişe rekorları kıran pembe dünyalı 2023 filmi",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 10,
+              "word": "LALALAND",
+              "hint": "Los Angeles'ta caz piyanisti Sebastian ile oyuncu Mia'nın aşkını anlatan Oscar ödüllü müzikal film",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 11,
+              "word": "HOGWARTS",
+              "hint": "Harry Potter evreninde dört binadan oluşan ve Dumbledore'un yönettiği efsanevi cadılık ve büyücülük okulu",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 12,
+              "word": "AMELİE",
+              "hint": "Paris'in Montmartre semtinde başkalarının hayatını gizlice güzelleştirmeye çalışan hayalperest genç kadının filmi",
               "difficulty": "Orta"
             }
           ]
@@ -1044,6 +1068,30 @@ export const CATEGORIES_DATA = {
               "word": "LOST",
               "hint": "Gizemli bir Pasifik adasına düşen Oceanic 815 uçağı kazazedelerinin hayatta kalma mücadelesi",
               "difficulty": "Kolay"
+            },
+            {
+              "id": 9,
+              "word": "FRİENDS",
+              "hint": "New York'taki Central Perk kafesinde buluşan Rachel, Monica, Phoebe, Joey, Chandler ve Ross altılısının efsane sitcomu",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 10,
+              "word": "WEDNESDAY",
+              "hint": "Addams Ailesi'nin gotik kızının Nevermore Akademisi'ndeki gizemleri çözdüğü Jenna Ortega başrollü dizi",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 11,
+              "word": "SQUIDGAME",
+              "hint": "Borç batağındaki 456 yarışmacının çocuk oyunlarıyla hayatta kalmaya çalıştığı Güney Kore fenomeni dizi",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 12,
+              "word": "BRİDGERTON",
+              "hint": "19. yüzyıl Londra sosyetesinde Lady Whistledown'un dedikodu bültenleriyle çalkalanan popüler dönem dizisi",
+              "difficulty": "Orta"
             }
           ]
         },
@@ -1101,6 +1149,30 @@ export const CATEGORIES_DATA = {
               "word": "MİYAZAKİ",
               "hint": "Ruhların Kaçışı ve Prenses Mononoke'yi yaratan Studio Ghibli kurucusu anime ustası",
               "difficulty": "Orta"
+            },
+            {
+              "id": 9,
+              "word": "HEPBURN",
+              "hint": "Tiffany'de Kahvaltı ve Roma Tatili filmleriyle zarafetin ebedi simgesi haline gelen efsane aktris Audrey",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 10,
+              "word": "ZENDAYA",
+              "hint": "Euphoria dizisiyle Emmy ödülü kazanan, Dune ve Örümcek-Adam serilerinin genç süperstar aktrisi",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 11,
+              "word": "STREEP",
+              "hint": "Şeytan Marka Giyer ve Sophie'nin Seçimi dahil 21 kez Oscar'a aday gösterilerek rekor kıran usta aktris Meryl",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 12,
+              "word": "ROBBİE",
+              "hint": "Barbie, Ben Tonya ve Para Avcısı filmleriyle hem başrol hem yapımcı olarak parlayan Avustralyalı yıldız Margot",
+              "difficulty": "Kolay"
             }
           ]
         },
@@ -1158,6 +1230,453 @@ export const CATEGORIES_DATA = {
               "word": "BİRDMAN",
               "hint": "Tek plan sekans gibi kurgulanarak En İyi Film Oscar'ını kazanan Alejandro Inarritu filmi",
               "difficulty": "Zor"
+            },
+            {
+              "id": 9,
+              "word": "WHİPLASH",
+              "hint": "Acımasız caz orkestrası şefi Fletcher ile genç baterist Andrew arasındaki tutkulu mücadeleyi anlatan Oscar'lı film",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 10,
+              "word": "NOMADLAND",
+              "hint": "Chloe Zhao'ya En İyi Yönetmen, Frances McDormand'a 3. En İyi Kadın Oyuncu Oscar'ını kazandıran yol filmi",
+              "difficulty": "Zor"
+            },
+            {
+              "id": 11,
+              "word": "ROMA",
+              "hint": "Alfonso Cuaron'un 1970'ler Meksiko'sunda bir ev işçisi kadının hikayesini siyah-beyaz anlattığı 3 Oscar'lı başyapıt",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 12,
+              "word": "CHİCAGO",
+              "hint": "Catherine Zeta-Jones ve Renee Zellweger'in başrolünde olduğu, 6 dalda Oscar kazanan 2002 yapımı caz müzikali",
+              "difficulty": "Orta"
+            }
+          ]
+        },
+        {
+          "id": "anime-manga",
+          "name": "Anime & Manga Dünyası",
+          "iconKey": "anime",
+          "badge": "Japon Kültürü",
+          "description": "Japon animasyon sanatının ve manga dünyasının en unutulmaz karakterleri ve serileri",
+          "levels": [
+            {
+              "id": 1,
+              "word": "NARUTO",
+              "hint": "İçinde Dokuz Kuyruklu Tilki mühürlü olan, Hokage olma hayaliyle büyüyen turuncu tulumlu ninja",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 2,
+              "word": "PİKACHU",
+              "hint": "Pokemon evreninde Ash Ketchum'un omzundan inmeyen, yanaklarından elektrik saçan sarı sevimli dostu",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 3,
+              "word": "TOTORO",
+              "hint": "Studio Ghibli'nin simgesi haline gelen, yağmurda şemsiye tutan dev ve sevimli orman ruhu",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 4,
+              "word": "SAİLORMOON",
+              "hint": "Ay Işığı adına kötülükle savaşan Usagi Tsukino ve gezegen koruyucusu kızların efsanevi büyülü anime serisi",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 5,
+              "word": "ONEPİECE",
+              "hint": "Hasır Şapkalı Luffy ve tayfasının Korsanlar Kralı olmak için Grand Line denizlerinde çıktığı destansı macera",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 6,
+              "word": "CHİHİRO",
+              "hint": "Miyazaki'nin Oscar ödüllü Ruhların Kaçışı filminde anne ve babasını kurtarmak için ruhlar hamamında çalışan küçük kız",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 7,
+              "word": "DEATHNOTE",
+              "hint": "İsmi yazılan kişinin hayatını sonlandıran doğaüstü defteri bulan Light Yagami ile dedektif L'nin zeka savaşı",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 8,
+              "word": "ACKERMAN",
+              "hint": "Attack on Titan evreninde insanlığın en güçlü askerleri Mikasa ve Yüzbaşı Levi'nin taşıdığı efsanevi soyadı",
+              "difficulty": "Zor"
+            },
+            {
+              "id": 9,
+              "word": "TANJİRO",
+              "hint": "Demon Slayer (İblis Keser) serisinde iblise dönüşen kız kardeşi Nezuko'yu iyileştirmek için savaşan su nefesi ustası",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 10,
+              "word": "GOKU",
+              "hint": "Dragon Ball evreninde Süper Saiyan dönüşümü ve Kamehameha dalgasıyla tanınan efsanevi savaşçı",
+              "difficulty": "Kolay"
+            }
+          ]
+        },
+        {
+          "id": "animasyon-dunyasi",
+          "name": "Animasyon & Pixar Klasiği",
+          "iconKey": "wand",
+          "badge": "Büyülü Ekran",
+          "description": "Disney, Pixar ve DreamWorks dünyasının kalplere dokunan unutulmaz animasyonları",
+          "levels": [
+            {
+              "id": 1,
+              "word": "ELSA",
+              "hint": "Karlar Ülkesi (Frozen) filminde buzdan saray inşa eden sihirli güçlere sahip Arendelle kraliçesi",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 2,
+              "word": "SHREK",
+              "hint": "Bataklığında huzur ararken Eşek ve Çizmeli Kedi ile Prenses Fiona’yı kurtaran sevimli yeşil dev",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 3,
+              "word": "SİMBA",
+              "hint": "Aslan Kral filminde babası Mufasa'nın ardından Hakuna Matata felsefesiyle büyüyüp tahtını geri alan genç aslan",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 4,
+              "word": "RAPUNZEL",
+              "hint": "Karmakarışık (Tangled) filminde yüksek bir kulede büyüyen, metrelerce uzunluktaki sihirli sarı saçlı prenses",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 5,
+              "word": "MOANA",
+              "hint": "Okyanusun seçtiği, yarı tanrı Maui ile birlikte adasını kurtarmak için yelken açan cesur Polinezyalı kız",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 6,
+              "word": "WALLE",
+              "hint": "Terk edilmiş Dünya'da tek başına çöpleri sıkıştırırken robot EVE'e aşık olan sevimli Pixar robotu",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 7,
+              "word": "WOODY",
+              "hint": "Oyuncak Hikayesi (Toy Story) serisinde Andy'nin en sevdiği kovboy bebeği ve Buzz Lightyear'ın en yakın dostu",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 8,
+              "word": "MULAN",
+              "hint": "Hasta babasının yerine kılık değiştirerek Çin ordusuna katılan ve ülkesini kurtaran efsanevi kadın savaşçı",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 9,
+              "word": "ZOOTOPİA",
+              "hint": "İlk tavşan polis memuru Judy Hopps ile kurnaz tilki Nick Wilde’ın birlikte suç çözdüğü hayvanlar metropolü",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 10,
+              "word": "RATATOUİLLE",
+              "hint": "Paris'in en ünlü restoranında aşçı şapkasının altına gizlenerek gurme yemekler pişiren fare Remy'nin hikayesi",
+              "difficulty": "Zor"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kozmetik",
+      "name": "Moda, Kozmetik & Güzellik",
+      "iconKey": "perfume",
+      "color": "from-pink-500 to-rose-600",
+      "description": "Makyaj sanatı, cilt bakımı sırları, dünyaca ünlü moda evleri, parfümler ve değerli taşlar",
+      "subcategories": [
+        {
+          "id": "makyaj-kozmetik",
+          "name": "Makyaj & Güzellik Sanatı",
+          "iconKey": "lipstick",
+          "badge": "Güzellik Çantası",
+          "description": "Makyaj çantasının vazgeçilmez ürünleri, fırça teknikleri ve renk paletleri",
+          "levels": [
+            {
+              "id": 1,
+              "word": "RUJ",
+              "hint": "Dudaklara renk, nem veya kadifemsi mat doku kazandıran makyaj çantasının en ikonik ürünü",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 2,
+              "word": "ALLIK",
+              "hint": "Elmacık kemiklerine taze, canlı ve pembe-şeftali tonlarında doğal bir ışıltı veren makyaj ürünü",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 3,
+              "word": "RİMEL",
+              "hint": "Kirpikleri tek tek ayırıp kıvırarak bakışlara derinlik ve hacim katan fırçalı göz makyajı ürünü",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 4,
+              "word": "PRİMER",
+              "hint": "Fondöten öncesinde gözenek görünümünü pürüzsüzleştirip makyajın kalıcılığını uzatan makyaj bazı",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 5,
+              "word": "KONTÜR",
+              "hint": "Yüz hatlarını gölge ve ışık oyunlarıyla daha belirgin ve boyutlu gösterme makyaj tekniği",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 6,
+              "word": "BRONZER",
+              "hint": "Cilde yaz güneşinden yeni dönmüş gibi sıcak ve altın-kahve bir ışıltı kazandıran pudra veya krem ürün",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 7,
+              "word": "MASKARA",
+              "hint": "Kirpiklere ekstra uzunluk ve dolgunluk veren, suya dayanıklı çeşitleri de bulunan göz kozmetiği",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 8,
+              "word": "EYELİNER",
+              "hint": "Göz kapağının kirpik dibine ince ve keskin kuyruklu çizgi çekmek için kullanılan likit veya jel kalem",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 9,
+              "word": "FONDÖTEN",
+              "hint": "Cilt tonunu eşitleyip pürüzsüz bir tuval oluşturmak için yüze uygulanan sıvı veya kompakt ten ürünü",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 10,
+              "word": "KAPATICI",
+              "hint": "Göz altı halkalarını ve ciltteki ufak renk eşitsizliklerini aydınlatıp gizleyen yoğun pigmentli ürün",
+              "difficulty": "Orta"
+            }
+          ]
+        },
+        {
+          "id": "cilt-bakimi",
+          "name": "Cilt & Saç Bakımı",
+          "iconKey": "lotus",
+          "badge": "Işıltılı Cilt",
+          "description": "Serumlar, vitaminler, nemlendirici ritüeller ve modern cilt bakımı içerikleri",
+          "levels": [
+            {
+              "id": 1,
+              "word": "TONİK",
+              "hint": "Yüz temizliğinden sonra gözenekleri arındırıp cildin pH dengesini tazeleyen sıvı bakım ürünü",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 2,
+              "word": "SERUM",
+              "hint": "Yüksek konsantrasyonlu aktif içerikleri cildin alt katmanlarına hızla taşıyan damlalıklı bakım iksiri",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 3,
+              "word": "MASKE",
+              "hint": "Kil, kağıt veya jel formunda yüze uygulanıp cilde yoğun nem ya da arınma sağlayan haftalık bakım",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 4,
+              "word": "KOLAJEN",
+              "hint": "Cilde sıkılık, esneklik ve gençlik kazandıran, vücutta en bol bulunan yapısal güzellik proteini",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 5,
+              "word": "RETİNOL",
+              "hint": "İnce çizgileri azaltıp hücre yenilenmesini hızlandıran A vitamini türevi gece bakım bileşeni",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 6,
+              "word": "PEELİNG",
+              "hint": "Cilt yüzeyindeki ölü hücreleri nazikçe arındırarak alttaki parlak ve taze dokuyu ortaya çıkarma işlemi",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 7,
+              "word": "KERATİN",
+              "hint": "Saç tellerinin ve tırnakların güçlü, parlak ve kırılmaya dirençli olmasını sağlayan temel protein",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 8,
+              "word": "MİSELER",
+              "hint": "Mıknatıs gibi çalışan mikroskobik yağ kürecikleriyle makyajı ovalamadan nazikçe çözen temizleme suyu",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 9,
+              "word": "PANTHENOL",
+              "hint": "Cildi yatıştırıp bariyeri onaran ve nemi hapseden B5 provitamini içerikli bakım bileşeni",
+              "difficulty": "Zor"
+            },
+            {
+              "id": 10,
+              "word": "NİASİNAMİD",
+              "hint": "Gözenek görünümünü sıkılaştıran, cilt bariyerini güçlendiren ve renk tonunu eşitleyen B3 vitamini formu",
+              "difficulty": "Zor"
+            }
+          ]
+        },
+        {
+          "id": "moda-parfum",
+          "name": "Moda İkonları & Parfümler",
+          "iconKey": "perfume",
+          "badge": "Haute Couture",
+          "description": "Paris, Milano ve New York podyumlarına yön veren efsane moda ve parfüm evleri",
+          "levels": [
+            {
+              "id": 1,
+              "word": "DİOR",
+              "hint": "1947'de New Look koleksiyonuyla kadın modasında devrim yapan, J'adore parfümüyle ünlü Paris moda evi",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 2,
+              "word": "VOGUE",
+              "hint": "1892'den beri yayınlanan, Anna Wintour yönetiminde küresel moda dünyasının İncil'i kabul edilen dergi",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 3,
+              "word": "PRADA",
+              "hint": "1913'te Milano'da kurulan, üçgen metal logosu ve Şeytan Marka Giyer filmindeki yeriyle ikonik İtalyan markası",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 4,
+              "word": "GUCCİ",
+              "hint": "Floransa’da kurulan, çift G logosu, yeşil-kırmızı şeridi ve Flora parfümüyle tanınan İtalyan moda devi",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 5,
+              "word": "CHANEL",
+              "hint": "Küçük siyah elbise, tüvit ceket ve dünyanın en ünlü No.5 parfümünü yaratan Coco'nun Fransız moda evi",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 6,
+              "word": "HERMES",
+              "hint": "Turuncu kutuları, ipek eşarpları ve yıllarca sıra beklenen efsanevi Birkin çantalarıyla ünlü Paris evi",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 7,
+              "word": "SEPHORA",
+              "hint": "Siyah-beyaz çizgili mağazalarıyla dünyaca ünlü kozmetik, parfüm ve cilt bakımı markalarını buluşturan güzellik zinciri",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 8,
+              "word": "VERSACE",
+              "hint": "Altın rengi Medusa başı logosu ve göz alıcı kırmızı halı tasarımlarıyla tanınan İtalyan moda imparatorluğu",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 9,
+              "word": "VALENTİNO",
+              "hint": "Kendine özgü tutkulu kırmızı elbiseleri ve Rockstud ayakkabı tasarımlarıyla ünlü Roma merkezli moda evi",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 10,
+              "word": "BALENCİAGA",
+              "hint": "İspanyol usta Cristobal tarafından kurulan, heykelsi kesimleri ve avangart sokak modasıyla tanınan lüks marka",
+              "difficulty": "Zor"
+            }
+          ]
+        },
+        {
+          "id": "taki-degerli-taslar",
+          "name": "Mücevher, Takı & Kumaşlar",
+          "iconKey": "diamond",
+          "badge": "Zarafet",
+          "description": "Göz kamaştıran değerli taşlar, zarif takılar ve en seçkin kumaş dokuları",
+          "levels": [
+            {
+              "id": 1,
+              "word": "İNCİ",
+              "hint": "İstiridyelerin içinde sedef katmanlarıyla doğal olarak oluşan, zarafetin simgesi beyaz-krem mücevher tanesi",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 2,
+              "word": "İPEK",
+              "hint": "Kozalardan elde edilen, parlaklığı ve yumuşak dokusuyla eşarp ve gece elbiselerinde kullanılan asil kumaş",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 3,
+              "word": "SAFİR",
+              "hint": "Prenses Diana'nın nişan yüzüğüyle ölümsüzleşen, kadifemsi derin mavi rengiyle ünlü değerli taş",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 4,
+              "word": "YAKUT",
+              "hint": "Tutkunun ve asaletin simgesi olan, korindon ailesinin ateş kırmızısı rengindeki değerli mücevher taşı",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 5,
+              "word": "SATEN",
+              "hint": "Ön yüzü su gibi kaygan ve parlak dokunan, abiye elbiselerde ve kurdelelerde tercih edilen zarif kumaş",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 6,
+              "word": "KAŞMİR",
+              "hint": "Himalaya keçilerinin ince tüylerinden dokunan, hafif ama son derece sıcak tutan lüks triko yünü",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 7,
+              "word": "KADİFE",
+              "hint": "Yüzeyi yumuşacık kısa havlarla kaplı, ışığı derin ve asil biçimde yansıtan kraliyet kumaşı",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 8,
+              "word": "ZÜMRÜT",
+              "hint": "Kleopatra'nın en sevdiği taş olarak bilinen, büyüleyici koyu yeşil rengiyle ünlü değerli mücevher",
+              "difficulty": "Kolay"
+            },
+            {
+              "id": 9,
+              "word": "AMETİST",
+              "hint": "Leylak ile koyu menekşe arasındaki büyüleyici mor tonlarıyla tanınan kuvars grubu doğal taş",
+              "difficulty": "Orta"
+            },
+            {
+              "id": 10,
+              "word": "PIRLANTA",
+              "hint": "Doğadaki en sert mineral olan elmasın 57 fasetli özel kesimle ışığı gökkuşağı gibi kırdığı tektaş mücevheri",
+              "difficulty": "Kolay"
             }
           ]
         }
@@ -3517,7 +4036,7 @@ export const CATEGORIES_DATA = {
       "name": "Dizi & Sinema",
       "iconKey": "clapper",
       "color": "from-purple-500 to-indigo-600",
-      "description": "Kült filmler, unutulmaz diziler, efsane oyuncular ve yönetmenler",
+      "description": "Cult movies, hit TV series, anime & manga universe, classic animations, and cinema icons",
       "subcategories": [
         {
           "id": "film-efsaneler",
@@ -3573,6 +4092,30 @@ export const CATEGORIES_DATA = {
               "word": "INTERSTELLAR",
               "hint": "Solucan deliğinden geçerek insanlığa yeni bir yuva arayan Cooper ve kızı Murphy'nin destanı",
               "difficulty": "Orta"
+            },
+            {
+              "id": 9,
+              "word": "BARBIE",
+              "hint": "Greta Gerwig's 2023 box-office phenomenon starring Margot Robbie in a vibrant pink world",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 10,
+              "word": "LALALAND",
+              "hint": "Oscar-winning musical romance following jazz pianist Sebastian and aspiring actress Mia in Los Angeles",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 11,
+              "word": "HOGWARTS",
+              "hint": "Legendary school of witchcraft and wizardry divided into four houses in the Harry Potter universe",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 12,
+              "word": "AMELIE",
+              "hint": "Whimsical French classic about a shy Montmartre waitress who secretly orchestrates joy for those around her",
+              "difficulty": "Medium"
             }
           ]
         },
@@ -3630,6 +4173,30 @@ export const CATEGORIES_DATA = {
               "word": "LOST",
               "hint": "Gizemli bir Pasifik adasına düşen Oceanic 815 uçağı kazazedelerinin hayatta kalma mücadelesi",
               "difficulty": "Kolay"
+            },
+            {
+              "id": 9,
+              "word": "FRIENDS",
+              "hint": "Iconic sitcom following six New York pals gathering on the orange couch at Central Perk",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 10,
+              "word": "WEDNESDAY",
+              "hint": "Hit mystery series starring Jenna Ortega as the gothic Addams daughter at Nevermore Academy",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 11,
+              "word": "SQUIDGAME",
+              "hint": "Global South Korean survival drama where 456 indebted players compete in deadly childhood games",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 12,
+              "word": "BRIDGERTON",
+              "hint": "Regency-era London romance drama narrated through the scandalous pamphlets of Lady Whistledown",
+              "difficulty": "Medium"
             }
           ]
         },
@@ -3687,6 +4254,30 @@ export const CATEGORIES_DATA = {
               "word": "MİYAZAKİ",
               "hint": "Ruhların Kaçışı ve Prenses Mononoke'yi yaratan Studio Ghibli kurucusu anime ustası",
               "difficulty": "Orta"
+            },
+            {
+              "id": 9,
+              "word": "HEPBURN",
+              "hint": "Timeless Hollywood icon Audrey, celebrated for Breakfast at Tiffany's and Roman Holiday",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 10,
+              "word": "ZENDAYA",
+              "hint": "Emmy-winning Euphoria star and leading actress of the Dune and Spider-Man blockbusters",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 11,
+              "word": "STREEP",
+              "hint": "Record-breaking 21-time Oscar nominee Meryl, star of The Devil Wears Prada and Sophie's Choice",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 12,
+              "word": "ROBBIE",
+              "hint": "Australian actress and producer Margot, acclaimed for Barbie, I Tonya, and The Wolf of Wall Street",
+              "difficulty": "Easy"
             }
           ]
         },
@@ -3744,6 +4335,453 @@ export const CATEGORIES_DATA = {
               "word": "BİRDMAN",
               "hint": "Tek plan sekans gibi kurgulanarak En İyi Film Oscar'ını kazanan Alejandro Inarritu filmi",
               "difficulty": "Zor"
+            },
+            {
+              "id": 9,
+              "word": "WHIPLASH",
+              "hint": "Oscar-winning drama about an ambitious jazz drummer pushed to the brink by ruthless instructor Fletcher",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 10,
+              "word": "NOMADLAND",
+              "hint": "Academy Award Best Picture winner directed by Chloe Zhao and starring Frances McDormand",
+              "difficulty": "Hard"
+            },
+            {
+              "id": 11,
+              "word": "ROMA",
+              "hint": "Alfonso Cuaron's 3-time Oscar-winning black-and-white masterpiece set in 1970s Mexico City",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 12,
+              "word": "CHICAGO",
+              "hint": "Dazzling 2002 jazz musical starring Catherine Zeta-Jones and Renee Zellweger that won 6 Oscars",
+              "difficulty": "Medium"
+            }
+          ]
+        },
+        {
+          "id": "anime-manga",
+          "name": "Anime & Manga Universe",
+          "iconKey": "anime",
+          "badge": "Otaku Legends",
+          "description": "Iconic heroes, Studio Ghibli classics, and legendary Japanese anime series",
+          "levels": [
+            {
+              "id": 1,
+              "word": "NARUTO",
+              "hint": "Orange-clad leaf village ninja dreaming of becoming Hokage while carrying the Nine-Tails",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 2,
+              "word": "PIKACHU",
+              "hint": "Ash Ketchum's loyal electric-type yellow companion and the global mascot of Pokemon",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 3,
+              "word": "TOTORO",
+              "hint": "Beloved giant forest spirit holding an umbrella in the rain, emblem of Studio Ghibli",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 4,
+              "word": "SAILORMOON",
+              "hint": "Magical girl classic starring Usagi Tsukino fighting evil by moonlight alongside the Sailor Guardians",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 5,
+              "word": "ONEPIECE",
+              "hint": "Monkey D. Luffy and the Straw Hat Pirates' grand voyage in search of the ultimate treasure",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 6,
+              "word": "CHIHIRO",
+              "hint": "Brave young girl working in a spirit bathhouse to save her parents in Miyazaki's Spirited Away",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 7,
+              "word": "DEATHNOTE",
+              "hint": "Psychological thriller pitting Light Yagami and his supernatural notebook against detective L",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 8,
+              "word": "ACKERMAN",
+              "hint": "Fierce clan surname shared by humanity's strongest soldiers Mikasa and Levi in Attack on Titan",
+              "difficulty": "Hard"
+            },
+            {
+              "id": 9,
+              "word": "TANJIRO",
+              "hint": "Kind-hearted Demon Slayer swordsman fighting to cure his sister Nezuko",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 10,
+              "word": "GOKU",
+              "hint": "Saiyan martial artist famous for the Kamehameha wave and Super Saiyan transformations in Dragon Ball",
+              "difficulty": "Easy"
+            }
+          ]
+        },
+        {
+          "id": "animasyon-dunyasi",
+          "name": "Animation & Pixar Classics",
+          "iconKey": "wand",
+          "badge": "Magic Screen",
+          "description": "Heartwarming animated masterpieces from Disney, Pixar, and DreamWorks",
+          "levels": [
+            {
+              "id": 1,
+              "word": "ELSA",
+              "hint": "Queen of Arendelle with magical ice powers who sings Let It Go in Disney's Frozen",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 2,
+              "word": "SHREK",
+              "hint": "Lovable green ogre who teams up with Donkey to rescue Princess Fiona",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 3,
+              "word": "SIMBA",
+              "hint": "Young lion prince who grows up with Hakuna Matata before reclaiming Pride Rock",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 4,
+              "word": "RAPUNZEL",
+              "hint": "Spirited princess with magical golden hair locked in a hidden tower in Disney's Tangled",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 5,
+              "word": "MOANA",
+              "hint": "Wayfinding Polynesian voyager chosen by the ocean who sails with demigod Maui",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 6,
+              "word": "WALLE",
+              "hint": "Lonely waste-collecting Pixar robot on an abandoned Earth who falls in love with EVE",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 7,
+              "word": "WOODY",
+              "hint": "Pull-string cowboy sheriff and loyal leader of Andy's room in Pixar's Toy Story",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 8,
+              "word": "MULAN",
+              "hint": "Heroic young woman who disguises herself as a soldier to take her father's place in China",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 9,
+              "word": "ZOOTOPIA",
+              "hint": "Vibrant mammal metropolis where rookie bunny officer Judy Hopps teams up with sly fox Nick Wilde",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 10,
+              "word": "RATATOUILLE",
+              "hint": "Pixar tale of culinary prodigy rat Remy cooking gourmet dishes beneath a chef's hat in Paris",
+              "difficulty": "Hard"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kozmetik",
+      "name": "Fashion, Beauty & Cosmetics",
+      "iconKey": "perfume",
+      "color": "from-pink-500 to-rose-600",
+      "description": "Makeup artistry, skincare essentials, haute couture fashion houses, perfumes, and gemstones",
+      "subcategories": [
+        {
+          "id": "makyaj-kozmetik",
+          "name": "Makeup & Beauty Artistry",
+          "iconKey": "lipstick",
+          "badge": "Glam Kit",
+          "description": "Essential beauty bag favorites, brush techniques, and iconic makeup staples",
+          "levels": [
+            {
+              "id": 1,
+              "word": "GLOSS",
+              "hint": "Luminous lip product applied alone or over lipstick for a mirror-like shine",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 2,
+              "word": "BLUSH",
+              "hint": "Rosy or peach-toned cheek product swept onto the cheekbones for a fresh, healthy flush",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 3,
+              "word": "LINER",
+              "hint": "Precision pencil or liquid pen used to define the lash line or craft a sharp winged eye",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 4,
+              "word": "PRIMER",
+              "hint": "Smoothing base applied before foundation to blur pores and lock makeup in place all day",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 5,
+              "word": "POWDER",
+              "hint": "Finely milled translucent or pressed formula used to set concealer and control shine",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 6,
+              "word": "BRONZER",
+              "hint": "Sun-kissed warm powder or cream swept across the forehead and cheeks for a golden glow",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 7,
+              "word": "CONTOUR",
+              "hint": "Sculpting makeup technique using cool shadows and highlights to define facial structure",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 8,
+              "word": "MASCARA",
+              "hint": "Wand-applied lash product designed to lengthen, curl, and volumize eyelashes",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 9,
+              "word": "LIPSTICK",
+              "hint": "Classic bullet cosmetic in satin, matte, or sheer finishes that colors and defines the lips",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 10,
+              "word": "CONCEALER",
+              "hint": "High-coverage complexion wand used to brighten under-eyes and camouflage blemishes",
+              "difficulty": "Medium"
+            }
+          ]
+        },
+        {
+          "id": "cilt-bakimi",
+          "name": "Skincare & Hair Rituals",
+          "iconKey": "lotus",
+          "badge": "Glass Skin",
+          "description": "Hydrating serums, active vitamins, and restorative self-care essentials",
+          "levels": [
+            {
+              "id": 1,
+              "word": "TONER",
+              "hint": "Refreshing liquid step applied after cleansing to balance skin pH and prep for hydration",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 2,
+              "word": "SERUM",
+              "hint": "Lightweight dropper treatment packed with concentrated actives that target specific skin needs",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 3,
+              "word": "LOTION",
+              "hint": "Silky hydrating emulsion smoothed onto face or body to soften and replenish moisture",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 4,
+              "word": "RETINOL",
+              "hint": "Gold-standard Vitamin A derivative celebrated for smoothing fine lines and renewing skin texture",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 5,
+              "word": "KERATIN",
+              "hint": "Protective structural protein that strengthens hair strands, nails, and outer skin layers",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 6,
+              "word": "PEPTIDE",
+              "hint": "Short chain of amino acids in skincare that signals skin to look firmer, plumper, and smoother",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 7,
+              "word": "COLLAGEN",
+              "hint": "Essential structural protein responsible for youthful skin bounce, firmness, and elasticity",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 8,
+              "word": "CERAMIDE",
+              "hint": "Skin-identical lipid molecule that seals the moisture barrier and protects against dryness",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 9,
+              "word": "SQUALANE",
+              "hint": "Weightless botanical emollient that mimics natural skin oils for non-greasy deep softness",
+              "difficulty": "Hard"
+            },
+            {
+              "id": 10,
+              "word": "NIACINAMIDE",
+              "hint": "Multi-tasking Vitamin B3 active loved for refining pores, calming redness, and brightening tone",
+              "difficulty": "Hard"
+            }
+          ]
+        },
+        {
+          "id": "moda-parfum",
+          "name": "Fashion Houses & Perfumes",
+          "iconKey": "perfume",
+          "badge": "Haute Couture",
+          "description": "Legendary Paris, Milan, and New York luxury houses and iconic fragrances",
+          "levels": [
+            {
+              "id": 1,
+              "word": "DIOR",
+              "hint": "Parisian couture house founded in 1947 behind the New Look silhouette and J'adore fragrance",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 2,
+              "word": "VOGUE",
+              "hint": "Iconic fashion magazine founded in 1892 and long helmed by Anna Wintour as style's global bible",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 3,
+              "word": "PRADA",
+              "hint": "Milanese luxury house founded in 1913, famous for its triangle emblem and nylon-leather minimalism",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 4,
+              "word": "GUCCI",
+              "hint": "Florentine luxury label recognized worldwide by its interlocking GG monogram and horsebit loafers",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 5,
+              "word": "CHANEL",
+              "hint": "Legendary French house founded by Coco, creator of the little black dress, tweed suit, and No. 5",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 6,
+              "word": "HERMES",
+              "hint": "Storied Parisian atelier renowned for silk scarves, orange boxes, and the coveted Birkin bag",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 7,
+              "word": "SEPHORA",
+              "hint": "Global black-and-white-striped beauty retailer curating prestige makeup, fragrance, and skincare",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 8,
+              "word": "VERSACE",
+              "hint": "Bold Italian fashion house symbolized by the golden Medusa emblem and glamorous runway gowns",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 9,
+              "word": "VALENTINO",
+              "hint": "Roman haute couture maison celebrated for its signature scarlet red gowns and Rockstud heels",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 10,
+              "word": "BALENCIAGA",
+              "hint": "Luxury house founded by Spanish couturier Cristobal, famed for sculptural silhouettes",
+              "difficulty": "Hard"
+            }
+          ]
+        },
+        {
+          "id": "taki-degerli-taslar",
+          "name": "Jewelry, Gems & Fine Fabrics",
+          "iconKey": "diamond",
+          "badge": "Elegance",
+          "description": "Precious gemstones, timeless jewelry pieces, and luxurious textile weaves",
+          "levels": [
+            {
+              "id": 1,
+              "word": "SILK",
+              "hint": "Lustrous natural fiber spun from cocoons, prized for centuries in evening gowns and scarves",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 2,
+              "word": "RUBY",
+              "hint": "Fiery crimson gemstone from the corundum family symbolizing passion and royal heritage",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 3,
+              "word": "PEARL",
+              "hint": "Iridescent organic gem formed inside oysters, a timeless emblem of bridal and classic grace",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 4,
+              "word": "SATIN",
+              "hint": "Glossy weave with a liquid-smooth surface on one side, favored for bridal dresses and ribbons",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 5,
+              "word": "VELVET",
+              "hint": "Plush woven fabric with a dense, ultra-soft pile associated with royal eveningwear",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 6,
+              "word": "EMERALD",
+              "hint": "Lush vivid-green beryl gemstone treasured since Cleopatra's reign in ancient Egypt",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 7,
+              "word": "DIAMOND",
+              "hint": "Hardest natural mineral on Earth, cut into brilliant facets for solitaire engagement rings",
+              "difficulty": "Easy"
+            },
+            {
+              "id": 8,
+              "word": "CASHMERE",
+              "hint": "Featherlight, ultra-warm luxury yarn combed from fine Himalayan goat undercoats",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 9,
+              "word": "AMETHYST",
+              "hint": "Violet-purple quartz gemstone admired in jewelry from delicate lilac to deep royal plum",
+              "difficulty": "Medium"
+            },
+            {
+              "id": 10,
+              "word": "SAPPHIRE",
+              "hint": "Deep celestial-blue gemstone immortalized by Princess Diana's iconic oval halo ring",
+              "difficulty": "Medium"
             }
           ]
         }
@@ -5253,7 +6291,9 @@ export const UI_STRINGS = {
     "backToLevels": "BÖLÜMLER",
     "dailyStarted": "Günün Meydan Okuması Başladı!",
     "letterHintToast": "Harf Sabitlendi",
-    "allLettersRevealed": "Tüm harfler zaten biliniyor!"
+    "allLettersRevealed": "Tüm harfler zaten biliniyor!",
+    "themes": "Temalar",
+    "themeStudio": "Kozmetik & Tema Atölyesi"
   },
   "en": {
     "gameTitle": "Word & World",
@@ -5333,6 +6373,8 @@ export const UI_STRINGS = {
     "backToLevels": "LEVELS",
     "dailyStarted": "Daily Challenge Started!",
     "letterHintToast": "Letter Pinned",
-    "allLettersRevealed": "All letters already uncovered!"
+    "allLettersRevealed": "All letters already uncovered!",
+    "themes": "Themes",
+    "themeStudio": "Theme & Style Studio"
   }
 };
