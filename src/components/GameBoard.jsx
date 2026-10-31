@@ -11,6 +11,7 @@ export default function GameBoard({
   maxAttempts = 6,
   isShaking,
   isWon,
+  revealedPositions = {},
   lang = 'tr'
 }) {
   const wordLength = targetWord.length;
@@ -158,6 +159,7 @@ export default function GameBoard({
                   // 2. CURRENT ACTIVE INPUT ROW
                   if (row.type === 'current') {
                     const hasChar = Boolean(letter);
+                    const ghostHintChar = !hasChar ? revealedPositions[colIndex] : null;
                     return (
                       <div
                         key={`curr-${colIndex}`}
@@ -165,11 +167,17 @@ export default function GameBoard({
                         className={`rounded-2xl flex items-center justify-center font-black uppercase transition-all duration-100 ${fontClass} ${
                           hasChar
                             ? 'bg-gradient-to-b from-indigo-500 via-indigo-600 to-purple-600 border-t-2 border-indigo-200/80 border-b-[4px] border-b-indigo-950 text-white shadow-lg shadow-indigo-500/30 animate-tile-pop'
+                            : ghostHintChar
+                            ? 'bg-cyan-950/55 border border-cyan-400/55 border-b-2 border-b-cyan-950 text-cyan-300/65 shadow-inner ring-1 ring-cyan-400/20'
                             : 'bg-slate-900/70 border border-slate-700/60 border-b-2 border-b-slate-950 text-slate-500 shadow-inner'
                         }`}
                       >
                         {hasChar ? (
                           <span className="drop-shadow-sm">{letter}</span>
+                        ) : ghostHintChar ? (
+                          <span className="drop-shadow-[0_0_6px_rgba(34,211,238,0.5)]">
+                            {ghostHintChar}
+                          </span>
                         ) : (
                           /* Cheerful subtle placeholder dot */
                           <span className="w-1.5 h-1.5 rounded-full bg-slate-700/70" />

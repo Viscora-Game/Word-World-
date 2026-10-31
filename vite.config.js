@@ -9,4 +9,19 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  build: {
+    chunkSizeWarningLimit: 600,
+    rolldownOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+          if (id.includes('src/data/categories') || id.includes('src\\data\\categories')) {
+            return 'levels-db';
+          }
+        }
+      }
+    }
+  }
 })

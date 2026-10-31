@@ -24,9 +24,9 @@ export default function LevelSelect({
   return (
     <div className="flex-1 w-full max-w-md mx-auto px-3.5 py-2.5 flex flex-col justify-start overflow-y-auto pb-4 select-none relative bg-[#070d1e]">
       
-      {/* Background Artwork */}
+      {/* Background Artwork (Preloaded WebP for instant 0ms render) */}
       <img
-        src={getAssetUrl('/assets/art/categories_bg.jpg')}
+        src={getAssetUrl('/assets/art/categories_bg.webp')}
         alt="Background"
         className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none z-0"
       />
@@ -99,7 +99,7 @@ export default function LevelSelect({
               {/* Header: length & lock indicator */}
               <div className="w-full flex items-center justify-between">
                 <span className="text-[9px] font-black text-slate-300">
-                  {wordLength} {t?.language === 'tr' ? 'Harf' : 'Ltr'}
+                  {wordLength} {t?.lettersShort || 'Harf'}
                 </span>
                 {!isUnlocked ? (
                   <Lock className="w-3.5 h-3.5 text-slate-500" />

@@ -23,11 +23,16 @@ export default function Keyboard({
   onChar,
   onEnter,
   onDelete,
+  eliminatedKeys = [],
   lang = 'tr',
   disabled = false
 }) {
-  // Determine key statuses from previous guesses
+  // Determine key statuses from previous guesses & radar eliminations
   const keyStatus = {};
+
+  eliminatedKeys.forEach((k) => {
+    keyStatus[normalizeLetter(k, lang)] = 'absent';
+  });
 
   guesses.forEach((guess) => {
     const evals = evaluateGuess(guess, targetWord, lang);

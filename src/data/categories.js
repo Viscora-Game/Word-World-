@@ -576,6 +576,146 @@ export const CATEGORIES_DATA = {
                 "Henry"
               ]
             }
+          },
+          {
+            "id": 21,
+            "word": "PARMA",
+            "hint": "1999 Moskova finalinde Marsilya'yı 3-0 yenerek UEFA Kupası'nı kazanan, kalesinde genç Buffon'un devleştiği efsane İtalyan kadrosu",
+            "difficulty": "Çok Zor",
+            "lineup": {
+              "formation": "3-5-2",
+              "teamType": "Kulüp Takımı",
+              "year": "1999 UEFA Kupası Şampiyonu",
+              "gk": "Buffon",
+              "def": [
+                "Thuram",
+                "Sensini",
+                "Cannavaro"
+              ],
+              "mid": [
+                "Fuser",
+                "Dino Baggio",
+                "Boghossian",
+                "Veron",
+                "Vanoli"
+              ],
+              "fwd": [
+                "Chiesa",
+                "Crespo"
+              ]
+            }
+          },
+          {
+            "id": 22,
+            "word": "DORTMUND",
+            "hint": "1997 Münih finalinde son şampiyon Juventus'u Riedle ve 19 yaşındaki Ricken'in aşırtma golüyle 3-1 yıkan Ottmar Hitzfeld kadrosu",
+            "difficulty": "Zor",
+            "lineup": {
+              "formation": "3-5-2",
+              "teamType": "Kulüp Takımı",
+              "year": "1997 Şampiyonlar Ligi Şampiyonu",
+              "gk": "Klos",
+              "def": [
+                "Kohler",
+                "Sammer",
+                "Kree"
+              ],
+              "mid": [
+                "Reuter",
+                "Lambert",
+                "Paulo Sousa",
+                "Möller",
+                "Heinrich"
+              ],
+              "fwd": [
+                "Riedle",
+                "Chapuisat"
+              ]
+            }
+          },
+          {
+            "id": 23,
+            "word": "DEPORTİVO",
+            "hint": "1999-2000 sezonunda Riazor'da devleri dize getirerek kulüp tarihinin tek La Liga şampiyonluğunu kazanan Super Depor kadrosu",
+            "difficulty": "Çok Zor",
+            "lineup": {
+              "formation": "4-2-3-1",
+              "teamType": "Kulüp Takımı",
+              "year": "2000 La Liga Şampiyonu",
+              "gk": "Songo'o",
+              "def": [
+                "Manuel Pablo",
+                "Naybet",
+                "Donato",
+                "Romero"
+              ],
+              "mid": [
+                "Mauro Silva",
+                "Flavio",
+                "Victor",
+                "Djalminha",
+                "Fran"
+              ],
+              "fwd": [
+                "Roy Makaay"
+              ]
+            }
+          },
+          {
+            "id": 24,
+            "word": "LEVERKUSEN",
+            "hint": "2002 yılında lig, kupa ve Şampiyonlar Ligi'nde aynı sezon üç ikincilik yaşayarak tarihe geçen Klaus Toppmöller kadrosu",
+            "difficulty": "Zor",
+            "lineup": {
+              "formation": "4-1-4-1",
+              "teamType": "Kulüp Takımı",
+              "year": "2002 Şampiyonlar Ligi Finalisti",
+              "gk": "Butt",
+              "def": [
+                "Sebescen",
+                "Zivkovic",
+                "Lucio",
+                "Placente"
+              ],
+              "mid": [
+                "Ramelow",
+                "Schneider",
+                "Ballack",
+                "Bastürk",
+                "Ze Roberto"
+              ],
+              "fwd": [
+                "Neuville"
+              ]
+            }
+          },
+          {
+            "id": 25,
+            "word": "İNTER",
+            "hint": "2010 Madrid finalinde Bayern Münih'i Diego Milito'nun iki golüyle devirip İtalya'nın ilk Treble zaferini kazanan Mourinho kadrosu",
+            "difficulty": "Orta",
+            "lineup": {
+              "formation": "4-2-3-1",
+              "teamType": "Kulüp Takımı",
+              "year": "2010 Şampiyonlar Ligi Şampiyonu",
+              "gk": "Julio Cesar",
+              "def": [
+                "Maicon",
+                "Lucio",
+                "Samuel",
+                "Chivu"
+              ],
+              "mid": [
+                "Zanetti",
+                "Cambiasso",
+                "Eto'o",
+                "Sneijder",
+                "Pandev"
+              ],
+              "fwd": [
+                "Diego Milito"
+              ]
+            }
           }
         ]
       },
@@ -3022,6 +3162,146 @@ export const CATEGORIES_DATA = {
                 "Henry"
               ]
             }
+          },
+          {
+            "id": 21,
+            "word": "PARMA",
+            "hint": "1999 Moskova finalinde Marsilya'yı 3-0 yenerek UEFA Kupası'nı kazanan, kalesinde genç Buffon'un devleştiği efsane İtalyan kadrosu",
+            "difficulty": "Çok Zor",
+            "lineup": {
+              "formation": "3-5-2",
+              "teamType": "Kulüp Takımı",
+              "year": "1999 UEFA Kupası Şampiyonu",
+              "gk": "Buffon",
+              "def": [
+                "Thuram",
+                "Sensini",
+                "Cannavaro"
+              ],
+              "mid": [
+                "Fuser",
+                "Dino Baggio",
+                "Boghossian",
+                "Veron",
+                "Vanoli"
+              ],
+              "fwd": [
+                "Chiesa",
+                "Crespo"
+              ]
+            }
+          },
+          {
+            "id": 22,
+            "word": "DORTMUND",
+            "hint": "1997 Münih finalinde son şampiyon Juventus'u Riedle ve 19 yaşındaki Ricken'in aşırtma golüyle 3-1 yıkan Ottmar Hitzfeld kadrosu",
+            "difficulty": "Zor",
+            "lineup": {
+              "formation": "3-5-2",
+              "teamType": "Kulüp Takımı",
+              "year": "1997 Şampiyonlar Ligi Şampiyonu",
+              "gk": "Klos",
+              "def": [
+                "Kohler",
+                "Sammer",
+                "Kree"
+              ],
+              "mid": [
+                "Reuter",
+                "Lambert",
+                "Paulo Sousa",
+                "Möller",
+                "Heinrich"
+              ],
+              "fwd": [
+                "Riedle",
+                "Chapuisat"
+              ]
+            }
+          },
+          {
+            "id": 23,
+            "word": "DEPORTİVO",
+            "hint": "1999-2000 sezonunda Riazor'da devleri dize getirerek kulüp tarihinin tek La Liga şampiyonluğunu kazanan Super Depor kadrosu",
+            "difficulty": "Çok Zor",
+            "lineup": {
+              "formation": "4-2-3-1",
+              "teamType": "Kulüp Takımı",
+              "year": "2000 La Liga Şampiyonu",
+              "gk": "Songo'o",
+              "def": [
+                "Manuel Pablo",
+                "Naybet",
+                "Donato",
+                "Romero"
+              ],
+              "mid": [
+                "Mauro Silva",
+                "Flavio",
+                "Victor",
+                "Djalminha",
+                "Fran"
+              ],
+              "fwd": [
+                "Roy Makaay"
+              ]
+            }
+          },
+          {
+            "id": 24,
+            "word": "LEVERKUSEN",
+            "hint": "2002 yılında lig, kupa ve Şampiyonlar Ligi'nde aynı sezon üç ikincilik yaşayarak tarihe geçen Klaus Toppmöller kadrosu",
+            "difficulty": "Zor",
+            "lineup": {
+              "formation": "4-1-4-1",
+              "teamType": "Kulüp Takımı",
+              "year": "2002 Şampiyonlar Ligi Finalisti",
+              "gk": "Butt",
+              "def": [
+                "Sebescen",
+                "Zivkovic",
+                "Lucio",
+                "Placente"
+              ],
+              "mid": [
+                "Ramelow",
+                "Schneider",
+                "Ballack",
+                "Bastürk",
+                "Ze Roberto"
+              ],
+              "fwd": [
+                "Neuville"
+              ]
+            }
+          },
+          {
+            "id": 25,
+            "word": "İNTER",
+            "hint": "2010 Madrid finalinde Bayern Münih'i Diego Milito'nun iki golüyle devirip İtalya'nın ilk Treble zaferini kazanan Mourinho kadrosu",
+            "difficulty": "Orta",
+            "lineup": {
+              "formation": "4-2-3-1",
+              "teamType": "Kulüp Takımı",
+              "year": "2010 Şampiyonlar Ligi Şampiyonu",
+              "gk": "Julio Cesar",
+              "def": [
+                "Maicon",
+                "Lucio",
+                "Samuel",
+                "Chivu"
+              ],
+              "mid": [
+                "Zanetti",
+                "Cambiasso",
+                "Eto'o",
+                "Sneijder",
+                "Pandev"
+              ],
+              "fwd": [
+                "Diego Milito"
+              ]
+            }
           }
         ]
       },
@@ -4958,7 +5238,23 @@ export const UI_STRINGS = {
     "correctBadge": "Doğru",
     "presentBadge": "Yeri Yanlış",
     "absentBadge": "Kelime Dışı",
-    "allCategoriesCompleted": "Tüm Seviyeler Tamamlandı!"
+    "allCategoriesCompleted": "Tüm Seviyeler Tamamlandı!",
+    "allLevelsCompleted": "Bu kategorideki tüm seviyeler tamamlandı!",
+    "level": "Bölüm",
+    "levels": "Bölüm",
+    "lettersShort": "Harf",
+    "remainingAttempts": "Hak",
+    "wordSolvedIn": "denemede çözüldü",
+    "wordWas": "DOĞRU KELİME",
+    "gameOver": "GİZEM ÇÖZÜLEMEDİ",
+    "perfect": "KUSURSUZ KEŞİF!",
+    "great": "HARİKA BAŞARI!",
+    "good": "BÖLÜMÜ GEÇTİN!",
+    "replay": "TEKRAR DENE",
+    "backToLevels": "BÖLÜMLER",
+    "dailyStarted": "Günün Meydan Okuması Başladı!",
+    "letterHintToast": "Harf Sabitlendi",
+    "allLettersRevealed": "Tüm harfler zaten biliniyor!"
   },
   "en": {
     "gameTitle": "Word & World",
@@ -5021,6 +5317,22 @@ export const UI_STRINGS = {
     "correctBadge": "Correct",
     "presentBadge": "Wrong Spot",
     "absentBadge": "Not in Word",
-    "allCategoriesCompleted": "All Levels Completed!"
+    "allCategoriesCompleted": "All Levels Completed!",
+    "allLevelsCompleted": "All levels in this category completed!",
+    "level": "Level",
+    "levels": "Levels",
+    "lettersShort": "Ltr",
+    "remainingAttempts": "Left",
+    "wordSolvedIn": "attempts",
+    "wordWas": "CORRECT WORD",
+    "gameOver": "MYSTERY UNSOLVED",
+    "perfect": "PERFECT DISCOVERY!",
+    "great": "GREAT SUCCESS!",
+    "good": "LEVEL CLEARED!",
+    "replay": "TRY AGAIN",
+    "backToLevels": "LEVELS",
+    "dailyStarted": "Daily Challenge Started!",
+    "letterHintToast": "Letter Pinned",
+    "allLettersRevealed": "All letters already uncovered!"
   }
 };

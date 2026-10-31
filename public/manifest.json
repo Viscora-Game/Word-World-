@@ -1,0 +1,19 @@
+{
+  "name": "Word & World",
+  "short_name": "Word & World",
+  "description": "Kelime avı, tarihi kadrolar ve dünya keşfi bulmaca oyunu.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#070a13",
+  "theme_color": "#070a13",
+  "icons": [
+    {
+      "src": "./assets/icons/app_icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,17 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { Trophy, RotateCcw, ArrowRight, List, Sparkles, Frown, Compass, CheckCircle2, Lock, AlertCircle } from 'lucide-react';
+import {
+  RotateCcw,
+  ArrowRight,
+  List,
+  Sparkles,
+  Compass,
+  CheckCircle2,
+  Lock,
+  AlertCircle,
+  Share2,
+  Star,
+  Check
+} from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundManager } from '../utils/audio';
+import { evaluateGuess } from '../utils/evaluator';
+import { buildShareText } from '../utils/dailyQuest';
 import GameIcon from './GameIcon';
 
 export default function WinModal({
   isOpen,
   isWon,
   starsEarned = 0,
+  dailyBonusAwarded = 0,
+  isDailyMode = false,
+  dailyEdition = 1,
+  subcategoryName = '',
+  levelId = 1,
+  guesses = [],
   attemptsCount = 0,
   maxAttempts = 6,
   targetWord = '',
   hint = '',
+  lang = 'tr',
   onNextLevel,
   onReplay,
   onBackToLevels,
@@ -19,15 +40,18 @@ export default function WinModal({
   t
 }) {
   const [animatedStars, setAnimatedStars] = useState(0);
+  const [shareCopied, setShareCopied] = useState(false);
+
+  const isTR = lang !== 'en';
 
   useEffect(() => {
     if (!isOpen) {
       setAnimatedStars(0);
+      setShareCopied(false);
       return;
     }
 
     if (isWon) {
-      // Confetti burst
       try {
         confetti({
           particleCount: starsEarned === 3 ? 120 : 60,
@@ -36,20 +60,19 @@ export default function WinModal({
         });
       } catch (e) {}
 
-      // Staggered star reveal with chimes
       const timer1 = setTimeout(() => {
         if (starsEarned >= 1) {
           setAnimatedStars(1);
           soundManager.playStar(1);
         }
-      }, 300);
+      }, 280);
 
       const timer2 = setTimeout(() => {
         if (starsEarned >= 2) {
           setAnimatedStars(2);
           soundManager.playStar(2);
         }
-      }, 700);
+      }, 650);
 
       const timer3 = setTimeout(() => {
         if (starsEarned >= 3) {
@@ -57,20 +80,20 @@ export default function WinModal({
           soundManager.playStar(3);
           try {
             confetti({
-              particleCount: 80,
+              particleCount: 75,
               angle: 60,
               spread: 55,
               origin: { x: 0 }
             });
             confetti({
-              particleCount: 80,
+              particleCount: 75,
               angle: 120,
               spread: 55,
               origin: { x: 1 }
             });
           } catch (e) {}
         }
-      }, 1100);
+      }, 1020);
 
       return () => {
         clearTimeout(timer1);
@@ -85,11 +108,48 @@ export default function WinModal({
   if (!isOpen) return null;
 
   const getTitle = () => {
-    if (!isWon) return t?.gameOver || 'GİZEM ÇÖZÜLEMEDİ';
-    if (starsEarned === 3) return t?.perfect || 'KUSURSUZ KEŞİF!';
-    if (starsEarned === 2) return t?.great || 'HARİKA BAŞARI!';
-    return t?.good || 'BÖLÜMÜ GEÇTİN!';
+    if (!isWon) return t?.gameOver || (isTR ? 'GİZEM ÇÖZÜLEMEDİ' : 'MYSTERY UNSOLVED');
+    if (isDailyMode) return isTR ? 'GÜNÜN KELİMESİ ÇÖZÜLDÜ!' : 'DAILY QUEST SOLVED!';
+    if (starsEarned === 3) return t?.perfect || (isTR ? 'KUSURSUZ KEŞİF!' : 'PERFECT DISCOVERY!');
+    if (starsEarned === 2) return t?.great || (isTR ? 'HARİKA BAŞARI!' : 'GREAT SUCCESS!');
+    return t?.good || (isTR ? 'BÖLÜMÜ GEÇTİN!' : 'LEVEL CLEARED!');
   };
+
+  const handleShareScore = async () => {
+    soundManager.playKey();
+    const text = buildShareText({
+      isDaily: isDailyMode,
+      dailyEdition,
+      subcategoryName,
+      levelId,
+      guesses,
+      targetWord,
+      maxAttempts,
+      isWon,
+      lang,
+      evaluateGuessFn: evaluateGuess
+    });
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Word & World',
+          text
+        });
+        return;
+      } catch (err) {
+        // Fallback to clipboard if dismissed or unsupported
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(text);
+      setShareCopied(true);
+      setTimeout(() => setShareCopied(false), 2500);
+    } catch (e) {}
+  };
+
+  const totalRewardStars = starsEarned + (dailyBonusAwarded || 0);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/85 backdrop-blur-md animate-in fade-in duration-150 select-none">
@@ -97,12 +157,12 @@ export default function WinModal({
         
         {/* Ambient Top Glow */}
         <div
-          className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full blur-3xl pointer-events-none ${
+          className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full blur-3xl pointer-events-none ${
             isWon ? 'bg-amber-500/25' : 'bg-rose-500/20'
           }`}
         />
 
-        {/* 1. STATUS BADGE: Trophy / Defeat */}
+        {/* 1. STATUS BADGE */}
         <div
           className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mb-2 shadow-xl border-t relative z-10 ${
             isWon
@@ -111,7 +171,7 @@ export default function WinModal({
           }`}
         >
           {isWon ? (
-            <GameIcon name="trophy" size="w-10 h-10 sm:w-12 sm:h-12" />
+            <GameIcon name="trophy" size="w-9 h-9 sm:w-10 sm:h-10" />
           ) : (
             <Lock className="w-8 h-8 sm:w-9 sm:h-9 text-rose-400 animate-pulse" />
           )}
@@ -123,17 +183,16 @@ export default function WinModal({
         </h3>
         <p className="text-[11px] font-bold text-slate-300 mb-2 relative z-10">
           {isWon
-            ? `${attemptsCount} / ${maxAttempts} ${t.wordSolvedIn || 'denemede çözüldü'}`
-            : `${maxAttempts} / ${maxAttempts} ${t.remainingAttempts || 'Hakkın Tükendi'}`}
+            ? `${attemptsCount} / ${maxAttempts} ${t?.wordSolvedIn || (isTR ? 'denemede çözüldü' : 'attempts')}`
+            : `${maxAttempts} / ${maxAttempts} ${isTR ? 'Hakkın Tükendi' : 'Out of Attempts'}`}
         </p>
 
         {/* 2. DOĞRU CEVAP vs GİZLİ KELİME KİLİTLİ */}
         {isWon ? (
-          /* WIN STATE: Solved Word Displayed in 3D Emerald Tiles */
           <div className="w-full bg-slate-950/80 rounded-2xl p-2.5 border border-slate-800 shadow-inner flex flex-col items-center mb-2.5 relative z-10">
-            <span className="text-[9.5px] font-black text-emerald-400 uppercase tracking-widest block mb-1.5 flex items-center gap-1">
+            <span className="text-[9.5px] font-black text-emerald-400 uppercase tracking-widest mb-1.5 flex items-center gap-1">
               <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-              {t.wordWas || 'DOĞRU KELİME'}
+              {t?.wordWas || (isTR ? 'DOĞRU KELİME' : 'CORRECT WORD')}
             </span>
             <div className="flex items-center justify-center gap-1 flex-wrap">
               {(targetWord || '').split('').map((ch, idx) => (
@@ -147,11 +206,11 @@ export default function WinModal({
             </div>
           </div>
         ) : (
-          /* LOSS STATE: Kelimeyi Asla Açıklama! Gizli Tut ki Tekrar Dene Denildiğinde Kolay Olmasın */
+          /* LOSS STATE: Word stays strictly secret so retrying remains a true challenge! */
           <div className="w-full bg-slate-950/80 rounded-2xl p-2.5 border border-slate-800 shadow-inner flex flex-col items-center mb-2.5 relative z-10">
-            <span className="text-[9.5px] font-black text-rose-400 uppercase tracking-widest block mb-1.5 flex items-center gap-1">
+            <span className="text-[9.5px] font-black text-rose-400 uppercase tracking-widest mb-1.5 flex items-center gap-1">
               <Lock className="w-3 h-3 text-rose-400" />
-              {targetWord.length} HARFLİ KELİME GİZLİ KALDI
+              {targetWord.length} {isTR ? 'HARFLİ KELİME GİZLİ KALDI' : 'LETTER WORD REMAINS LOCKED'}
             </span>
             <div className="flex items-center justify-center gap-1 flex-wrap">
               {Array.from({ length: targetWord.length }).map((_, idx) => (
@@ -166,12 +225,12 @@ export default function WinModal({
           </div>
         )}
 
-        {/* 3. BİLGİ / KEŞİF: Only show on Win; Show encourage on Loss */}
+        {/* 3. BİLGİ NOTU (Win) vs TEŞVİK (Loss) */}
         {isWon && hint ? (
           <div className="w-full bg-gradient-to-r from-[#0d1a33]/90 via-[#0a1529]/90 to-[#0d1a33]/90 rounded-2xl p-2.5 border border-cyan-500/35 mb-2.5 text-left relative z-10 shadow-sm">
             <div className="flex items-center gap-1.5 text-[9.5px] font-black uppercase tracking-wider text-cyan-300 mb-1">
               <Compass className="w-3.5 h-3.5 text-cyan-400" />
-              <span>DÜNYA KEŞFİ & BİLGİ NOTU</span>
+              <span>{isTR ? 'DÜNYA KEŞFİ & BİLGİ NOTU' : 'WORLD DISCOVERY NOTE'}</span>
             </div>
             <p className="text-[11px] sm:text-xs font-semibold text-slate-100 leading-snug">
               "{hint}"
@@ -181,18 +240,19 @@ export default function WinModal({
           <div className="w-full bg-gradient-to-r from-rose-950/40 via-slate-900/60 to-rose-950/40 rounded-2xl p-2.5 border border-rose-500/30 mb-2.5 text-left relative z-10 shadow-sm">
             <div className="flex items-center gap-1.5 text-[9.5px] font-black uppercase tracking-wider text-rose-300 mb-1">
               <AlertCircle className="w-3.5 h-3.5 text-rose-400" />
-              <span>YENİDEN DENEME FIRSATI</span>
+              <span>{isTR ? 'YENİDEN DENEME FIRSATI' : 'SECOND CHANCE'}</span>
             </div>
             <p className="text-[10.5px] sm:text-[11px] font-semibold text-slate-300 leading-snug">
-              Gizemli kelimenin sırrı henüz çözülemedi. Bildiğin harfleri hatırlayarak hemen tekrar dene ve bu seviyeyi fetheyle!
+              {isTR
+                ? 'Gizemli kelimenin sırrı henüz çözülemedi. Bulduğun yeşil ve sarı harfleri hatırlayarak hemen tekrar dene!'
+                : 'The secret word remains locked. Remember the green and yellow clues you uncovered and try again!'}
             </p>
           </div>
         ) : null}
 
-        {/* 4. ÖDÜL: Animated 3-Star Showcase & Earned Star Pill (Only on Win) */}
+        {/* 4. ÖDÜL: Animated 3-Star Showcase & Accurate Earned Star Pill */}
         {isWon && (
-          <div className="w-full flex items-center justify-between gap-2 p-2 bg-slate-950/70 rounded-2xl border border-slate-800/80 mb-3 relative z-10">
-            {/* Stars */}
+          <div className="w-full flex items-center justify-between gap-2 p-2 bg-slate-950/75 rounded-2xl border border-slate-800/80 mb-2.5 relative z-10">
             <div className="flex items-center gap-2 pl-2">
               {[1, 2, 3].map((starIdx) => {
                 const isFilled = animatedStars >= starIdx;
@@ -200,28 +260,33 @@ export default function WinModal({
                   <div
                     key={starIdx}
                     className={`transition-all duration-300 ${
-                      isFilled ? 'animate-star-burst scale-110' : 'scale-85 opacity-25 grayscale'
+                      isFilled ? 'animate-star-burst scale-110' : 'scale-85 opacity-20 grayscale'
                     }`}
                   >
-                    <GameIcon name="star" size="w-7 h-7 sm:w-8 sm:h-8" />
+                    <Star
+                      className={`w-7 h-7 ${
+                        isFilled
+                          ? 'text-amber-300 fill-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.75)]'
+                          : 'text-slate-600 fill-slate-800'
+                      }`}
+                    />
                   </div>
                 );
               })}
             </div>
 
-            {/* Reward Pill */}
-            <div className="flex items-center gap-1 bg-gradient-to-r from-amber-500/25 to-yellow-500/15 border border-amber-500/40 px-2.5 py-1 rounded-full shadow-sm">
-              <Sparkles className="w-3 h-3 text-amber-300" />
-              <span className="text-[11px] font-black text-amber-300">
-                +{starsEarned * 10} ⭐
+            <div className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500/25 to-yellow-500/15 border border-amber-400/50 px-3 py-1 rounded-full shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+              <span className="text-xs font-black text-amber-300">
+                +{totalRewardStars} {isTR ? 'Yıldız' : 'Stars'}
               </span>
             </div>
           </div>
         )}
 
-        {/* 5. SONRAKİ SEVİYE / ACTIONS: Clear "Ne Yapmam Gerekiyor?" primary action */}
+        {/* 5. ACTIONS: Next Level + Share Grid + Replay / Back */}
         <div className="w-full flex flex-col gap-2 relative z-10">
-          {isWon && hasNextLevel ? (
+          {isWon && hasNextLevel && !isDailyMode ? (
             <button
               onClick={() => {
                 soundManager.playKey();
@@ -231,14 +296,13 @@ export default function WinModal({
             >
               <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-20 pointer-events-none animate-shimmer-sweep" />
               <span className="drop-shadow-[0_1px_0_rgba(255,255,255,0.4)]">
-                {t.nextLevel || 'SONRAKİ SEVİYE'}
+                {t?.nextLevel || (isTR ? 'SONRAKİ SEVİYE' : 'NEXT LEVEL')}
               </span>
               <div className="w-7 h-7 rounded-full bg-emerald-700/40 flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
                 <ArrowRight className="w-4 h-4 text-slate-950" />
               </div>
             </button>
           ) : !isWon ? (
-            /* LOSS PRIMARY BUTTON: Massive Tactile Retry Button */
             <button
               onClick={() => {
                 soundManager.playKey();
@@ -247,12 +311,32 @@ export default function WinModal({
               className="group relative w-full py-3 px-4 rounded-2xl bg-gradient-to-b from-amber-400 via-amber-500 to-orange-600 hover:from-amber-300 hover:via-amber-400 hover:to-orange-500 text-slate-950 font-black text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center gap-2 border-t-2 border-amber-200/90 border-b-[5px] border-b-amber-950 active:border-b-[2px] active:translate-y-1 shadow-xl shadow-amber-950/70 transition-all cursor-pointer overflow-hidden"
             >
               <RotateCcw className="w-4 h-4 text-slate-950" />
-              <span>{t.replay || 'TEKRAR DENE'}</span>
+              <span>{t?.replay || (isTR ? 'TEKRAR DENE' : 'TRY AGAIN')}</span>
             </button>
           ) : null}
 
+          {/* Share Score with Friends Button (Wordle-style grid) */}
+          {isWon && guesses.length > 0 && (
+            <button
+              onClick={handleShareScore}
+              className="w-full py-2.5 px-3 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 border-t border-indigo-300/60 border-b-[4px] border-b-indigo-950 active:border-b-[2px] active:translate-y-0.5 shadow-lg transition-all cursor-pointer"
+            >
+              {shareCopied ? (
+                <>
+                  <Check className="w-4 h-4 text-emerald-300 stroke-[3]" />
+                  <span>{isTR ? 'SKOR PANOYA KOPYALANDI!' : 'SCORE COPIED!'}</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-3.5 h-3.5 text-indigo-200" />
+                  <span>{isTR ? 'SKORU ARKADAŞLARINLA PAYLAŞ' : 'SHARE SCORE WITH FRIENDS'}</span>
+                </>
+              )}
+            </button>
+          )}
+
           <div className="flex gap-2 w-full">
-            {isWon && (
+            {isWon && !isDailyMode && (
               <button
                 onClick={() => {
                   soundManager.playKey();
@@ -261,7 +345,7 @@ export default function WinModal({
                 className="flex-1 py-2.5 px-3 rounded-2xl bg-gradient-to-b from-slate-800 to-slate-850 hover:to-slate-800 text-white font-black text-[11px] uppercase flex items-center justify-center gap-1.5 border-t border-slate-700/70 border-b-[4px] border-b-slate-950 active:border-b-[2px] active:translate-y-0.5 shadow-md transition-all cursor-pointer"
               >
                 <RotateCcw className="w-3.5 h-3.5 text-amber-400" />
-                <span>{t.replay || 'TEKRAR DENE'}</span>
+                <span>{t?.replay || (isTR ? 'TEKRAR' : 'REPLAY')}</span>
               </button>
             )}
 
@@ -273,7 +357,13 @@ export default function WinModal({
               className="flex-1 py-2.5 px-3 rounded-2xl bg-gradient-to-b from-slate-800 to-slate-850 hover:to-slate-800 text-slate-200 hover:text-white font-black text-[11px] uppercase flex items-center justify-center gap-1.5 border-t border-slate-700/70 border-b-[4px] border-b-slate-950 active:border-b-[2px] active:translate-y-0.5 shadow-md transition-all cursor-pointer"
             >
               <List className="w-3.5 h-3.5 text-cyan-400" />
-              <span>{t.backToLevels || 'BÖLÜMLER'}</span>
+              <span>
+                {isDailyMode
+                  ? isTR
+                    ? 'ANA MENÜ'
+                    : 'MAIN MENU'
+                  : t?.backToLevels || (isTR ? 'BÖLÜMLER' : 'LEVELS')}
+              </span>
             </button>
           </div>
         </div>

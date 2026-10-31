@@ -15,19 +15,19 @@ export default function SubcategorySelect({
   return (
     <div className="flex-1 w-full max-w-md mx-auto px-3.5 py-2 flex flex-col justify-start overflow-y-auto pb-4 select-none relative bg-[#070d1e]">
       
-      {/* Background Artwork */}
+      {/* Background Artwork (Preloaded WebP for instant 0ms render) */}
       <img
-        src={getAssetUrl('/assets/art/categories_bg.jpg')}
+        src={getAssetUrl('/assets/art/categories_bg.webp')}
         alt="Background"
         className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none z-0"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[#070d1e]/85 via-[#070d1e]/60 to-[#040814]/90 pointer-events-none z-0" />
 
-      {/* Category Header Card with 3D Main Icon & Dedicated Visual Banner */}
+      {/* Category Header Card with Main Emblem & Dedicated Visual Banner */}
       <div className="relative rounded-3xl bg-gradient-to-r from-slate-900/90 via-slate-850/90 to-slate-900/90 border border-slate-700/80 border-b-[4px] border-b-slate-950 px-3.5 py-2.5 mb-2.5 shadow-2xl overflow-hidden shrink-0 z-10 backdrop-blur-md">
         {/* Category Artwork Banner in Background */}
         <img
-          src={getAssetUrl(`/assets/art/cat_card_${category.id}.jpg`)}
+          src={getAssetUrl(`/assets/art/cat_card_${category.id}.webp`)}
           alt={category.name}
           className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"
         />

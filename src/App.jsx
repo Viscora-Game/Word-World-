@@ -1,8 +1,18 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { CATEGORIES_DATA, UI_STRINGS } from './data/categories';
 import { soundManager } from './utils/audio';
-import { normalizeLetter, toUpperTR } from './utils/turkishUpper';
+import { normalizeLetter, toUpperTR, toAsciiUpper } from './utils/turkishUpper';
 import { evaluateGuess } from './utils/evaluator';
+import { leaderboardService } from './services/leaderboardService';
+import {
+  getDailyChallenge,
+  getDailyState,
+  isDailyCompletedToday,
+  getTodayDailyRecord,
+  markDailyCompleted,
+  getStreakInfo,
+  registerDailyActivity
+} from './utils/dailyQuest';
 import Header from './components/Header';
 import MainMenu from './components/MainMenu';
 import CyberCoreIntro from './components/CyberCoreIntro';
@@ -20,7 +30,12 @@ import LeaderboardModal from './components/LeaderboardModal';
 import BottomNavBar from './components/BottomNavBar';
 import GameIcon from './components/GameIcon';
 import { getAssetUrl } from './utils/assetUrl';
-import { Lightbulb, Sparkles } from 'lucide-react';
+import { Lightbulb, Sparkles, Shield } from 'lucide-react';
+
+const ALPHABET_POOL = {
+  tr: 'ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ'.split(''),
+  en: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+};
 
 export default function App() {
   // Persistence states
@@ -38,11 +53,23 @@ export default function App() {
     return saved ? JSON.parse(saved) : {};
   });
 
+  // Player Profile, Daily Quest & Streak states
+  const [playerName, setPlayerName] = useState(() => leaderboardService.getPlayerName());
+  const [dailyBonusStars, setDailyBonusStars] = useState(
+    () => getDailyState().totalBonusStars || 0
+  );
+  const [dailyCompleted, setDailyCompleted] = useState(() => isDailyCompletedToday());
+  const [dailyRecord, setDailyRecord] = useState(() => getTodayDailyRecord());
+  const [streak, setStreak] = useState(() => getStreakInfo().streak);
+
   // CyberCore Studio Intro & Navigation
   const [showIntro, setShowIntro] = useState(true);
   const [view, setView] = useState('main');
   const [selectedCategoryId, setSelectedCategoryId] = useState('spor');
   const [selectedSubcategoryId, setSelectedSubcategoryId] = useState('ilk-11-takim');
+  const [selectedLevelId, setSelectedLevelId] = useState(1);
+  const [isDailyMode, setIsDailyMode] = useState(false);
+  const [dailyBonusAwarded, setDailyBonusAwarded] = useState(0);
 
   // Background warmup of all primary graphic assets during initial load & intro
   useEffect(() => {
@@ -65,7 +92,6 @@ export default function App() {
       img.src = url;
     });
   }, []);
-  const [selectedLevelId, setSelectedLevelId] = useState(1);
 
   // In-Game state
   const [guesses, setGuesses] = useState([]);
@@ -75,6 +101,9 @@ export default function App() {
   const [isGameOver, setIsGameOver] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
   const [lettersRevealed, setLettersRevealed] = useState(0);
+  const [revealedPositions, setRevealedPositions] = useState({});
+  const [eliminatedKeys, setEliminatedKeys] = useState([]);
+  const [radarUsed, setRadarUsed] = useState(false);
 
   // Modals
   const [isDailyModalOpen, setIsDailyModalOpen] = useState(false);
@@ -85,9 +114,12 @@ export default function App() {
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [settingsTab, setSettingsTab] = useState('settings');
 
-  // Translations
+  // Translations & Data
   const t = UI_STRINGS[lang] || UI_STRINGS.tr;
   const categories = CATEGORIES_DATA[lang] || CATEGORIES_DATA.tr;
+
+  // Deterministic Daily Challenge for Today
+  const dailyChallenge = useMemo(() => getDailyChallenge(categories), [categories]);
 
   // Active Category & Subcategory & Level
   const currentCategory = useMemo(() => {
@@ -106,7 +138,7 @@ export default function App() {
 
   const targetWord = useMemo(() => {
     const raw = (currentLevel?.word || 'KELİME').replace(/\s+/g, '');
-    return lang === 'tr' ? toUpperTR(raw) : raw.toUpperCase();
+    return lang === 'tr' ? toUpperTR(raw) : toAsciiUpper(raw);
   }, [currentLevel, lang]);
 
   const maxAttempts = 6;
@@ -155,27 +187,36 @@ export default function App() {
     return res;
   }, [categories, levelProgress]);
 
-  // Total stars
-  const totalStars = useMemo(() => {
+  // Total stars (Level Mastery Stars + Daily Quest Bonus Stars)
+  const levelStars = useMemo(() => {
     return Object.values(categoryProgress).reduce((acc, curr) => acc + curr.stars, 0);
   }, [categoryProgress]);
+
+  const totalStars = levelStars + dailyBonusStars;
 
   // Total completed levels
   const totalCompleted = useMemo(() => {
     return Object.values(categoryProgress).reduce((acc, curr) => acc + curr.completedLevels, 0);
   }, [categoryProgress]);
 
+  // Live Player Rank for MainMenu Card
+  const playerRank = useMemo(() => {
+    return leaderboardService.getQuickRank(totalStars, totalCompleted, lang);
+  }, [totalStars, totalCompleted, lang, playerName]);
+
   // Toast Notification Helper
-  const showToast = (msg) => {
+  const showToast = useCallback((msg) => {
     setToastMessage(msg);
     setTimeout(() => {
       setToastMessage(null);
-    }, 2500);
-  };
+    }, 2600);
+  }, []);
 
   // Start / Reset Level
-  const initLevel = useCallback((lvlId) => {
+  const initLevel = useCallback((lvlId, daily = false) => {
     setSelectedLevelId(lvlId);
+    setIsDailyMode(daily);
+    setDailyBonusAwarded(0);
     setGuesses([]);
     setCurrentGuess('');
     setIsWon(false);
@@ -183,9 +224,13 @@ export default function App() {
     setIsWinModalOpen(false);
     setIsShaking(false);
     setLettersRevealed(0);
+    setRevealedPositions({});
+    setEliminatedKeys([]);
+    setRadarUsed(false);
   }, []);
 
   const handleSelectCategory = (catId) => {
+    setIsDailyMode(false);
     setSelectedCategoryId(catId);
     const cat = categories.find((c) => c.id === catId);
     if (cat?.subcategories?.length > 0) {
@@ -197,12 +242,13 @@ export default function App() {
   };
 
   const handleSelectSubcategory = (subId) => {
+    setIsDailyMode(false);
     setSelectedSubcategoryId(subId);
     setView('levels');
   };
 
   const handleSelectLevel = (lvlId) => {
-    initLevel(lvlId);
+    initLevel(lvlId, false);
     const lvl = currentSubcategory.levels?.find((l) => l.id === lvlId);
     if (lvl?.lineup) {
       setIsPitchModalOpen(true);
@@ -212,7 +258,12 @@ export default function App() {
 
   const handleBack = () => {
     if (view === 'game') {
-      setView('levels');
+      if (isDailyMode) {
+        setIsDailyMode(false);
+        setView('main');
+      } else {
+        setView('levels');
+      }
     } else if (view === 'levels') {
       setView('subcategories');
     } else if (view === 'subcategories') {
@@ -223,12 +274,15 @@ export default function App() {
   };
 
   const handlePlayDaily = () => {
-    setSelectedCategoryId('spor');
-    setSelectedSubcategoryId('ilk-11-takim');
-    initLevel(1);
-    setIsPitchModalOpen(true);
+    if (!dailyChallenge) return;
+    setSelectedCategoryId(dailyChallenge.categoryId);
+    setSelectedSubcategoryId(dailyChallenge.subcategoryId);
+    initLevel(dailyChallenge.level.id, true);
+    if (dailyChallenge.level?.lineup) {
+      setIsPitchModalOpen(true);
+    }
     setView('game');
-    showToast(t?.dailyStarted || '📅 Günün Meydan Okuması Başladı!');
+    showToast(t?.dailyStarted || 'Günün Meydan Okuması Başladı!');
   };
 
   // Keyboard actions
@@ -262,7 +316,6 @@ export default function App() {
     setGuesses(newGuesses);
     setCurrentGuess('');
 
-    // Check Win (evaluates all letters including forgiving Turkish I/İ)
     const evals = evaluateGuess(currentGuess, targetWord, lang);
     const isAllCorrect = evals.length === targetWord.length && evals.every((s) => s === 'correct');
 
@@ -271,20 +324,45 @@ export default function App() {
       setIsGameOver(true);
       soundManager.playWin();
 
-      // 1-2 guesses = 3 stars, 3-4 = 2 stars, 5-6 = 1 star
       const attemptsCount = newGuesses.length;
       let stars = 1;
       if (attemptsCount <= 2) stars = 3;
       else if (attemptsCount <= 4) stars = 2;
 
+      const updatedStreak = registerDailyActivity();
+      setStreak(updatedStreak);
+
+      let extraDailyStars = 0;
+      if (isDailyMode) {
+        const res = markDailyCompleted({ attemptsCount, maxAttempts });
+        if (!res.alreadyCompleted) {
+          extraDailyStars = res.bonusAwarded;
+          setDailyBonusAwarded(extraDailyStars);
+          setDailyBonusStars(res.state.totalBonusStars);
+          setDailyCompleted(true);
+          setDailyRecord(getTodayDailyRecord());
+        }
+      }
+
       setLevelProgress((prev) => {
         const subMap = { ...(prev[selectedSubcategoryId] || {}) };
         const oldStars = subMap[selectedLevelId]?.stars || 0;
+        const wasCompleted = Boolean(subMap[selectedLevelId]?.completed);
+        const newBestStars = Math.max(oldStars, stars);
+        const starDiff = Math.max(0, newBestStars - oldStars);
+
         subMap[selectedLevelId] = {
           completed: true,
-          stars: Math.max(oldStars, stars),
+          stars: newBestStars,
           attempts: attemptsCount
         };
+
+        // Sync updated score to Leaderboard service
+        leaderboardService.submitScore(
+          totalStars + starDiff + extraDailyStars,
+          totalCompleted + (wasCompleted ? 0 : 1)
+        );
+
         return {
           ...prev,
           [selectedSubcategoryId]: subMap
@@ -312,25 +390,31 @@ export default function App() {
     targetWord,
     guesses,
     maxAttempts,
+    lang,
     t,
+    isDailyMode,
     selectedSubcategoryId,
-    selectedLevelId
+    selectedLevelId,
+    totalStars,
+    totalCompleted,
+    showToast
   ]);
 
-  // Reveal Letter power-up
+  // JOKER 1: Reveal & Pin Letter directly onto the GameBoard
   const handleRevealLetter = () => {
     if (lettersRevealed >= 2) return;
 
-    const correctIndices = new Set();
+    const knownIndices = new Set(Object.keys(revealedPositions).map(Number));
     guesses.forEach((g) => {
-      for (let i = 0; i < g.length; i++) {
-        if (g[i] === targetWord[i]) correctIndices.add(i);
-      }
+      const evals = evaluateGuess(g, targetWord, lang);
+      evals.forEach((status, i) => {
+        if (status === 'correct') knownIndices.add(i);
+      });
     });
 
     const unrevealed = [];
     for (let i = 0; i < targetWord.length; i++) {
-      if (!correctIndices.has(i)) {
+      if (!knownIndices.has(i)) {
         unrevealed.push(i);
       }
     }
@@ -338,20 +422,63 @@ export default function App() {
     if (unrevealed.length > 0) {
       const targetIdx = unrevealed[Math.floor(Math.random() * unrevealed.length)];
       const revealedChar = targetWord[targetIdx];
+      setRevealedPositions((prev) => ({ ...prev, [targetIdx]: revealedChar }));
       setLettersRevealed((prev) => prev + 1);
-      showToast(`💡 ${targetIdx + 1}. ${t?.letterHintToast || 'Harf'}: "${revealedChar}"`);
+      showToast(
+        `${targetIdx + 1}. ${t?.letterHintToast || 'Harf Sabitlendi'}: "${revealedChar}"`
+      );
     } else {
       showToast(t?.allLettersRevealed || 'Tüm harfler zaten biliniyor!');
     }
   };
 
+  // JOKER 2: Radar Scan - Eliminate 3 Wrong Keys on Keyboard
+  const handleEliminateLetters = () => {
+    if (radarUsed) return;
+
+    const targetChars = new Set(
+      targetWord.split('').map((c) => normalizeLetter(c, lang))
+    );
+    if (lang === 'tr') {
+      if (targetChars.has('İ')) targetChars.add('I');
+      if (targetChars.has('I')) targetChars.add('İ');
+    }
+
+    const alreadyTried = new Set(eliminatedKeys);
+    guesses.forEach((g) => {
+      g.split('').forEach((c) => alreadyTried.add(normalizeLetter(c, lang)));
+    });
+
+    const pool = (ALPHABET_POOL[lang] || ALPHABET_POOL.tr).filter(
+      (ch) => !targetChars.has(ch) && !alreadyTried.has(ch)
+    );
+
+    if (pool.length === 0) {
+      showToast(lang === 'tr' ? 'Elenecek yanlış harf kalmadı!' : 'No wrong keys left!');
+      return;
+    }
+
+    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+    const picked = shuffled.slice(0, 3);
+    setEliminatedKeys((prev) => [...prev, ...picked]);
+    setRadarUsed(true);
+    showToast(
+      lang === 'tr'
+        ? `Klavyeden 3 yanlış harf elendi: ${picked.join(', ')}`
+        : `3 wrong keys eliminated: ${picked.join(', ')}`
+    );
+  };
+
   const handleNextLevel = () => {
     const nextId = selectedLevelId + 1;
-    const exists = currentSubcategory.levels.some((l) => l.id === nextId);
-    if (exists) {
-      initLevel(nextId);
+    const nextLvl = currentSubcategory.levels.find((l) => l.id === nextId);
+    if (nextLvl) {
+      initLevel(nextId, false);
+      if (nextLvl.lineup) {
+        setIsPitchModalOpen(true);
+      }
     } else {
-      showToast(t.allLevelsCompleted);
+      showToast(t.allLevelsCompleted || t.allCategoriesCompleted);
       setView('levels');
       setIsWinModalOpen(false);
     }
@@ -359,15 +486,26 @@ export default function App() {
 
   const handleResetProgress = () => {
     setLevelProgress({});
+    setDailyBonusStars(0);
+    setDailyCompleted(false);
+    setDailyRecord(null);
     localStorage.removeItem('wordhunt_progress');
+    localStorage.removeItem('wordhunt_daily_v2');
     setIsSettingsModalOpen(false);
-    showToast(t?.progressResetSuccess || 'İlerleme başarıyla sıfırlandı.');
+    showToast(t?.resetSuccess || 'Tüm ilerleme sıfırlandı!');
   };
 
   const getHeaderSubtitle = () => {
     if (view === 'subcategories') return currentCategory.name;
     if (view === 'levels') return currentSubcategory.name;
-    if (view === 'game') return `${currentSubcategory.name} • ${t.level} ${selectedLevelId}`;
+    if (view === 'game') {
+      if (isDailyMode) {
+        return lang === 'tr'
+          ? `Günün Kelimesi #${dailyChallenge?.edition || 1}`
+          : `Daily Word #${dailyChallenge?.edition || 1}`;
+      }
+      return `${currentSubcategory.name} • ${t?.level || 'Bölüm'} ${selectedLevelId}`;
+    }
     return '';
   };
 
@@ -391,10 +529,11 @@ export default function App() {
       {/* Mobile Frame Container: 100dvh on mobile, sleek phone frame on desktop */}
       <div className="w-full sm:max-w-[430px] h-[100dvh] sm:h-[94vh] sm:max-h-[880px] bg-[#0d121f] sm:rounded-[44px] sm:border-[6px] sm:border-slate-800 shadow-2xl flex flex-col relative overflow-hidden">
         
-        {/* Floating Toast Notification */}
+        {/* Floating Toast Notification (Clean Vector Icon, Zero Emojis) */}
         {toastMessage && (
-          <div className="absolute top-14 left-1/2 -translate-x-1/2 z-50 bg-gradient-to-r from-indigo-600 to-purple-600 border border-indigo-300/40 text-white font-black text-xs py-2 px-4 rounded-full shadow-xl backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-150 whitespace-nowrap">
-            {toastMessage}
+          <div className="absolute top-14 left-1/2 -translate-x-1/2 z-50 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 border border-indigo-300/50 text-white font-black text-xs py-2 px-4 rounded-full shadow-2xl backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-150 flex items-center gap-1.5 whitespace-nowrap">
+            <Sparkles className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+            <span>{toastMessage}</span>
           </div>
         )}
 
@@ -419,7 +558,7 @@ export default function App() {
           />
         )}
 
-        {/* Screen: Main Menu (Word & World Centerpiece) */}
+        {/* Screen: Main Menu (Word & World Centerpiece - Locked Layout) */}
         {view === 'main' && (
           <MainMenu
             onPlay={() => setView('categories')}
@@ -443,8 +582,13 @@ export default function App() {
             soundEnabled={soundEnabled}
             onToggleSound={() => setSoundEnabled((prev) => !prev)}
             totalStars={totalStars}
+            playerName={playerName}
+            playerRank={playerRank}
+            streak={streak}
+            dailyCompleted={dailyCompleted}
             levelProgress={levelProgress}
             categories={categories}
+            lang={lang}
             t={t}
           />
         )}
@@ -459,7 +603,7 @@ export default function App() {
           />
         )}
 
-        {/* Screen: Subcategories Selection (e.g. Spor -> Futbol, Basketbol, F1) */}
+        {/* Screen: Subcategories Selection */}
         {view === 'subcategories' && (
           <SubcategorySelect
             category={currentCategory}
@@ -483,15 +627,15 @@ export default function App() {
         {/* Screen: In-Game */}
         {view === 'game' && (
           <div className="flex-1 min-h-0 flex flex-col justify-between overflow-hidden relative bg-[#070d1e]">
-            {/* Ambient Celestial Backdrop */}
+            {/* Ambient Celestial Backdrop (WebP instant cached) */}
             <img
-              src={getAssetUrl('/assets/art/categories_bg.jpg')}
+              src={getAssetUrl('/assets/art/categories_bg.webp')}
               alt=""
               className="absolute inset-0 w-full h-full object-cover object-top opacity-15 pointer-events-none select-none z-0"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#070d1e]/60 to-[#040812]/95 pointer-events-none z-0" />
             
-            {/* DEDICATED QUESTION / MISSION CARD (NEVER TRUNCATED!) */}
+            {/* DEDICATED QUESTION / MISSION CARD */}
             <div className="w-full px-3 pt-1.5 pb-0.5 shrink-0 relative z-10">
               <div className="w-full rounded-3xl bg-gradient-to-r from-slate-900/95 via-slate-850/95 to-slate-900/95 border border-slate-700/80 border-b-[4px] border-b-slate-950 px-3.5 py-2.5 shadow-xl backdrop-blur-md flex flex-col gap-1">
                 
@@ -500,7 +644,11 @@ export default function App() {
                   <div className="flex items-center gap-1.5 min-w-0">
                     <GameIcon name={currentSubcategory.iconKey} size="w-4 h-4" />
                     <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-wide text-amber-300 truncate">
-                      {currentSubcategory.name}
+                      {isDailyMode
+                        ? lang === 'tr'
+                          ? `Günün Kelimesi • ${currentSubcategory.name}`
+                          : `Daily Word • ${currentSubcategory.name}`
+                        : currentSubcategory.name}
                     </span>
                   </div>
 
@@ -517,17 +665,17 @@ export default function App() {
                     </button>
 
                     <span className="bg-slate-800/90 border border-slate-700/80 px-2.5 py-1 rounded-full text-[10px] font-black text-slate-300">
-                      {maxAttempts - guesses.length} {t.remainingAttempts}
+                      {maxAttempts - guesses.length} {t?.remainingAttempts || 'Hak'}
                     </span>
                   </div>
                 </div>
 
-                {/* Full Question Text (100% visible, multi-line, readable) */}
+                {/* Full Question Text */}
                 <p className="text-xs sm:text-[12.5px] font-bold text-slate-100 leading-snug text-left select-text">
                   "{currentLevel.hint}"
                 </p>
 
-                {/* Interactive Starting 11 Pitch Button (Only if lineup exists) */}
+                {/* Interactive Starting 11 Pitch Button (Zero Emojis) */}
                 {currentLevel.lineup && (
                   <button
                     onClick={() => {
@@ -536,7 +684,10 @@ export default function App() {
                     }}
                     className="mt-1 w-full py-2 px-3 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-[11px] sm:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 border border-emerald-400/50 border-b-[3px] border-b-emerald-950 shadow-md active:translate-y-0.5 transition cursor-pointer"
                   >
-                    <span>🏟️ {t?.viewPitch || 'SAHADAKİ İLK 11\'İ GÖRÜNTÜLE'} ({currentLevel.lineup.formation})</span>
+                    <Shield className="w-3.5 h-3.5 text-emerald-200 fill-emerald-300/20 shrink-0" />
+                    <span>
+                      {t?.viewPitch || 'SAHADAKİ İLK 11 DİZİLİŞİNİ GÖR'} ({currentLevel.lineup.formation})
+                    </span>
                   </button>
                 )}
               </div>
@@ -550,6 +701,7 @@ export default function App() {
               maxAttempts={maxAttempts}
               isShaking={isShaking}
               isWon={isWon}
+              revealedPositions={revealedPositions}
               lang={lang}
             />
 
@@ -560,6 +712,7 @@ export default function App() {
               onChar={handleChar}
               onEnter={handleEnter}
               onDelete={handleDelete}
+              eliminatedKeys={eliminatedKeys}
               lang={lang}
               disabled={isWon || isGameOver}
             />
@@ -585,15 +738,27 @@ export default function App() {
           isOpen={isWinModalOpen}
           isWon={isWon}
           starsEarned={starsEarned}
+          dailyBonusAwarded={dailyBonusAwarded}
+          isDailyMode={isDailyMode}
+          dailyEdition={dailyChallenge?.edition || 1}
+          subcategoryName={currentSubcategory.name}
+          levelId={selectedLevelId}
+          guesses={guesses}
           attemptsCount={guesses.length}
           maxAttempts={maxAttempts}
           targetWord={targetWord}
           hint={currentLevel.hint}
+          lang={lang}
           onNextLevel={handleNextLevel}
-          onReplay={() => initLevel(selectedLevelId)}
+          onReplay={() => initLevel(selectedLevelId, isDailyMode)}
           onBackToLevels={() => {
             setIsWinModalOpen(false);
-            setView('levels');
+            if (isDailyMode) {
+              setIsDailyMode(false);
+              setView('main');
+            } else {
+              setView('levels');
+            }
           }}
           hasNextLevel={hasNextLevel}
           t={t}
@@ -613,20 +778,26 @@ export default function App() {
           isOpen={isDailyModalOpen}
           onClose={() => setIsDailyModalOpen(false)}
           onPlayDaily={handlePlayDaily}
+          dailyChallenge={dailyChallenge}
+          dailyCompleted={dailyCompleted}
+          dailyRecord={dailyRecord}
+          streak={streak}
+          lang={lang}
           t={t}
         />
 
-        {/* Leaderboard Modal (Image 2 & 3: Liderlik Tablosu) */}
+        {/* Global & Seasonal Leaderboard Modal */}
         <LeaderboardModal
           isOpen={isLeaderboardModalOpen}
           onClose={() => setIsLeaderboardModalOpen(false)}
           totalStars={totalStars}
           totalCompleted={totalCompleted}
-          playerRankTitle={t?.masterHunter || 'Usta Avcı'}
+          lang={lang}
+          onPlayerNameChange={(newName) => setPlayerName(newName)}
           t={t}
         />
 
-        {/* Hint Modal */}
+        {/* Hint & Tactical Boosters Modal */}
         <HintModal
           isOpen={isHintModalOpen}
           onClose={() => setIsHintModalOpen(false)}
@@ -635,10 +806,14 @@ export default function App() {
           onRevealLetter={handleRevealLetter}
           lettersRevealed={lettersRevealed}
           maxLetterReveals={2}
+          revealedPositions={revealedPositions}
+          onEliminateLetters={handleEliminateLetters}
+          radarUsed={radarUsed}
+          lang={lang}
           t={t}
         />
 
-        {/* CyberCore Studio Intro (Opens on game startup, exact to prototype) */}
+        {/* CyberCore Studio Intro */}
         {showIntro && (
           <CyberCoreIntro onFinish={() => setShowIntro(false)} />
         )}

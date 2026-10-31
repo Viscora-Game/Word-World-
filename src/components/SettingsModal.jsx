@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getAssetUrl } from '../utils/assetUrl';
+import { PUBLIC_GAME_URL } from '../utils/dailyQuest';
 import {
   X,
   Volume2,
@@ -41,6 +42,12 @@ export default function SettingsModal({
   const [activeTab, setActiveTab] = useState(initialTab);
   const [copiedToast, setCopiedToast] = useState(null);
 
+  useEffect(() => {
+    if (isOpen) {
+      setActiveTab(initialTab);
+    }
+  }, [isOpen, initialTab]);
+
   if (!isOpen) return null;
 
   const isTR = lang === 'tr';
@@ -49,10 +56,10 @@ export default function SettingsModal({
     soundManager.playButton();
     const shareData = {
       title: 'Word & World',
-      text: isTR 
-        ? 'Word & World ile kelimeleri ve dünyayı keşfet! Viscora Games:'
-        : 'Explore words and the world with Word & World by Viscora Games:',
-      url: DEV_PAGE_URL
+      text: isTR
+        ? 'Word & World ile kelimeleri, tarihi kadroları ve dünyayı keşfet! Hemen oyna:'
+        : 'Explore words, legendary lineups, and the world with Word & World! Play now:',
+      url: PUBLIC_GAME_URL
     };
 
     if (navigator.share) {

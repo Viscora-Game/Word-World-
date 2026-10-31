@@ -1,4 +1,4 @@
-// Turkish-aware uppercase, lowercase, and letter comparison utilities
+// Turkish-aware uppercase, lowercase, ASCII folding, and letter comparison utilities
 
 export const toUpperTR = (str = '') => {
   if (!str) return '';
@@ -16,12 +16,36 @@ export const toLowerTR = (str = '') => {
     .toLocaleLowerCase('tr-TR');
 };
 
+const TR_TO_ASCII_MAP = {
+  Ç: 'C',
+  ç: 'C',
+  Ğ: 'G',
+  ğ: 'G',
+  İ: 'I',
+  ı: 'I',
+  Ö: 'O',
+  ö: 'O',
+  Ş: 'S',
+  ş: 'S',
+  Ü: 'U',
+  ü: 'U'
+};
+
+export const toAsciiUpper = (str = '') => {
+  if (!str) return '';
+  return str
+    .split('')
+    .map((ch) => TR_TO_ASCII_MAP[ch] || ch)
+    .join('')
+    .toUpperCase();
+};
+
 export const normalizeLetter = (letter = '', lang = 'tr') => {
   if (!letter) return '';
   if (lang === 'tr') {
     return toUpperTR(letter);
   }
-  return letter.toUpperCase();
+  return toAsciiUpper(letter);
 };
 
 /**
